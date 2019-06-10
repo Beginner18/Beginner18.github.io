@@ -2,7 +2,7 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Private Zone</title>
+<title>Categories - Private Zone</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
@@ -10,7 +10,7 @@
     <meta name="keywords" content="web">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Private Zone">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
 <meta property="og:site_name" content="Private Zone">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
@@ -98,11 +98,11 @@
             
             <div class="navbar-start">
                 
-                <a class="navbar-item is-active" href="/">Home</a>
+                <a class="navbar-item" href="/">Home</a>
                 
                 <a class="navbar-item" href="/archives">Archives</a>
                 
-                <a class="navbar-item" href="/categories">Categories</a>
+                <a class="navbar-item is-active" href="/categories">Categories</a>
                 
                 <a class="navbar-item" href="/tags">Tags</a>
                 
@@ -136,120 +136,18 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-10T06:50:57.336Z">2019-06-10</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 503 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
             
-                <a class="has-link-black-ter" href="/2019/06/10/java/"></a>
-            
-        </h1>
-        <div class="content">
-            <ol>
-<li><h1 id="java引用-vs-c-引用"><a href="#java引用-vs-c-引用" class="headerlink" title="java引用 vs c++引用"></a>java引用 vs c++引用</h1></li>
-<li>1 [c++引用] (<a href="https://blog.csdn.net/dujiangyan101/article/details/2844138" target="_blank" rel="noopener">https://blog.csdn.net/dujiangyan101/article/details/2844138</a>)</li>
-</ol>
-<p>-</p>
-<blockquote>
-<p><strong>引用</strong>  </p>
-<blockquote>
-<ul>
-<li><p>引用不可为空，对象必须存在不可为null  </p>
-</li>
-<li><p>地址概念：某块内存的别名</p>
-</li>
-<li><p>引用是别名，地址不可更改</p>
-</li>
-<li><p>引用使用无需解引*，对引用的赋值为对地址变量的赋值</p>
-</li>
-<li><p>sizeof引用为引用指向的对象的大小  </p>
-<figure class="highlight plain hljs"><figcaption><span>i </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">int j = 6; </span><br><span class="line">int &amp;k = i; </span><br><span class="line">k = j; // k 和i 的值都变成了6;</span><br><span class="line">```    </span><br><span class="line"></span><br><span class="line">1.2 [java引用](https://blog.csdn.net/jiangnan2014/article/details/22944075)</span><br><span class="line">-</span><br><span class="line">&gt;**引用**</span><br><span class="line">&gt;&gt;+ 所有的参数传递都是 传值，从来没有 传引用 这个事实；</span><br><span class="line">&gt;&gt;+ 所有的参数传递都会在 程序运行栈上 新分配一个 值 的复制品；</span><br><span class="line">&gt;&gt;+ java只有按值传递，所谓的按地址(引用)传递，也属于按值传递，只不过这个“值”是个地址;</span><br><span class="line">&gt;&gt;+ 对于引用类型的传参也是传值的，传的是引用类型的值，其实就是对象的地址；</span><br><span class="line">&gt;&gt;+ java所有对像变量都是对像的引用；</span><br><span class="line">&gt;&gt;+ 函数的形式参数，是传入参数的拷贝；引用变量之间拷贝的是【地址】，基本变量之间拷贝的是 内存中的值 （被称为直接量）；    </span><br><span class="line">&gt;&gt;</span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-</blockquote>
-<p>public class Test1<br>{
-        String a = “123”;<br>        public static void test(Test1 test)<br>        {<br>                test.a = “abc”;//更改test指向的内存空间的值<br>        }<br>        public static void main(String[] args)<br>        {<br>                Test1 test1 = new Test1();<br>                test1.a = “567”;<br>                System.out.println(test1.a); //567<br>                test(test1);//复制test1的地址至test<br>                System.out.println(test1.a); //abc<br>        }<br>}</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;+ java引用可以改变引用的地址，java引用.为对引用地址所指向对象的操作，=表示对引用本身的修改（地址)</span><br><span class="line">&gt;&gt;  </span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>public class Test<br>{
-        public static void test(StringBuffer str)<br>        {<br>                str.append(“world”);//改变引用对象的内存空间的值<br>                str = new StringBuffer(“world”);//更新地址，并对地址对象赋值，不会改变原值<br>        }<br>        public static void main(String[] args)<br>        {<br>                StringBuffer str = new StringBuffer(“hello”);<br>                System.out.println(str);  //hello<br>                test(str);//复制地址<br>                System.out.println(str);  //hello<br>        }<br>}</p>
-<pre><code>
-</code></pre>
+            </ul>
         </div>
-        
-        
-        
     </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-05T00:35:41.000Z">2019-06-05</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a few seconds read (About 28 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/06/05/tcp-ip-http/">tcp/ip http</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="1-plan"><a href="#1-plan" class="headerlink" title="1 plan"></a>1 plan</h2><h2 id="1-1-socket简介"><a href="#1-1-socket简介" class="headerlink" title="1.1 socket简介"></a>1.1 socket简介</h2><h2 id="1-2-socket-tcp"><a href="#1-2-socket-tcp" class="headerlink" title="1.2 socket-tcp"></a>1.2 socket-tcp</h2><h1 id="1-3-socket-udp"><a href="#1-3-socket-udp" class="headerlink" title="1.3 socket-udp"></a>1.3 socket-udp</h1><p>##1.4 协议：tcp ip udp http </p>
-<p>##1.5 http协议 http2.0 </p>
-<p>##1.6 并发编程 select I/O复用</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-</div>
+</div></div>
                 
 
 
