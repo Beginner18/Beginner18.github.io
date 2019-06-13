@@ -229,9 +229,100 @@
         
           
         
+          
+        
       
     
     
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/06/11/java-异常/">
+      java异常处理
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YY</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-06-11</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h2 id="1-自定义异常"><a href="#1-自定义异常" class="headerlink" title="1 自定义异常"></a>1 <a href="https://www.runoob.com/java/java-exceptions.html" target="_blank" rel="noopener">自定义异常</a></h2>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/java-异常/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>java, 异常</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class="post-wrapper">
@@ -306,7 +397,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h1 id="java引用-vs-c-引用"><a href="#java引用-vs-c-引用" class="headerlink" title="java引用 vs c++引用"></a>java引用 vs c++引用</h1><ol>
+      <h1 id="java参数传递-vs-c-引用-vs-go指针传递"><a href="#java参数传递-vs-c-引用-vs-go指针传递" class="headerlink" title="java参数传递 vs c++引用 vs go指针传递"></a>java参数传递 vs c++引用 vs go指针传递</h1><ol>
 <li><a href="https://blog.csdn.net/dujiangyan101/article/details/2844138" target="_blank" rel="noopener"><strong>c++引用</strong></a></li>
 </ol>
 <hr>
@@ -330,6 +421,7 @@
 <blockquote>
 <p><strong>引用</strong></p>
 <ul>
+<li>值传递</li>
 <li>所有的参数传递都是 传值，从来没有 传引用 这个事实；</li>
 <li>所有的参数传递都会在 程序运行栈上 新分配一个 值 的复制品；</li>
 <li>java只有按值传递，所谓的按地址(引用)传递，也属于按值传递，只不过这个“值”是个地址;</li>
@@ -347,6 +439,61 @@
 <figure class="highlight plain"><figcaption><span>class Test</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        public static void test(StringBuffer str)</span><br><span class="line">        &#123;</span><br><span class="line">                str.append(&quot;world&quot;);//改变引用对象的内存空间的值</span><br><span class="line">                str = new StringBuffer(&quot;world&quot;);//更新地址，并对地址对象赋值，不会改变原值</span><br><span class="line">        &#125;</span><br><span class="line">        public static void main(String[] args)</span><br><span class="line">        &#123;</span><br><span class="line">                StringBuffer str = new StringBuffer(&quot;hello&quot;);</span><br><span class="line">                System.out.println(str);  //hello</span><br><span class="line">                test(str);//复制地址</span><br><span class="line">                System.out.println(str);  //注释掉str.append为hello，否则为hello world</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </blockquote>
 </li>
+</ul>
+</blockquote>
+<blockquote>
+<p><a href="https://juejin.im/post/5bce68226fb9a05ce46a0476" target="_blank" rel="noopener">参考1: java参数传递</a><br><a href="https://pengjiaheng.iteye.com/blog/518623" target="_blank" rel="noopener">参考2: java堆栈</a></p>
+</blockquote>
+<ol start="3">
+<li><strong><a href="https://www.flysnow.org/2018/02/24/golang-function-parameters-passed-by-value.html" target="_blank" rel="noopener">go(c语言)指针传递</a></strong></li>
+</ol>
+<hr>
+<blockquote>
+<ul>
+<li>类似C语言，函数传值一切皆copy</li>
+<li>参数为指针则为指针所指向的地址的值copy</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><figcaption><span>main</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(&quot;Hello, playground&quot;)</span><br><span class="line">	var a int = 1</span><br><span class="line">	b := &amp;a</span><br><span class="line">	fmt.Println(&quot;the addr of b: &quot;,&amp;b, &quot;, a: &quot;, &amp;a, &quot; value of b: &quot;, b, &quot;the value of *b: &quot;, *b)</span><br><span class="line">	fun1(b)</span><br><span class="line">	fmt.Println(&quot;2st the addr of b: &quot;,&amp;b, &quot;, a: &quot;, &amp;a, &quot; value of b: &quot;, b, &quot;the value of *b: &quot;, *b)</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func fun1(c *int)&#123;</span><br><span class="line"></span><br><span class="line">fmt.Println(&quot;the add of c: &quot;, &amp;c, &quot;the value of c: &quot;, c, &quot;the value of *c: &quot;, *c)</span><br><span class="line">var d int = 2</span><br><span class="line">c = &amp;d</span><br><span class="line">fmt.Println(&quot;2 st the add of c: &quot;, &amp;c, &quot;the value of c: &quot;, c, &quot;the value of *c: &quot;, *c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Hello, playground<br>the addr of b:  0x40c130 , a:  0x414020  value of b:  0x414020 the value of *b:  1  </p>
+<p>the add of c:  0x40c138 the value of c:  0x414020 the value of *c:  1  </p>
+<p>2 st the add of c:  0x40c138 the value of c:  0x41402c the value of *c:  2  </p>
+<p>2st the addr of b:  0x40c130 , a:  0x414020  value of b:  0x414020 the value of *b:  1</p>
+<blockquote>
+<p>传map</p>
+</blockquote>
+<figure class="highlight plain"><figcaption><span>main</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(&quot;Hello, playground&quot;)</span><br><span class="line">	a := make(map[int]int)</span><br><span class="line">	a[1]=3</span><br><span class="line">	fmt.Printf(&quot;1st a[1] is: %d addr of map:%p \n&quot;, a[1],&amp;a)</span><br><span class="line">	fun1(a)</span><br><span class="line">	fmt.Printf(&quot;1st a[1] is: %d addr of map:%p \n&quot;, a[1],&amp;a)</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func fun1(c map[int]int)&#123;</span><br><span class="line">fmt.Printf(&quot;1st c[1] is: %d addr of map:%p \n&quot;, c[1],&amp;c)</span><br><span class="line">c=make(map[int]int)</span><br><span class="line">c[1]=4</span><br><span class="line">fmt.Printf(&quot;1st c[1] is: %d addr of map:%p \n&quot;, c[1],&amp;c)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Hello, playground</p>
+</blockquote>
+<blockquote>
+<p>1st a[1] is: 3 addr of map:0x40c130  </p>
+</blockquote>
+<blockquote>
+<p>1st c[1] is: 3 addr of map:0x40c138  </p>
+</blockquote>
+<blockquote>
+<p>1st c[1] is: 4 addr of map:0x40c138   </p>
+</blockquote>
+<blockquote>
+<p>1st a[1] is: 3 addr of map:0x40c130 </p>
+</blockquote>
+<ol start="4">
+<li><strong><a href="https://blog.csdn.net/luoshenfu001/article/details/8601494" target="_blank" rel="noopener">小结：以c++为准</a></strong></li>
+</ol>
+<hr>
+<blockquote>
+<ul>
+<li>参数列表，初始化之后不可更改，名称：值</li>
+<li>指针为独立的参数，其参数列表中值为本身的地址，初始化之后不可变更</li>
+<li>引用作为别名，其参数列表值为引用变量的地址，初始化之后不可变更</li>
+<li>指针指向的地址可以可变，引用引用的地址不可改变（参数列表的初始化)</li>
+<li>对指针的操作及运算为指针本身的运算eg:++指针指向的地址++</li>
+<li>对引用的运算为引用所引用的对象本身的运算</li>
+<li>const int *p， p指向的变量为常量，p可以指向不同的常量</li>
+<li>int const * p, p不可改变其指向，其指向的对象为变量</li>
 </ul>
 </blockquote>
 
@@ -604,7 +751,7 @@
 </header>
 
     <div class="content pure">
-      <a href="/tags/java/" style="font-size: 14px; color: #999">java</a>
+      <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/java-异常/" style="font-size: 14px; color: #999">java, 异常</a>
     </div>
   </section>
 
