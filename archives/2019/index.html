@@ -140,7 +140,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search">
+						<input type="text" class="input u-search-input" placeholder="搜尋">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -1009,12 +1009,25 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       <ol>
-<li><h1 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h1></li>
-<li><h1 id="tcp-ip"><a href="#tcp-ip" class="headerlink" title="tcp/ip "></a>tcp/ip </h1></li>
-<li><h1 id="udp"><a href="#udp" class="headerlink" title="udp"></a>udp</h1></li>
-<li><h1 id="http协议-http1-0-http1-1-http2-0"><a href="#http协议-http1-0-http1-1-http2-0" class="headerlink" title="http协议 http1.0 http1.1 http2.0"></a>http协议 http1.0 http1.1 http2.0</h1></li>
-<li><h1 id="webSocket协议"><a href="#webSocket协议" class="headerlink" title="webSocket协议"></a>webSocket协议</h1></li>
+<li>socket</li>
 </ol>
+<hr>
+<ol start="2">
+<li>tcp/ip </li>
+</ol>
+<hr>
+<ol start="3">
+<li>udp</li>
+</ol>
+<hr>
+<ol start="4">
+<li>http协议 http1.0 http1.1 http2.0</li>
+</ol>
+<hr>
+<ol start="5">
+<li>webSocket协议</li>
+</ol>
+<hr>
 <h2 id="5-1-简介"><a href="#5-1-简介" class="headerlink" title="5.1 简介"></a>5.1 简介</h2><p>WebSocket是一种协议，与HTTP协议一样位于应用层，都是TCP/IP协议的子集。HTTP协议是单向通信协议，只有客户端发起HTTP请求，服务端才会返回数据。而WebSocket协议是双向通信协议，在建立连接之后，客户端和服务器都可以主动向对方发送或接受数据。WebSocket协议建立的前提需要借助HTTP协议，建立连接之后，持久连接的双向通信就与HTTP协议无关了。</p>
 <p>WebSocket是应用层协议，是TCP/IP协议的子集，通过HTTP/1.1协议的101状态码进行握手。也就是说，WebSocket协议的建立需要先借助HTTP协议，在服务器返回101状态码之后，就可以进行websocket全双工双向通信了，就没有HTTP协议什么事情了。</p>
 <p>WebSocket协议的目标是在一个独立的持久连接上提供全双工双向通信。客户端和服务器可以向对方主动发送和接受数据。在JS中创建WebSocket后，会有一个HTTP请求发向浏览器以发起请求。在取得服务器响应后，建立的连接会使用HTTP升级将HTTP协议转换为WebSocket协议。也就是说，使用标准的HTTP协议无法实现WebSocket，只有支持那些协议的专门浏览器才能正常工作。  </p>
@@ -1201,7 +1214,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
   
     <a class="rightBtn" rel="nofollow" href="/blog/tags/" title="blog/tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1282,19 +1295,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    as theme
+    作為主題
     
-      , 
-      total visits
+      ，
+      總訪問量為
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -1408,15 +1421,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "複製成功";
+  let COPY_FAILURE = "複製失敗";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
