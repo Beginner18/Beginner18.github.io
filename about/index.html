@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: go,内存 | Private Zone</title>
+  <title>关于 | Private Zone</title>
   
   <meta name="keywords" content="web">
   
@@ -46,7 +46,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class="cover  half">
+    <cover class="cover page half">
       
         
   <h1 class="title">Private Zone</h1>
@@ -105,7 +105,7 @@
 
       
     </cover>
-    <header class="l_header pure">
+    <header class="l_header no_sidebar pure">
   <div id="loading-bar-wrapper">
     <div id="loading-bar" class="pure"></div>
   </div>
@@ -188,8 +188,6 @@
 			<ul class="switcher h-list">
 				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
         
-          <li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
-        
 			</ul>
 		</div>
 	</div>
@@ -254,25 +252,12 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      
-<div class="l_main">
+      <div class="l_main no_sidebar">
   
-    
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
+
   
+    <article id="page" class="post white-box article-type-page" itemscope itemprop="blogPost">
+      
 
 
   <section class="meta">
@@ -281,11 +266,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/2019/06/13/go_mem/">
-      go 内存
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/about/index.html">
+        关于
+      </a>
+    </h1>
+  
 
 
       
@@ -311,7 +298,7 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-06-13</p>
+    <p>2019-06-20</p>
   </a>
 </div>
 
@@ -324,6 +311,19 @@
         
           
             
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
 
           
         
@@ -340,74 +340,107 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h1 id="go内存模型"><a href="#go内存模型" class="headerlink" title="go内存模型"></a>go内存模型</h1><ol>
-<li><strong>内存模型剖析</strong></li>
-</ol>
-<hr>
-<blockquote>
-<ul>
-<li>待补充</li>
-</ul>
-</blockquote>
-<ol start="2">
-<li><a href="https://www.jianshu.com/p/72e1a2571f01" target="_blank" rel="noopener"><strong>逃逸分析</strong></a></li>
-</ol>
-<hr>
-<blockquote>
-<ul>
-<li>编译参数加入 -gcflags ‘-m -l’</li>
-<li>go消除堆栈区别  </li>
-<li>逃逸分析确定变量的储存区域为堆/栈，减少gc压力，栈可以直接回收，栈分配空间及回收空间较快</li>
-<li>代码段</li>
-</ul>
-</blockquote>
-<blockquote>
-<blockquote>
-<figure class="highlight plain"><figcaption><span>main</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import (</span><br><span class="line">	&quot;time&quot;</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line">func main()&#123;</span><br><span class="line">	//go_parser.TestParser(&quot;a==1 &amp;&amp; b!=2&quot;)</span><br><span class="line">	res := make(map[string]int)</span><br><span class="line">	fmt.Println(res[&quot;res&quot;])</span><br><span class="line">	fmt.Println(int(time.Now().Weekday()))</span><br><span class="line">	// test grpc dispatch get scenes</span><br><span class="line">	//grpc.GetScene(20351, imkfdispatch.Scene_BuyCarConsult)</span><br><span class="line">	res1 := taoyi()</span><br><span class="line">	fmt.Println(&quot;2st addr of i: &quot;, res1)</span><br><span class="line">	i := *res1</span><br><span class="line">	fmt.Println(&quot;the res is: %d&quot;, i)</span><br><span class="line">	fmt.Println(&quot;3st addr of i: &quot;, &amp;i)</span><br><span class="line">&#125;</span><br><span class="line">func taoyi()(*int)&#123;</span><br><span class="line">	var i int = 1</span><br><span class="line">	fmt.Println(&quot;1st addr of i: &quot;, &amp;i)</span><br><span class="line">	return &amp;i</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-</blockquote>
-<blockquote>
-<ul>
-<li>输出内容：</li>
-</ul>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>./main.go:25:14: “1st addr of i: “ escapes to heap<br>./main.go:25:33: &amp;i escapes to heap<br>./main.go:25:33: &amp;i escapes to heap<br>./main.go:24:6: moved to heap: i<br>./main.go:26:9: &amp;i escapes to heap<br>./main.go:25:13: taoyi … argument does not escape<br>./main.go:11:17: res[“res”] escapes to heap<br>./main.go:13:17: int(time.Now().Weekday()) escapes to heap<br>./main.go:17:14: “2st addr of i: “ escapes to heap<br>./main.go:17:14: res1 escapes to heap<br>./main.go:19:14: “the res is: %d” escapes to heap<br>./main.go:19:14: i escapes to heap<br>./main.go:20:14: “3st addr of i: “ escapes to heap<br>./main.go:20:33: &amp;i escapes to heap<br>./main.go:20:33: &amp;i escapes to heap<br>./main.go:18:2: moved to heap: i<br>./main.go:10:13: main make(map[string]int) does not escape<br>./main.go:11:13: main … argument does not escape<br>./main.go:13:13: main … argument does not escape<br>./main.go:17:13: main … argument does not escape<br>./main.go:19:13: main … argument does not escape<br>./main.go:20:13: main … argument does not escape</p>
-</blockquote>
-</blockquote>
-<p><a href="https://studygolang.com/articles/10026" target="_blank" rel="noopener">参考1</a></p>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+        </div>
+        
+        
+      </section>
+    </article>
+  
 
-      
-    </div>
+  
     
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/go-内存/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go,内存</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
       
     
-  </section>
+      
+    
+      
+        <section class="widget grid">
   
+<header class="pure">
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class="content pure">
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/" id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/blog/archives/" href="/blog/archives/" rel="nofollow" id="blogarchives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/projects/" href="/projects/" id="projects">
+          
+            <i class="fas fa-code-branch fa-fw" aria-hidden="true"></i>
+          
+          开源项目
+        </a></li>
+      
+        <li><a class="flat-box" title="/friends/" href="/friends/" rel="nofollow" id="friends">
+          
+            <i class="fas fa-link fa-fw" aria-hidden="true"></i>
+          
+          我的友链
+        </a></li>
+      
+        <li><a class="flat-box" title="https://xaoxuu.com/wiki/material-x/" href="https://xaoxuu.com/wiki/material-x/" rel="nofollow" id="https:xaoxuu.comwikimaterial-x">
+          
+            <i class="fas fa-book fa-fw" aria-hidden="true"></i>
+          
+          主题文档
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/" rel="nofollow" id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于小站
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+      
     
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+      
     
+      
     
+      
+    
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
 
   
 
 
-    
   
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+
 </div>
 <aside class="l_side">
   
