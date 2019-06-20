@@ -140,7 +140,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search">
+						<input type="text" class="input u-search-input" placeholder="搜索">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -342,6 +342,145 @@
 <figure class="highlight plain"><figcaption><span>com.example.web;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.beans.factory.annotation.Value;  </span><br><span class="line">import org.springframework.web.bind.annotation.RestController;  </span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;  </span><br><span class="line">@RestController</span><br><span class="line">public class HelloController &#123;</span><br><span class="line">    @Value(&quot;$&#123;com.test.rand&#125;&quot;)</span><br><span class="line">    private String value1;</span><br><span class="line">    @RequestMapping(&quot;/hello&quot;)</span><br><span class="line">    public String index()&#123;</span><br><span class="line">        return value1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </blockquote>
 </blockquote>
+<ol start="3">
+<li>spring DI</li>
+</ol>
+<hr>
+<blockquote>
+<ul>
+<li>spring可以注入class注册到bean</li>
+<li>spring bean可以由xml文件定义bean</li>
+<li>应用程序支持spring注解需要配置app-context-annotation.xml文件,告诉spring扫描代码，找到@Component @Controller @Respository @Service注解的注入bean以及支持在指定包（及所有子包）下使用@Autowired @Inject @Resource注解的bean<br>xml文件配置可以被java配置替代(如下代码中的@Configuration) </li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// app-context-annotation.xml文件:</span><br><span class="line">&lt;context:componet-scan  </span><br><span class="line">base-package=&quot;com.apress.prospring5.ch3.annotation&quot;/&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>app-context-xml.xml文件:</li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> &lt;bean id=&quot;provider&quot;</span><br><span class="line">class=....HelloWorldMessageProvider/&gt;</span><br><span class="line">&lt;bean id=&quot;renderer&quot;</span><br><span class="line">class=.....StandardOutMessageRenderer&quot;</span><br><span class="line">p:messageProvider-ref=&quot;provider&quot;/&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<ul>
+<li>java配置</li>
+</ul>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// 注解配置，ctx直接调用该配置，通过bean可以自动实现interface</span><br><span class="line">// 该配置可以获取provider及renderer interface</span><br><span class="line">// java配置可以同过xml文件注入eg: @ImportResource(locations = &#123;&quot;classpath:spring/app-context-xml.xml&quot;&#125;)</span><br><span class="line">@ComponentScan(basePackages = &#123;&quot;com.apress.prospring5.ch3.annotation) //必须启动组建扫描</span><br><span class="line">@Configuration</span><br><span class="line">public class HelloWorldConfiguration&#123;</span><br><span class="line">	@Bean</span><br><span class="line">	public MessageProvider provider() &#123;</span><br><span class="line">		return new HelloWorldMessageProvoder(); // provider具体实现class</span><br><span class="line">		&#125;</span><br><span class="line">	@Bean</span><br><span class="line">	public MessageRenderer renderer()&#123;</span><br><span class="line">		// renderer的具体实现class</span><br><span class="line">		MessageRenderer renderer = new StandardOutMessageRenderer(); </span><br><span class="line">		renderer.setMessageProvider(provider());</span><br><span class="line">		return renderer;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line">// 以上配置替代app-context-xml.xml文件: &lt;bean id=&quot;provider&quot;</span><br><span class="line">class=....HelloWorldMessageProvider/&gt;</span><br><span class="line">&lt;bean id=&quot;renderer&quot;</span><br><span class="line">class=.....StandardOutMessageRenderer&quot;</span><br><span class="line">p:messageProvider-ref=&quot;provider&quot;/&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong><em>setter注入</em></strong><bean>中指定<property>标记（每个<property>标记注入一个依赖项）代码片段如下:</property></property></bean></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;renderer&quot;</span><br><span class="line">	class=.....StandardOutMessageRenderer&quot;&gt;</span><br><span class="line">	&lt;property name=&quot;messageProvider&quot; ref=&quot;provider&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line">&lt;bean id=&quot;provider&quot;</span><br><span class="line">class=....HelloWorldMessageProvider/&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>spring2.5以上：</p>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> &lt;bean id=&quot;provider&quot;</span><br><span class="line">class=....HelloWorldMessageProvider/&gt;</span><br><span class="line">&lt;bean id=&quot;renderer&quot;</span><br><span class="line">class=.....StandardOutMessageRenderer&quot;</span><br><span class="line">p:messageProvider-ref=&quot;provider&quot;/&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong><em>setter注入</em></strong>注解方式：</li>
+</ul>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Service(&quot;renderer&quot;)</span><br><span class="line">public class StandardOutMessageRenderer implements MessageRenderer&#123;</span><br><span class="line">	@Overrider</span><br><span class="line">	@Autowired //可使用@Resource(name=&quot;messageProvider&quot;)</span><br><span class="line">	public void setMessageProvider(MessageProvoder provoder)&#123;</span><br><span class="line">		this.messageProvider = provider;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong><em>构造函数注入</em></strong>  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class ConfigurableMessageProvider implements MessageProvider &#123;</span><br><span class="line">	private String message;</span><br><span class="line">	public ConfigurableMessageProvider(String message)&#123;</span><br><span class="line">		this.message=message;</span><br><span class="line">	&#125;</span><br><span class="line">	@Overrider</span><br><span class="line">	public String getMessage()&#123;</span><br><span class="line">		return message;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>创建ConfigurableMessageProvider需要提供非null的消息值，重定义xml创建实例，使用构造函数注入消息:  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> &lt;bean id=&quot;messageProvider&quot;</span><br><span class="line">class=....ConfigurableMessageProvider/&gt;</span><br><span class="line">&lt;constructonr-arg type=&quot;String&quot; value=&quot;I hope...&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>多个构造函数使用index<br>Spring3.1起参数可以用c名称空间，即  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;constructonr-arg value=&quot;I hope...&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line">修改为：c:message=&quot;I I hope...&quot;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<p>构造函数使用注解：</p>
+<blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class ConfigurableMessageProvider implements MessageProvider &#123;</span><br><span class="line">	private String message;</span><br><span class="line">	// @Value能注入值</span><br><span class="line">	@AutoWired</span><br><span class="line">	public ConfigurableMessageProvider(@Value(&quot;configurable message&quot;) String message)&#123;</span><br><span class="line">		this.message=message;</span><br><span class="line">	&#125;</span><br><span class="line">	@Overrider</span><br><span class="line">	public String getMessage()&#123;</span><br><span class="line">		return message;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">将@Value变为外部文件注入</span><br><span class="line">xml文件变为：</span><br><span class="line">&lt;context:componet-scan  </span><br><span class="line">base-package=&quot;com.apress.prospring5.ch3.annotation&quot;/&gt;  </span><br><span class="line">&lt;bean id=&quot;message&quot; class=&quot;java.lang.String&quot;</span><br><span class="line">	c:_0=&quot;I hope ...&quot;/&gt;</span><br><span class="line">其中c:_0中_0为索引</span><br><span class="line">对应代码为：构造函数中value会由bean自动注入</span><br><span class="line">public class ConfigurableMessageProvider implements MessageProvider &#123;</span><br><span class="line">	private String message;</span><br><span class="line">	// @Value能注入值</span><br><span class="line">	@AutoWired</span><br><span class="line">	public ConfigurableMessageProvider(String message)&#123;</span><br><span class="line">		this.message=message;</span><br><span class="line">	&#125;</span><br><span class="line">	@Overrider</span><br><span class="line">	public String getMessage()&#123;</span><br><span class="line">		return message;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>通过注解指定用于构造的构造方法: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class ConstructorConfusion()&#123;</span><br><span class="line">private String somevalue</span><br><span class="line">public void ConstructorConfusion(String somevalue)&#123;</span><br><span class="line">	System.out.println(&quot;ConstructorConfusion(string) called&quot;);</span><br><span class="line">	this.somevalue=somevalue;</span><br><span class="line">&#125;</span><br><span class="line">@Autowired //指定了构造函数，只能用于一个</span><br><span class="line">public void ConstructorConfusion(int somevalue)&#123;</span><br><span class="line">	System.out.println(&quot;ConstructorConfusion(int) called&quot;);</span><br><span class="line">	this.somevalue=&quot;Number: &quot;+Integer.toString(somevalue);</span><br><span class="line">&#125;</span><br><span class="line">public String toString()&#123;</span><br><span class="line">	return somevalue;</span><br><span class="line">&#125;</span><br><span class="line">public static void main(String... args)&#123;</span><br><span class="line">GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();</span><br><span class="line">ctx.load(&quot;&quot;classpath:spring/app-context-annotation.xml&quot;);</span><br><span class="line">ctx.refresh();</span><br><span class="line">ConstructorConfusion cc=(ConstructorConfusion)ctx.getBean(&quot;constructorConfusion&quot;);</span><br><span class="line">System.out.println(cc);</span><br><span class="line">ctx.close();</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong><em>字段注入</em></strong>:依赖直接注入字段，不需要构造函数及setter,通过@Autowired<blockquote>
+<p>不能用于final字段，只能通过构造函数  </p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>注入参数</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>setter与构造函数分别通过<property>及<constructor-args>标记注入<br>示例如下：</constructor-args></property></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class InjectSimple &#123;</span><br><span class="line">prviate String name;</span><br><span class="line">private int age;</span><br><span class="line">private float height;</span><br><span class="line">public static void main(String... args)&#123;</span><br><span class="line">	GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();</span><br><span class="line">ctx.load(&quot;&quot;classpath:spring/app-context-xml.xml&quot;);</span><br><span class="line">ctx.refresh();</span><br><span class="line">InjectSimple simple = (InjectSimple)ctx.getBean(&quot;injectSimple&quot;);</span><br><span class="line">System.out.println(simple);</span><br><span class="line">ctx.close();</span><br><span class="line">&#125;</span><br><span class="line">public void setAge(String age)&#123;</span><br><span class="line">	this.age=age;</span><br><span class="line">&#125;</span><br><span class="line">public void setName(String name)&#123;</span><br><span class="line">	this.name=name;</span><br><span class="line">&#125;</span><br><span class="line">public void setHeight(float height)&#123;</span><br><span class="line">	this.height=height;</span><br><span class="line">&#125;</span><br><span class="line">app-context-xml.xml</span><br><span class="line">&lt;beans ...&gt;</span><br><span class="line">	&lt;bean id=&quot;injectSimpleConfig&quot;</span><br><span class="line">		class=&quot;com.apress.prospring5.ch3.xml.InjectSimpleConfig&quot;/&gt;</span><br><span class="line">	&lt;bean id=&quot;injectSimpleSpel&quot; </span><br><span class="line">		class=&quot;com.apress.prospring5.ch3.xml.InjectSimpleSpel&quot;</span><br><span class="line">		p:name=&quot;xx&quot;</span><br><span class="line">		p:age=&quot;123&quot;</span><br><span class="line">		p:height=&quot;1.1&quot;/&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>注解方式:</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@Service(&quot;injectSimple&quot;) //或者spel注入@Service(&quot;injectSimpleSpel&quot;)</span><br><span class="line">public class InjectSimple &#123;</span><br><span class="line">@Value(&quot;xx&quot;) //或者spel注入 @Value(&quot;#&#123;injectSimpleConfig.name&#125;&quot;)</span><br><span class="line">prviate String name;</span><br><span class="line">@Value(&quot;11&quot;) //或者spel注入 @Value(&quot;#&#123;injectSimpleConfig.age +1 &#125;&quot;)</span><br><span class="line">private int age;</span><br><span class="line">@Value(&quot;1.1&quot;)</span><br><span class="line">private float height;</span><br><span class="line">public static void main(String... args)&#123;</span><br><span class="line">	GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();</span><br><span class="line">ctx.load(&quot;&quot;classpath:spring/app-context-xml.xml&quot;);</span><br><span class="line">ctx.refresh();</span><br><span class="line">InjectSimple simple = (InjectSimple)ctx.getBean(&quot;injectSimple&quot;);</span><br><span class="line">System.out.println(simple);</span><br><span class="line">ctx.close();</span><br><span class="line">&#125;</span><br><span class="line">public void setAge(String age)&#123;</span><br><span class="line">	this.age=age;</span><br><span class="line">&#125;</span><br><span class="line">public void setName(String name)&#123;</span><br><span class="line">	this.name=name;</span><br><span class="line">&#125;</span><br><span class="line">public void setHeight(float height)&#123;</span><br><span class="line">	this.height=height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//调用方式：</span><br><span class="line">// 1 xml文件配置</span><br><span class="line">publci class DeclareSpringComponents &#123;</span><br><span class="line">	GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();</span><br><span class="line">	// A、加载app-context-annotation.xml文件 告知spring扫描代码找到注解,   </span><br><span class="line">		interface的具体实现class必须带注解;使用annotation包中注解定义的bean</span><br><span class="line">	// B、 加载app-context-xml.xml</span><br><span class="line">	ctx.load(&quot;classpath:spring/app-context-xml.xml);//可以将app-context-xml.xml  </span><br><span class="line">	替换为app-context-annotation.xml，只要class的实现添加了注解，则两者实现完全一致</span><br><span class="line">	ctx.refresh();</span><br><span class="line">	MessageRenderer messageRenderer = ctx.getBean(&quot;renderer&quot;, MessageRenderer.class);</span><br><span class="line">		messageRenderer.render();</span><br><span class="line">	ctx.close();</span><br><span class="line">&#125;</span><br><span class="line">// 2 配置类</span><br><span class="line">public class HelloWorldAnnotated &#123;</span><br><span class="line">	public static void main(String... args) &#123;</span><br><span class="line">		// 加载配置类</span><br><span class="line">		ApplicationContext ctx = new AnnotationConfigApplicationContext(HelloWorldConfiguration.class);</span><br><span class="line">		MessageRenderer messageRenderer = ctx.getBean(&quot;renderer&quot;, MessageRenderer.class);</span><br><span class="line">		messageRenderer.render();</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<ul>
+<li>spring框架主要：interface + DI (dependency injection)</li>
+<li>通过applicationContext获取interface的具体实现class，通过ctx.getbean自动实现interface，spring 框架自动处理</li>
+<li>setter注入，java 配置， 构造函数实现</li>
+<li>java配置 </li>
+</ul>
+</blockquote>
 
       
     </div>
@@ -504,7 +643,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn" rel="nofollow" href="/blog/tags/" title="blog/tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -512,7 +651,7 @@
 </header>
 
     <div class="content pure">
-      <a href="/tags/go-内存/" style="font-size: 14px; color: #999">go,内存</a> <a href="/tags/java/" style="font-size: 24px; color: #555">java</a> <a href="/tags/java-spring-boot/" style="font-size: 14px; color: #999">java, spring boot</a> <a href="/tags/java-异常/" style="font-size: 14px; color: #999">java, 异常</a>
+      <a href="/tags/go/" style="font-size: 14px; color: #999">go</a> <a href="/tags/go-内存/" style="font-size: 14px; color: #999">go,内存</a> <a href="/tags/java/" style="font-size: 24px; color: #555">java</a> <a href="/tags/java-spring-boot/" style="font-size: 14px; color: #999">java, spring boot</a> <a href="/tags/java-异常/" style="font-size: 14px; color: #999">java, 异常</a>
     </div>
   </section>
 
@@ -585,19 +724,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -703,15 +842,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
