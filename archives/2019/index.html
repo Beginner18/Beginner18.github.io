@@ -140,7 +140,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜索">
+						<input type="text" class="input u-search-input" placeholder="Search">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -322,7 +322,7 @@
 <li>方法类型：方法接收器的类型+方法名</li>
 <li>方法值：方法接收器+方法名</li>
 <li>方法类型及方法值均可以直接作为函数调用，方法类型函数调用时第一个参数为接收器类型，类型不会自动转换</li>
-<li>方法值直接定义了接收器，接收器类型可自动转换，方法接收器的类型的实质不可以为指针或者interface；字面量取不到对应地址</li>
+<li>方法值直接定义了接收器，接收器类型可自动转换，方法接收器的类型的实质不可以为指针或者interface；字面量取不到对应地址  </li>
 </ul>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line">type test struct&#123;</span><br><span class="line">a int</span><br><span class="line">b int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(&quot;Hello, playground&quot;)</span><br><span class="line">	b := test&#123;2,2&#125;</span><br><span class="line">	b.show(&quot;直接调用&quot;)</span><br><span class="line">	// 1 方法表达式</span><br><span class="line">	c := test.show // 方法表达式</span><br><span class="line">	c(b,&quot;方法表达式调用&quot;) // 调用方法表达式需要指定接收器</span><br><span class="line">	// 2 方法的值</span><br><span class="line">	d := b.show  // 或者(&amp;b).show 方法值调用自动指定接收器，类型可自动转换</span><br><span class="line">	d(&quot;方法值调用方式&quot;)</span><br><span class="line">	</span><br><span class="line">	// 方法指针</span><br><span class="line">	e := (*test).show1 // 方法表达式 为指针</span><br><span class="line">	e(&amp;b, &quot;方法表达式调用&quot;) // 接收器为指针，不会自动转换</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	f := (&amp;b).show1  // 或者b.show1</span><br><span class="line">	f(&quot;方法值调用&quot;)</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (a test) show(b string)&#123;</span><br><span class="line">fmt.Printf(&quot;%s: %+v\n&quot;,b, a)</span><br><span class="line">&#125;</span><br><span class="line">// 不可重名</span><br><span class="line">func (a *test) show1(b string)&#123;</span><br><span class="line">a.a=1</span><br><span class="line">fmt.Printf(&quot;%s: pointer %+v\n&quot;,b, *a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1445,7 +1445,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
   
     <a class="rightBtn" rel="nofollow" href="/blog/tags/" title="blog/tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1526,19 +1526,19 @@
     </div>
   
   <br>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
   <div>
-    本站使用
+    Use
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    作为主题
+    as theme
     
-      ，
-      总访问量为
+      , 
+      total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
+      times
     
-    。
+    . 
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -1652,15 +1652,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "复制成功";
-  let COPY_FAILURE = "复制失败";
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
