@@ -170,7 +170,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search">
+						<input type="text" class="input u-search-input" placeholder="搜索">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -1286,7 +1286,8 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h2 id="1-socket"><a href="#1-socket" class="headerlink" title="1 socket"></a>1 socket</h2><h2 id="2-tcp-ip"><a href="#2-tcp-ip" class="headerlink" title="2 tcp/ip "></a>2 tcp/ip </h2><h2 id="3-udp"><a href="#3-udp" class="headerlink" title="3 udp"></a>3 udp</h2><h2 id="4-http协议-http1-0-http1-1-http2-0"><a href="#4-http协议-http1-0-http1-1-http2-0" class="headerlink" title="4 http协议 http1.0 http1.1 http2.0"></a>4 http协议 http1.0 http1.1 http2.0</h2><blockquote>
+      <h2 id="1-socket"><a href="#1-socket" class="headerlink" title="1 socket"></a>1 socket</h2><h2 id="2-tcp-ip"><a href="#2-tcp-ip" class="headerlink" title="2 tcp/ip "></a>2 tcp/ip </h2><h2 id="3-udp"><a href="#3-udp" class="headerlink" title="3 udp"></a>3 udp</h2><p>&lt; –!more– &gt;</p>
+<h2 id="4-http协议-http1-0-http1-1-http2-0"><a href="#4-http协议-http1-0-http1-1-http2-0" class="headerlink" title="4 http协议 http1.0 http1.1 http2.0"></a>4 http协议 http1.0 http1.1 http2.0</h2><blockquote>
 <ul>
 <li>http1 建立连接 客户端请求  服务端发送响应并关闭连接 获取响应</li>
 <li>http1.1 复用连接,建立连接: 请求1-&gt;响应1, 请求2-&gt;响应2, 其他顺序请求获取响应后才可再次发送请求； 由于复用连接，客户端需要区分每个响应：context-length或者分块传输(Chunked)<br>服务端需提供context-length标明响应body的长度，客户端做区分(服务端必须处理完所有数据才可以发送响应)；<br>http1.1 规定可以不使用Content-Length字段，而使用”分块传输编码”（Chunked Transfer Encoding）。只要请求或响应的头信息有Transfer-Encoding: chunked字段，就表明body将可能由数量未定的多个数据块组成。每个数据块之前会有一行包含一个16进制数值，表示这个块的长度；最后一个大小为0的块，就表示本次响应的数据发送完了。</li>
@@ -1297,6 +1298,21 @@
 <li>http2.0利用分帧机制，不再依赖多个TCP连接去实现多流并行了</li>
 <li>http2.0客户端发起的流标识为奇数，服务端发起的流标识为偶数</li>
 <li>http2.0可以支持优先级，首部压缩减少传输数量量，客户端服务端均可以乱序发送数据，之后通过流标识及帧进行数据重组；http2.0服务端支持数据推送</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>http2多路复用<br>Tcp全双工：<br>发送数据流头堵塞 按序到达<br>发送堵塞不影响接收<br>http:<br>请求<br>1 请求以数据帧形式发送<br>2 并发发送<br>3 若发送的数据帧出现tcp头堵塞则堵塞<br>返回<br>无需按接收到的请求顺序返回结果<br>完成的结果，按tcp协议写入到socket<br>发送头堵塞不影响接收端接收数据<br>server端处理请求方式：<br>单进程单线程 排队 对头堵塞<br>单进程多线程<br>多进程单线程<br>多进程多线程</p>
+</blockquote>
+</blockquote>
+<p>消息：</p>
+<ul>
+<li>流：流是连接中的一个虚拟信道，可以承载双向的消息；每个流都有一个唯一的整数标识符（1、2…N）；</li>
+<li>消息：是指逻辑上的 HTTP 消息，比如请求、响应等，由一或多个帧组成。</li>
+<li>帧：HTTP 2.0 通信的最小单位，每个帧包含帧首部，至少也会标识出当前帧所属的流，承载着特定类型的数据，如 HTTP 首部、负荷，等等<br>每帧由消息流号标识</li>
+</ul>
+<blockquote>
+<ul>
 <li><strong><em>http响应四种模型:</em></strong></li>
 </ul>
 </blockquote>
@@ -1349,6 +1365,21 @@
 <li>A需要从B获取消息: B作为server端提供响应接口，A作为cli端调用B(http rpc)； A主动发起请求获取response</li>
 </ul>
 </blockquote>
+</blockquote>
+<h1 id="8-其他"><a href="#8-其他" class="headerlink" title="8 其他"></a>8 其他</h1><blockquote>
+<ul>
+<li>IP地址是逻辑地址用来标识网络中的一个主机，ip地址唯一，计算机间通信通过ip</li>
+<li>IP分公有ip及私有ip，公有ip全球可以访问，私有地址(以192.168.开头)不能直接在internet网络中应用</li>
+<li>IP地址=网络地址+主机地址</li>
+<li>网络地址就是判断网络中的计算机在不在同一网络,在就能通,不在就不能通</li>
+<li>网络地址: IP地址&amp;子网掩码，二进制计算获取网络地址</li>
+<li>域名internet中计算机或者计算机组的名称,域名便于人类记忆</li>
+<li>DNS(Domain name server): 域名服务器，存有域名跟ip的对应表，可以将域名解析为ip；</li>
+<li>chrom浏览器输入google.com：1 请求dns服务器解析google.com获取ip地址 2 与该ip建立连接</li>
+<li>网络A的IP地址范围为“192.168.1.1<del>192. 168.1.254”，网络B的IP地址范围为“192.168.2.1</del>192.168.2.254”，两者的子网掩码为255.255.255.0</li>
+<li>网络A与B在不同的网络中不能直接通信，两者必须通过网关通信：如果网络A中的主机发现数据包的目的主机不在本地网络中，就把数据包转发给它自己的网关，再由网关转发给网络B的网关，网络B的网关再转发给网络B的某个主机</li>
+<li>网关的IP地址是具有路由功能的设备的IP地址： 路由器、启用了路由协议的服务器（实质上相当于一台路由器）、代理服务器（也相当于一台路由器）。</li>
+</ul>
 </blockquote>
 
       
@@ -1504,7 +1535,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn" rel="nofollow" href="/blog/tags/" title="blog/tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1593,19 +1624,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -1711,15 +1742,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
