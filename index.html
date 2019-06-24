@@ -170,7 +170,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜索">
+						<input type="text" class="input u-search-input" placeholder="搜尋">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -1286,102 +1286,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h2 id="1-socket"><a href="#1-socket" class="headerlink" title="1 socket"></a>1 socket</h2><h2 id="2-tcp-ip"><a href="#2-tcp-ip" class="headerlink" title="2 tcp/ip "></a>2 tcp/ip </h2><h2 id="3-udp"><a href="#3-udp" class="headerlink" title="3 udp"></a>3 udp</h2><p>&lt; –!more– &gt;</p>
-<h2 id="4-http协议-http1-0-http1-1-http2-0"><a href="#4-http协议-http1-0-http1-1-http2-0" class="headerlink" title="4 http协议 http1.0 http1.1 http2.0"></a>4 http协议 http1.0 http1.1 http2.0</h2><blockquote>
-<ul>
-<li>http1 建立连接 客户端请求  服务端发送响应并关闭连接 获取响应</li>
-<li>http1.1 复用连接,建立连接: 请求1-&gt;响应1, 请求2-&gt;响应2, 其他顺序请求获取响应后才可再次发送请求； 由于复用连接，客户端需要区分每个响应：context-length或者分块传输(Chunked)<br>服务端需提供context-length标明响应body的长度，客户端做区分(服务端必须处理完所有数据才可以发送响应)；<br>http1.1 规定可以不使用Content-Length字段，而使用”分块传输编码”（Chunked Transfer Encoding）。只要请求或响应的头信息有Transfer-Encoding: chunked字段，就表明body将可能由数量未定的多个数据块组成。每个数据块之前会有一行包含一个16进制数值，表示这个块的长度；最后一个大小为0的块，就表示本次响应的数据发送完了。</li>
-<li>http2 数据压缩 头跟数据分成不同帧 建立连接 发送请求1 2 3 4 获取请求2 3 1 4 请求返回可以无序</li>
-<li>http头堵塞问题：服务端顺序处理请求，若某一请求处理时间较久，其后所有请求排队堵塞</li>
-<li>http基于tcp传输层协议，存在tcp头堵塞问题，Tcp全双工 发送不堵塞接收 </li>
-<li>http2.0采用二进制数据分帧更好的利用底层tcp，解决1.1的队首问题；</li>
-<li>http2.0利用分帧机制，不再依赖多个TCP连接去实现多流并行了</li>
-<li>http2.0客户端发起的流标识为奇数，服务端发起的流标识为偶数</li>
-<li>http2.0可以支持优先级，首部压缩减少传输数量量，客户端服务端均可以乱序发送数据，之后通过流标识及帧进行数据重组；http2.0服务端支持数据推送</li>
-</ul>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>http2多路复用<br>Tcp全双工：<br>发送数据流头堵塞 按序到达<br>发送堵塞不影响接收<br>http:<br>请求<br>1 请求以数据帧形式发送<br>2 并发发送<br>3 若发送的数据帧出现tcp头堵塞则堵塞<br>返回<br>无需按接收到的请求顺序返回结果<br>完成的结果，按tcp协议写入到socket<br>发送头堵塞不影响接收端接收数据<br>server端处理请求方式：<br>单进程单线程 排队 对头堵塞<br>单进程多线程<br>多进程单线程<br>多进程多线程</p>
-</blockquote>
-</blockquote>
-<p>消息：</p>
-<ul>
-<li>流：流是连接中的一个虚拟信道，可以承载双向的消息；每个流都有一个唯一的整数标识符（1、2…N）；</li>
-<li>消息：是指逻辑上的 HTTP 消息，比如请求、响应等，由一或多个帧组成。</li>
-<li>帧：HTTP 2.0 通信的最小单位，每个帧包含帧首部，至少也会标识出当前帧所属的流，承载着特定类型的数据，如 HTTP 首部、负荷，等等<br>每帧由消息流号标识</li>
-</ul>
-<blockquote>
-<ul>
-<li><strong><em>http响应四种模型:</em></strong></li>
-</ul>
-</blockquote>
-<blockquote>
-<blockquote>
-<ul>
-<li>单进程I/O模型:<br>服务端开启一个进程，一个进程仅能处理一个请求，并且对请求顺序处理；</li>
-<li>多进程I/O模型: 服务端并行开启多个进程，同样的一个进程只能处理一个请求，这样服务端就可以同时处理多个请求；</li>
-<li>复用I/O模型: 服务端开启一个进程，但是呢，同时开启多个线程，一个线程响应一个请求，同样可以达到同时处理多个请求，线程间并发执行；</li>
-<li>复用多线程I/O模型: 服务端并行开启多个进程，同时每个进程开启多个线程，这样服务端可以同时处理进程数M*每个进程的线程数N个请求。<br><a href="https://blog.51cto.com/13570193/2108347" target="_blank" rel="noopener">http协议</a><br><a href="https://blog.51cto.com/biketiger/1716962" target="_blank" rel="noopener">http断开连接</a><br><a href="https://blog.csdn.net/zqjflash/article/details/50179235" target="_blank" rel="noopener">http2详解</a><br><a href="https://www.cnblogs.com/XiongMaoMengNan/p/8425724.html" target="_blank" rel="noopener">http1.1 vs http2.0</a><br><a href="http://www.blogjava.net/yongboy/archive/2015/03/20/423655.html" target="_blank" rel="noopener">http2.0定义的帧</a></li>
-</ul>
-</blockquote>
-</blockquote>
-<h2 id="5-webSocket协议"><a href="#5-webSocket协议" class="headerlink" title="5 webSocket协议"></a>5 webSocket协议</h2><h2 id="5-1-简介"><a href="#5-1-简介" class="headerlink" title="5.1 简介"></a>5.1 简介</h2><p>WebSocket是一种协议，与HTTP协议一样位于应用层，都是TCP/IP协议的子集。HTTP协议是单向通信协议，只有客户端发起HTTP请求，服务端才会返回数据。而WebSocket协议是双向通信协议，在建立连接之后，客户端和服务器都可以主动向对方发送或接受数据。WebSocket协议建立的前提需要借助HTTP协议，建立连接之后，持久连接的双向通信就与HTTP协议无关了。</p>
-<p>WebSocket是应用层协议，是TCP/IP协议的子集，通过HTTP/1.1协议的101状态码进行握手。也就是说，WebSocket协议的建立需要先借助HTTP协议，在服务器返回101状态码之后，就可以进行websocket全双工双向通信了，就没有HTTP协议什么事情了。</p>
-<p>WebSocket协议的目标是在一个独立的持久连接上提供全双工双向通信。客户端和服务器可以向对方主动发送和接受数据。在JS中创建WebSocket后，会有一个HTTP请求发向浏览器以发起请求。在取得服务器响应后，建立的连接会使用HTTP升级将HTTP协议转换为WebSocket协议。也就是说，使用标准的HTTP协议无法实现WebSocket，只有支持那些协议的专门浏览器才能正常工作。  </p>
-<p>由于WebScoket使用了自定义协议，所以URL与HTTP协议略有不同。未加密的连接为ws://，而不是http://。加密的连接为wss://，而不是https://。</p>
-<h2 id="5-2-对比http"><a href="#5-2-对比http" class="headerlink" title="5.2 对比http"></a>5.2 对比http</h2><blockquote>
-<ul>
-<li>前端通过浏览器与服务端建立tcp长连接，全双工通信</li>
-<li>通过http get建立连接 之后升级协议为webSocket</li>
-<li>http协议请求型，惰性，客服端发起请求，服务端才回复请求</li>
-</ul>
-</blockquote>
-<blockquote>
-<blockquote>
-<ul>
-<li>ajax可以通过轮询实现后端推送消息给前端：一定时间后发起http请求，并得到response(不论是否有新的数据),导致后端服务器过忙，很多无用请求;<strong><em>1个request对应一个response,轮询发起http请求</em></strong></li>
-<li>前端通过long poll实现服务端推送消息至前端：前端发起请求，服务端无数据时不发送response直到有新的数据发起response;<strong><em>1个request对应一个response，阻塞在服务端response</em></strong></li>
-<li>http流实现后端推送消息至前端：前端发起请求，服务端可以推送多次response;<strong><em>一个request对应多个response</em></strong></li>
-<li>ajax轮询 需要服务器有很快的处理速度和资源。（速度）</li>
-<li>long poll 需要有很高的并发，也就是说同时接待客户的能力。（场地大小）</li>
-<li>传统轮询技术(Ajax短轮询)是客户端向服务器发起HTTP请求，无论数据是否更新，服务器都会传输数据。一个request对应一个response。<br>服务器推送技术(Ajax长轮询)是短轮询的变种，是客户端向服务器发起HTTP请求，只有等待数据更新后才会传输数据，否则服务器保持连接状态。接着发起下一次HTTP请求，一个request对应一个response。<br>服务器推送技术(HTTP流)，在客户端只发起一次HTTP请求，服务器保持连接状态，在数据更新之后，服务器会传输数据，否则保持连接状态。此时一个requset对应多个response。<br>无论是短轮询、长轮询，还是HTTP流，相同点在于都需要客户端先发起HTTP请求。</li>
-</ul>
-</blockquote>
-</blockquote>
-<h2 id="5-3-示例"><a href="#5-3-示例" class="headerlink" title="5.3 示例"></a>5.3 示例</h2><p><strong><em>Js webSocketAPI</em></strong></p>
-<figure class="highlight plain"><figcaption><span>打开WebSocket, 传递的参数url没有同源策略的限制。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">let websocket = new WebSocket(url)</span><br><span class="line"></span><br><span class="line">// 监听open事件，在成功建立websocket时向url发送纯文本字符串数据(如果是对象则必须序列化处理)。</span><br><span class="line">websocket.onopen = () =&gt; &#123;</span><br><span class="line">  if (websocket.readyState === WebSocket.OPEN) &#123;</span><br><span class="line">    websocket.send(&apos;hello world&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 监听message事件，在服务器响应时接受数据。返回的数据存储在事件对象中。</span><br><span class="line">websocket.onmessage = e =&gt; &#123;</span><br><span class="line">  let data = e.data</span><br><span class="line">  console.log(data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 监听error事件，在发生错误时触发，连接不能持续。</span><br><span class="line">websocket.onerror = () =&gt; &#123;</span><br><span class="line">  console.log(&apos;websocket connecting error!!&apos;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 监听close事件，在连接关闭时触发。只有close事件的事件对象拥有额外的信息。可以通过这些信息来查看关闭状态</span><br><span class="line">websocket.onclose = e =&gt; &#123;</span><br><span class="line">  let clean = e.wasClean // 是否已经关闭</span><br><span class="line">  let code = e.code // 服务器返回的数值状态码。</span><br><span class="line">  let reason = e.reason //服务器返回的消息。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="../pic/webSocket%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82.png" alt="webSocekt请求"><br><a href="https://www.cnblogs.com/fuqiang88/p/5956363.html" target="_blank" rel="noopener">看完让你彻底搞懂Websocket原理</a><br><a href="https://blog.csdn.net/qq_34803821/article/details/84657721" target="_blank" rel="noopener">webSocket协议</a><br><a href="https://www.cnblogs.com/unclekeith/p/8087182.html" target="_blank" rel="noopener">webSocket协议解析</a><br><a href="https://blog.csdn.net/xuduorui/article/details/76464576" target="_blank" rel="noopener">golang中的webSocket实现</a><br><a href="https://godoc.org/golang.org/x/net/websocket#Codec" target="_blank" rel="noopener">golang官方webSocket实现</a></p>
-<h1 id="6-并发编程-select-I-O复用"><a href="#6-并发编程-select-I-O复用" class="headerlink" title="6 并发编程 select I/O复用"></a>6 并发编程 select I/O复用</h1><h1 id="7-前后端通信"><a href="#7-前后端通信" class="headerlink" title="7 前后端通信"></a>7 前后端通信</h1><blockquote>
-<ul>
-<li>前端作为通信的cli端，若http协议只能通过请求获取response</li>
-<li>服务端之间通信: 服务端均可作为通信的server端存在</li>
-</ul>
-<blockquote>
-<ul>
-<li>服务端A B</li>
-<li>B推送消息给A，A作为server端，B作为cli端调用接口(http rpc)发送消息给A； B主动发起请求，获取response</li>
-<li>A需要从B获取消息: B作为server端提供响应接口，A作为cli端调用B(http rpc)； A主动发起请求获取response</li>
-</ul>
-</blockquote>
-</blockquote>
-<h1 id="8-其他"><a href="#8-其他" class="headerlink" title="8 其他"></a>8 其他</h1><blockquote>
-<ul>
-<li>IP地址是逻辑地址用来标识网络中的一个主机，ip地址唯一，计算机间通信通过ip</li>
-<li>IP分公有ip及私有ip，公有ip全球可以访问，私有地址(以192.168.开头)不能直接在internet网络中应用</li>
-<li>IP地址=网络地址+主机地址</li>
-<li>网络地址就是判断网络中的计算机在不在同一网络,在就能通,不在就不能通</li>
-<li>网络地址: IP地址&amp;子网掩码，二进制计算获取网络地址</li>
-<li>域名internet中计算机或者计算机组的名称,域名便于人类记忆</li>
-<li>DNS(Domain name server): 域名服务器，存有域名跟ip的对应表，可以将域名解析为ip；</li>
-<li>chrom浏览器输入google.com：1 请求dns服务器解析google.com获取ip地址 2 与该ip建立连接</li>
-<li>网络A的IP地址范围为“192.168.1.1<del>192. 168.1.254”，网络B的IP地址范围为“192.168.2.1</del>192.168.2.254”，两者的子网掩码为255.255.255.0</li>
-<li>网络A与B在不同的网络中不能直接通信，两者必须通过网关通信：如果网络A中的主机发现数据包的目的主机不在本地网络中，就把数据包转发给它自己的网关，再由网关转发给网络B的网关，网络B的网关再转发给网络B的某个主机</li>
-<li>网关的IP地址是具有路由功能的设备的IP地址： 路由器、启用了路由协议的服务器（实质上相当于一台路由器）、代理服务器（也相当于一台路由器）。</li>
-</ul>
-</blockquote>
-
+      <h2 id="1-socket"><a href="#1-socket" class="headerlink" title="1 socket"></a>1 socket</h2><h2 id="2-tcp-ip"><a href="#2-tcp-ip" class="headerlink" title="2 tcp/ip "></a>2 tcp/ip </h2><h2 id="3-udp"><a href="#3-udp" class="headerlink" title="3 udp"></a>3 udp</h2>
+      
+        <div class="readmore">
+          <a href="/2019/06/05/tcp-ip-http/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            閱讀全文
+          </a>
+        </div>
       
     </div>
     
@@ -1535,7 +1447,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
   
     <a class="rightBtn" rel="nofollow" href="/blog/tags/" title="blog/tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1624,7 +1536,7 @@
     </div>
   
   <br>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
 </div>
   <div>
     本站使用
@@ -1742,15 +1654,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "复制成功";
-  let COPY_FAILURE = "复制失败";
+  let COPY_SUCCESS = "複製成功";
+  let COPY_FAILURE = "複製失敗";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
