@@ -170,7 +170,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜尋">
+						<input type="text" class="input u-search-input" placeholder="Search">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -363,7 +363,29 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line">type test struct&#123;</span><br><span class="line">a int</span><br><span class="line">b int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(&quot;Hello, playground&quot;)</span><br><span class="line">	b := test&#123;2,2&#125;</span><br><span class="line">	b.show(&quot;直接调用&quot;)</span><br><span class="line">	// 1 方法表达式</span><br><span class="line">	c := test.show // 方法表达式</span><br><span class="line">	c(b,&quot;方法表达式调用&quot;) // 调用方法表达式需要指定接收器</span><br><span class="line">	// 2 方法的值</span><br><span class="line">	d := b.show  // 或者(&amp;b).show 方法值调用自动指定接收器，类型可自动转换</span><br><span class="line">	d(&quot;方法值调用方式&quot;)</span><br><span class="line">	</span><br><span class="line">	// 方法指针</span><br><span class="line">	e := (*test).show1 // 方法表达式 为指针</span><br><span class="line">	e(&amp;b, &quot;方法表达式调用&quot;) // 接收器为指针，不会自动转换</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	f := (&amp;b).show1  // 或者b.show1</span><br><span class="line">	f(&quot;方法值调用&quot;)</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (a test) show(b string)&#123;</span><br><span class="line">fmt.Printf(&quot;%s: %+v\n&quot;,b, a)</span><br><span class="line">&#125;</span><br><span class="line">// 不可重名</span><br><span class="line">func (a *test) show1(b string)&#123;</span><br><span class="line">a.a=1</span><br><span class="line">fmt.Printf(&quot;%s: pointer %+v\n&quot;,b, *a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h1 id="2-go接口"><a href="#2-go接口" class="headerlink" title="2 go接口"></a>2 go接口</h1><blockquote>
+<ul>
+<li>接口定义了规约</li>
+<li>接口定义方法签名，interface{}类型为interface{}类型只是任意类型均实现了该接口，会隐士转换类型</li>
+<li>接口值包括type&amp;&amp;value</li>
+<li>接口为nil为接口值的type&amp;&amp;value均为nil</li>
+<li>接口值的type类型必须实现接口对应的方法；go语言为静态语言，编译时无法知道接口的动态类型，？？？？接口的编译</li>
+<li>接口初始化时会判定相应的初始化时是否实现了接口类型</li>
+<li>接口的实现为指针时，接口初始化值不可以为变量必须为指针(go传参数为值copy类型)</li>
+<li>接口的实现为值时，接口初始化可以为指针也可以为变量，指针可以隐士解引获取对应的底层变量</li>
+<li><a href="https://draveness.me/golang/basic/golang-interface.html" target="_blank" rel="noopener"><strong><em>接口详细介绍及底层实现</em></strong></a></li>
+<li>接口隐士实现：实现即接口</li>
+<li>看代码：flag及sort的实现</li>
+<li>示例：</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line">type testInterface interface&#123;</span><br><span class="line">set(a string)</span><br><span class="line">show()</span><br><span class="line">&#125;</span><br><span class="line">type testHello struct&#123;</span><br><span class="line">info string</span><br><span class="line">&#125;</span><br><span class="line">func (a *testHello) set(b string)&#123;</span><br><span class="line">a.info=b</span><br><span class="line">&#125;</span><br><span class="line">func (a *testHello) show()&#123;</span><br><span class="line">fmt.Println(&quot;here is: &quot;, a.info)</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var hello testHello	</span><br><span class="line">	hello.info=&quot;123&quot;</span><br><span class="line">	var testType testInterface = &amp;hello	//接口类型为testInterface,接口值为动态变量的类型及值，接口的值分为type&amp;&amp;value</span><br><span class="line">						//接口值： 1 type=*testHello 2 value=&amp;hello；接口值中type必须实现接口定义的方法</span><br><span class="line">						// testInterface=hello错误</span><br><span class="line">					   	//cannot use hello (type testHello) as type testInterface in assignment:</span><br><span class="line">					  	//testHello does not implement testInterface (set method has pointer receiver)</span><br><span class="line">	testType.set(&quot;hello world&quot;)</span><br><span class="line">	testType.show()</span><br><span class="line">	fmt.Printf(&quot;%T&quot;,hello)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line">type testInterface interface&#123;</span><br><span class="line">show()</span><br><span class="line">&#125;</span><br><span class="line">type testHello struct&#123;</span><br><span class="line">info string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (a testHello) show()&#123;</span><br><span class="line">fmt.Println(&quot;here is: &quot;, a.info)</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	var hello testHello	</span><br><span class="line">	hello.info=&quot;123&quot;</span><br><span class="line">	var testType testInterface = &amp;hello	//接收类型为非指针类型，interface值的type可以为指针也可以为非指针</span><br><span class="line">	testType.show()</span><br><span class="line">	fmt.Printf(&quot;%T&quot;,hello)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -1292,7 +1314,7 @@
         <div class="readmore">
           <a href="/2019/06/05/tcp-ip-http/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            閱讀全文
+            Read More
           </a>
         </div>
       
@@ -1449,7 +1471,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
   
     <a class="rightBtn" rel="nofollow" href="/blog/tags/" title="blog/tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1538,19 +1560,19 @@
     </div>
   
   <br>
-  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
   <div>
-    本站使用
+    Use
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    作为主题
+    as theme
     
-      ，
-      总访问量为
+      , 
+      total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
+      times
     
-    。
+    . 
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -1664,15 +1686,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "複製成功";
-  let COPY_FAILURE = "複製失敗";
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
