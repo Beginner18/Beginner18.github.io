@@ -344,7 +344,19 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h2 id="1-socket"><a href="#1-socket" class="headerlink" title="1 socket"></a>1 socket</h2><h2 id="2-tcp-ip"><a href="#2-tcp-ip" class="headerlink" title="2 tcp/ip "></a>2 tcp/ip </h2><h2 id="3-udp"><a href="#3-udp" class="headerlink" title="3 udp"></a>3 udp</h2>
+      <h2 id="1-socket"><a href="#1-socket" class="headerlink" title="1 socket"></a>1 socket</h2><h2 id="2-tcp-ip"><a href="#2-tcp-ip" class="headerlink" title="2 tcp/ip "></a>2 tcp/ip </h2><h2 id="3-udp"><a href="#3-udp" class="headerlink" title="3 udp"></a>3 udp</h2><h2 id="4-http协议-http1-0-http1-1-http2-0"><a href="#4-http协议-http1-0-http1-1-http2-0" class="headerlink" title="4 http协议 http1.0 http1.1 http2.0"></a>4 http协议 http1.0 http1.1 http2.0</h2><blockquote>
+<ul>
+<li>http1 建立连接 客户端请求  服务端发送响应并关闭连接 获取响应</li>
+<li>http1.1 复用连接,建立连接: 请求1-&gt;响应1, 请求2-&gt;响应2, 其他顺序请求获取响应后才可再次发送请求； 由于复用连接，客户端需要区分每个响应：context-length或者分块传输(Chunked)<br>服务端需提供context-length标明响应body的长度，客户端做区分(服务端必须处理完所有数据才可以发送响应)；<br>http1.1 规定可以不使用Content-Length字段，而使用”分块传输编码”（Chunked Transfer Encoding）。只要请求或响应的头信息有Transfer-Encoding: chunked字段，就表明body将可能由数量未定的多个数据块组成。每个数据块之前会有一行包含一个16进制数值，表示这个块的长度；最后一个大小为0的块，就表示本次响应的数据发送完了。</li>
+<li>http2 数据压缩 头跟数据分成不同帧 建立连接 发送请求1 2 3 4 获取请求2 3 1 4 请求返回可以无序</li>
+<li>http头堵塞问题：服务端顺序处理请求，若某一请求处理时间较久，其后所有请求排队堵塞</li>
+<li>http基于tcp传输层协议，存在tcp头堵塞问题，Tcp全双工 发送不堵塞接收 </li>
+<li>http2.0采用二进制数据分帧更好的利用底层tcp，解决1.1的队首问题；</li>
+<li>http2.0利用分帧机制，不再依赖多个TCP连接去实现多流并行了</li>
+<li>http2.0客户端发起的流标识为奇数，服务端发起的流标识为偶数</li>
+<li>http2.0可以支持优先级，首部压缩减少传输数量量，客户端服务端均可以乱序发送数据，之后通过流标识及帧进行数据重组；http2.0服务端支持数据推送</li>
+</ul>
+</blockquote>
       
         <div class="readmore">
           <a href="/2019/06/29/tcp-ip-http/" class="flat-box">
