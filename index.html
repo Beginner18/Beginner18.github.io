@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜尋">
+						<input type="text" class="input u-search-input" placeholder="Search">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -355,10 +355,7 @@
 <li>shell：特殊应用程序为其他应用程序提供接口；命令行解释器：读取用户输入然后执行命令；</li>
 </ul>
 </blockquote>
-<fancybox>
-![操作系统体系结构](../pic/os/unix操作系统体系结构.png)
-</fancybox>
-
+<p><img src="../pic/os/unix%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png" alt="操作系统体系结构"></p>
 <h2 id="1-2-login"><a href="#1-2-login" class="headerlink" title="1.2 login"></a>1.2 login</h2><blockquote>
 <ul>
 <li>口令文件: /etc/passwd文件</li>
@@ -428,13 +425,10 @@
 <h2 id="1-10-系统调用和库函数"><a href="#1-10-系统调用和库函数" class="headerlink" title="1.10 系统调用和库函数"></a>1.10 系统调用和库函数</h2><blockquote>
 <ul>
 <li>库函数封装系统调用，提供更复杂功能，系统调用提供一种最小接口；</li>
-<li>eg sbrk为进程分配空间，地址空间管理由进程处理，内核中系统调用分配一块空间给进程，库函数malloc在用户层次管理进程的内存空间;</li>
+<li>eg sbrk为进程分配空间，地址空间管理由进程处理，内核中系统调用分配一块空间给进程，库函数malloc在用户层次管理进程的内存空间;  </li>
 </ul>
 </blockquote>
-<fancybox>
-![系统调用和库函数](../pic/os/系统调用和库函数.jpeg)
-</fancybox>
-
+<p><img src="../pic/os/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%92%8C%E5%BA%93%E5%87%BD%E6%95%B0.jpeg" alt="系统调用和库函数"></p>
 
       
     </div>
@@ -743,7 +737,7 @@
         <div class="readmore">
           <a href="/2019/06/29/tcp-ip-http/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            閱讀全文
+            Read More
           </a>
         </div>
       
@@ -1668,7 +1662,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1697,7 +1691,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1786,19 +1780,19 @@
     </div>
   
   <br>
-  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
   <div>
-    本站使用
+    Use
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    作为主题
+    as theme
     
-      ，
-      总访问量为
+      , 
+      total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
+      times
     
-    。
+    . 
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -1904,15 +1898,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "複製成功";
-  let COPY_FAILURE = "複製失敗";
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
