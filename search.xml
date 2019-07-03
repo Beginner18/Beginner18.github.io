@@ -13,7 +13,7 @@
   <entry>
     <title><![CDATA[go依赖管理]]></title>
     <url>%2F2019%2F07%2F03%2Fgo%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%2F</url>
-    <content type="text"><![CDATA[1 vendor2 dep3 mod官网参考go.mod依赖包失败解决方案]]></content>
+    <content type="text"><![CDATA[1 vendor2 dep3 mod 相同项目依赖不同主版本为不同的文件目录: eg rsc.io/quote 其v3版本与v2版本为不同的文件夹； 相同依赖的主版本不能相同: v1.5.2不能与v1.6.0同时存在 mod支持相同依赖（eg rsc.io/quote）的不同主版本 it is impossible for a program to build with both rsc.io/quote v1.5.2 and rsc.io/quote v1.6.0 go mod init packagename: creates a new module, initializing the go.mod file that describes it. go build, go test, and other package-building commands add new dependencies to go.mod as needed. go list -m all : prints the current module’s dependencies. go get(可带版本): changes the required version of a dependency (or adds a new dependency). go get XX@v1.2.3 go mod tidy : removes unused dependencies.官网参考go.modgo module in 2019依赖包失败解决方案]]></content>
       <tags>
         <tag>go</tag>
         <tag>依赖管理</tag>
