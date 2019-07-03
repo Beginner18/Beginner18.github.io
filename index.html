@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜索">
+						<input type="text" class="input u-search-input" placeholder="搜尋">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -270,9 +270,216 @@
         
           
         
+          
+        
+          
+        
       
     
     
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/07/04/代理服务注册服务发现/">
+      代理服务注册服务发现
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YY</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-07-03</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h2 id="1-服务注册"><a href="#1-服务注册" class="headerlink" title="1 服务注册"></a>1 服务注册</h2><blockquote>
+<ul>
+<li>服务自动将自己的ip地址及其他信息(rpc:serviceName/methodName)等注册到对应的注册中心(etcd zookeeper)</li>
+<li>注册中心(zookeeper)可以发送健康检查检查服务的运行状态，进行相应的处理</li>
+</ul>
+</blockquote>
+<h2 id="2-服务发现"><a href="#2-服务发现" class="headerlink" title="2 服务发现"></a>2 服务发现</h2><blockquote>
+<ul>
+<li>cli端(dubbo的consumer)或者proxy代理通过注册中心(etcd zookeeper)等，查询对应的请求对应的ip地址，返回ip地址给cli端</li>
+</ul>
+</blockquote>
+<h2 id="3-代理-amp-amp-网关"><a href="#3-代理-amp-amp-网关" class="headerlink" title="3 代理&amp;&amp;网关"></a>3 代理&amp;&amp;网关</h2><blockquote>
+<ul>
+<li>代理根据相应的url命名，解析url转发至相应的服务</li>
+<li>eg http请求grpc服务: http请求代理地址，代理服务器到注册中心查询相应serviceName的ip地址，代理服务器做负载均衡，代理服务器将解析的http请求封装成grpc请求，直接请求grpc服务</li>
+<li>网关类似代理，所有请求按相应的规则打到网关服务器，网关根据规则将请求转发到对应的服务器或者代理，再做其他处理</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/服务注册/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>服务注册</a>
+        
+          <a href="/tags/服务发现/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>服务发现</a>
+        
+          <a href="/tags/自动代理/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>自动代理</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/07/03/go依赖管理/">
+      go依赖管理
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YY</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-07-02</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h2 id="1-vendor"><a href="#1-vendor" class="headerlink" title="1 vendor"></a>1 vendor</h2><h2 id="2-dep"><a href="#2-dep" class="headerlink" title="2 dep"></a>2 dep</h2><h2 id="3-mod"><a href="#3-mod" class="headerlink" title="3 mod"></a>3 mod</h2><p><a href="https://blog.golang.org/using-go-modules" target="_blank" rel="noopener">官网参考go.mod</a><br><a href="https://shockerli.net/post/go-get-golang-org-x-solution/" target="_blank" rel="noopener">依赖包失败解决方案</a></p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/go/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go</a>
+        
+          <a href="/tags/依赖管理/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>依赖管理</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class="post-wrapper">
@@ -411,11 +618,13 @@
 </blockquote>
 <h2 id="1-8-信号"><a href="#1-8-信号" class="headerlink" title="1.8 信号"></a>1.8 信号</h2><blockquote>
 <ul>
-<li>通知进程发生了某种情况：除0发送SIGFPE信号</li>
+<li>系统通知进程发生了某种情况：除0发送SIGFPE信号</li>
 <li>信号处理：a 忽略； b 系统默认处理方式; c 捕获信号，提供函数信号发生时调用</li>
 <li>产生信号：终端中断键del或ctrl+c，退出键ctrl+\，调用kill函数（向进程发送信号必须是进程所有者或者超级用户)</li>
+<li>捕获信号：发送信号到进程(系统设置进程的信号位)-&gt;内核在用户进程栈新建信号处理函数栈，进程从内核态转为用户态时执行信号处理函数，并接着信号中断处继续执行进程</li>
 </ul>
 </blockquote>
+<p><a href="https://blog.csdn.net/Thanksgining/article/details/41824475" target="_blank" rel="noopener">信号机制参考</a><br><a href="https://www.cnblogs.com/mickole/p/3190845.html" target="_blank" rel="noopener">alarm信号</a></p>
 <h2 id="1-9-时间值"><a href="#1-9-时间值" class="headerlink" title="1.9 时间值"></a>1.9 时间值</h2><blockquote>
 <ul>
 <li>日历时间：协调世界时间(Coordinated Universal Time, UTC)1970/01/01 00:00:00后秒数累计，记录文件最近一次修改时间;</li>
@@ -430,6 +639,21 @@
 </ul>
 </blockquote>
 <p><img src="../pic/os/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%92%8C%E5%BA%93%E5%87%BD%E6%95%B0.jpeg" alt="系统调用和库函数"></p>
+<h2 id="1-11-标准"><a href="#1-11-标准" class="headerlink" title="1.11 标准"></a>1.11 <a href="https://www.jianshu.com/p/5841545715c8" target="_blank" rel="noopener">标准</a></h2><blockquote>
+<ul>
+<li>ISO C 规定了标准 C 的接口</li>
+<li>POSIX 规定了Unix 系统的系统调用以及库函数， 还包括使用程序接口等</li>
+<li>SUS(Single Unix Specification（SUS， 单一 Unix 规范) 规定了一些附加接口，扩展了POSIX</li>
+<li><strong><em>程序限制</em></strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>某些限制在一个给定的 UNIX 实现中可能是固定的（由头文件定义），在另一个 UNIX 实现中可能是动态的（需要由进程调用一个函数获得限制值）。如文件名的最大字符数在不同的操作系统中，是属于动态/静态限制。因此提供了三种限制：<br>1、编译时限制（由头文件给定）<br>2、与文件或者目录无关的运行时限制（由 <code>sysconf</code>函数给定）<br>3、与文件或者目录相关的运行时限制（由 <code>pathconf</code>函数以及<code>fpathconf</code>函数给定）</p>
+</blockquote>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">sysconf</span><span class="params">(<span class="keyword">int</span> name)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">pathconf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*pathname,<span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">fpathconf</span><span class="params">(<span class="keyword">int</span> fd,<span class="keyword">int</span> name)</span></span>; <span class="comment">//fd 为文件描述符</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -738,7 +962,7 @@
         <div class="readmore">
           <a href="/2019/06/29/tcp-ip-http/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
+            閱讀全文
           </a>
         </div>
       
@@ -1663,7 +1887,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1692,7 +1916,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1700,7 +1924,7 @@
 </header>
 
     <div class="content pure">
-      <a href="/tags/go/" style="font-size: 14px; color: #999">go</a> <a href="/tags/go-内存/" style="font-size: 14px; color: #999">go,内存</a> <a href="/tags/http1-0-2/" style="font-size: 14px; color: #999">http1.0-2</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/java-spring-boot/" style="font-size: 14px; color: #999">java, spring boot</a> <a href="/tags/java-异常/" style="font-size: 14px; color: #999">java, 异常</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/unix/" style="font-size: 14px; color: #999">unix</a> <a href="/tags/webSocket/" style="font-size: 14px; color: #999">webSocket</a> <a href="/tags/操作系统/" style="font-size: 14px; color: #999">操作系统</a>
+      <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/go-内存/" style="font-size: 14px; color: #999">go,内存</a> <a href="/tags/http1-0-2/" style="font-size: 14px; color: #999">http1.0-2</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/java-spring-boot/" style="font-size: 14px; color: #999">java, spring boot</a> <a href="/tags/java-异常/" style="font-size: 14px; color: #999">java, 异常</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/unix/" style="font-size: 14px; color: #999">unix</a> <a href="/tags/webSocket/" style="font-size: 14px; color: #999">webSocket</a> <a href="/tags/依赖管理/" style="font-size: 14px; color: #999">依赖管理</a> <a href="/tags/操作系统/" style="font-size: 14px; color: #999">操作系统</a> <a href="/tags/服务发现/" style="font-size: 14px; color: #999">服务发现</a> <a href="/tags/服务注册/" style="font-size: 14px; color: #999">服务注册</a> <a href="/tags/自动代理/" style="font-size: 14px; color: #999">自动代理</a>
     </div>
   </section>
 
@@ -1781,17 +2005,17 @@
     </div>
   
   <br>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
 </div>
   <div>
     本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    作为主题
+    as theme
     
       ，
-      总访问量为
+      total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
+      times
     
     。
   </div>
@@ -1899,15 +2123,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "复制成功";
-  let COPY_FAILURE = "复制失败";
+  let COPY_SUCCESS = "複製成功";
+  let COPY_FAILURE = "複製失敗";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

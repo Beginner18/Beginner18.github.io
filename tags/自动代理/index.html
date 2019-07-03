@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Archives: 2019/7 | Private Zone</title>
+  <title>Tag: 自动代理 | Private Zone</title>
   
   <meta name="keywords" content="web">
   
@@ -248,16 +248,14 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      <div class="l_main">
-	
-		
+      
+<div class="l_main">
+  
+    
+      
   <section class="post-list">
     
       
-        
-          
-        
-          
         
           
         
@@ -376,289 +374,6 @@
           </div>
         
       
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/07/03/go依赖管理/">
-      go依赖管理
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YY</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-07-02</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h2 id="1-vendor"><a href="#1-vendor" class="headerlink" title="1 vendor"></a>1 vendor</h2><h2 id="2-dep"><a href="#2-dep" class="headerlink" title="2 dep"></a>2 dep</h2><h2 id="3-mod"><a href="#3-mod" class="headerlink" title="3 mod"></a>3 mod</h2><p><a href="https://blog.golang.org/using-go-modules" target="_blank" rel="noopener">官网参考go.mod</a><br><a href="https://shockerli.net/post/go-get-golang-org-x-solution/" target="_blank" rel="noopener">依赖包失败解决方案</a></p>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/go/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go</a>
-        
-          <a href="/tags/依赖管理/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>依赖管理</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/07/02/os/">
-      os
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YY</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-07-01</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h1 id="1-unix基础及标准"><a href="#1-unix基础及标准" class="headerlink" title="1 unix基础及标准"></a>1 unix基础及标准</h1><h2 id="1-1-体系结构"><a href="#1-1-体系结构" class="headerlink" title="1.1 体系结构"></a>1.1 体系结构</h2><blockquote>
-<ul>
-<li>内核：控制计算机硬件资源，提供程序运行环境  </li>
-<li>系统调用：内核接口  </li>
-<li>应用程序：直接调用内核||通过库函数调用内核||通过shell程序</li>
-<li>shell：特殊应用程序为其他应用程序提供接口；命令行解释器：读取用户输入然后执行命令；</li>
-<li>其他</li>
-</ul>
-</blockquote>
-<p><img src="../pic/os/unix%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png" alt="操作系统体系结构"></p>
-<h2 id="1-2-login"><a href="#1-2-login" class="headerlink" title="1.2 login"></a>1.2 login</h2><blockquote>
-<ul>
-<li>口令文件: /etc/passwd文件</li>
-<li>文件内容为7个以冒号分割的字段即：”登陆名:加密口令:数字用户ID:数字组ID:注释字段:起始目录:shell程序”, eg: “sar:x:205:105:Stephen Rago:/home/sar/:/bin/ksh”</li>
-<li>用户登陆后：a 系统显示系统消息； b 某些系统启动视窗管理程序，最终shell程序运行在视窗中； c 用户向shell程序键入命令</li>
-</ul>
-</blockquote>
-<h2 id="1-3-文件和目录"><a href="#1-3-文件和目录" class="headerlink" title="1.3 文件和目录"></a>1.3 文件和目录</h2><blockquote>
-<ul>
-<li>unix文件和目录为层次结构起始为:”/“</li>
-<li>目录：包含目录项的文件,包含一个文件名及文件属性；</li>
-<li>文件属性：文件类型(普通文件,目录)、文件大小、文件所有者、文件权限、文件最后修改时间等</li>
-<li>stat、fstat:返回文件属性信息</li>
-<li>创建目录自动创建两个文件名:. ..</li>
-<li>ls命令：遍历相应目录文件，获取记录输出记录的文件名</li>
-<li>工作目录：每个进程均有工作目录，可以通过chdir更改工作目录</li>
-<li>起始工作目录：login时从口令文件中获取，参考 <strong><em>1.2 login</em></strong></li>
-<li>每个文件均包括：所有者的用户ID及组ID</li>
-</ul>
-</blockquote>
-<h2 id="1-4-输入-amp-amp-输出"><a href="#1-4-输入-amp-amp-输出" class="headerlink" title="1.4 输入&amp;&amp;输出"></a>1.4 输入&amp;&amp;输出</h2><blockquote>
-<ul>
-<li>文件描述符：非负小整数，内核标识一个进程正在访问的文件</li>
-<li>stdin stdout stderr</li>
-<li>不带缓冲IO(系统调用)：open read write lseek close</li>
-<li>标准IO(库函数)：提供带缓冲接口，调用方不用关心buffSize的选取, eg printf</li>
-</ul>
-</blockquote>
-<h2 id="1-5-程序-amp-amp-进程"><a href="#1-5-程序-amp-amp-进程" class="headerlink" title="1.5 程序&amp;&amp;进程"></a>1.5 程序&amp;&amp;进程</h2><blockquote>
-<ul>
-<li>程序：磁盘上可执行文件</li>
-<li>进程：程序执行实例，进程ID唯一标识</li>
-<li>进程存在进程所有者用户ID及组ID</li>
-<li>进程控制: fork exec waitpid</li>
-<li>线程: 线程ID，一个进程的所有线程共享同一地址空间、文件描述符、栈及与进程相关属性；线程访问共享数据需要做同步处理；</li>
-</ul>
-</blockquote>
-<h2 id="1-6-出错处理"><a href="#1-6-出错处理" class="headerlink" title="1.6 出错处理"></a>1.6 出错处理</h2><blockquote>
-<ul>
-<li>返回负值设置errno</li>
-<li>不同的线程有自己局部errno</li>
-<li>致命错误：输出错误并退出</li>
-<li>非致命错误：妥善处理，资源类错误可延迟重试，eg EAGAIN ENFILE ENOBUFS ENOLCK ENOSPC EWOULDBLOCK等</li>
-</ul>
-</blockquote>
-<h2 id="1-7-用户标识-用于权限控制"><a href="#1-7-用户标识-用于权限控制" class="headerlink" title="1.7 用户标识(用于权限控制)"></a>1.7 用户标识(用于权限控制)</h2><blockquote>
-<ul>
-<li>用户ID：login时获取系统管理员登陆时分配(/etc/passwd文件)，唯一，用户不可更改，0位根用户或超级用户</li>
-<li>组ID: login时获取，(/etc/group文件)</li>
-<li>附属组ID:用户可以配置多个附属组作权限控制，大多系统最多16个(/etc/group文件)</li>
-</ul>
-</blockquote>
-<h2 id="1-8-信号"><a href="#1-8-信号" class="headerlink" title="1.8 信号"></a>1.8 信号</h2><blockquote>
-<ul>
-<li>系统通知进程发生了某种情况：除0发送SIGFPE信号</li>
-<li>信号处理：a 忽略； b 系统默认处理方式; c 捕获信号，提供函数信号发生时调用</li>
-<li>产生信号：终端中断键del或ctrl+c，退出键ctrl+\，调用kill函数（向进程发送信号必须是进程所有者或者超级用户)</li>
-<li>捕获信号：发送信号到进程(系统设置进程的信号位)-&gt;内核在用户进程栈新建信号处理函数栈，进程从内核态转为用户态时执行信号处理函数，并接着信号中断处继续执行进程</li>
-</ul>
-</blockquote>
-<p><a href="https://blog.csdn.net/Thanksgining/article/details/41824475" target="_blank" rel="noopener">信号机制参考</a><br><a href="https://www.cnblogs.com/mickole/p/3190845.html" target="_blank" rel="noopener">alarm信号</a></p>
-<h2 id="1-9-时间值"><a href="#1-9-时间值" class="headerlink" title="1.9 时间值"></a>1.9 时间值</h2><blockquote>
-<ul>
-<li>日历时间：协调世界时间(Coordinated Universal Time, UTC)1970/01/01 00:00:00后秒数累计，记录文件最近一次修改时间;</li>
-<li>进程时间：时钟滴答，cpu时间，度量进程使用的cpu时间，每秒曾取50、60或者100个时钟滴答</li>
-<li>进程时间：时钟时间(墙上时钟时间wall clock time，进程运行的总时间)、用户时间（执行用户指令所用时间）、系统时间</li>
-</ul>
-</blockquote>
-<h2 id="1-10-系统调用和库函数"><a href="#1-10-系统调用和库函数" class="headerlink" title="1.10 系统调用和库函数"></a>1.10 系统调用和库函数</h2><blockquote>
-<ul>
-<li>库函数封装系统调用，提供更复杂功能，系统调用提供一种最小接口；</li>
-<li>eg sbrk为进程分配空间，地址空间管理由进程处理，内核中系统调用分配一块空间给进程，库函数malloc在用户层次管理进程的内存空间;  </li>
-</ul>
-</blockquote>
-<p><img src="../pic/os/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%92%8C%E5%BA%93%E5%87%BD%E6%95%B0.jpeg" alt="系统调用和库函数"></p>
-<h2 id="1-11-标准"><a href="#1-11-标准" class="headerlink" title="1.11 标准"></a>1.11 <a href="https://www.jianshu.com/p/5841545715c8" target="_blank" rel="noopener">标准</a></h2><blockquote>
-<ul>
-<li>ISO C 规定了标准 C 的接口</li>
-<li>POSIX 规定了Unix 系统的系统调用以及库函数， 还包括使用程序接口等</li>
-<li>SUS(Single Unix Specification（SUS， 单一 Unix 规范) 规定了一些附加接口，扩展了POSIX</li>
-<li><strong><em>程序限制</em></strong></li>
-</ul>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>某些限制在一个给定的 UNIX 实现中可能是固定的（由头文件定义），在另一个 UNIX 实现中可能是动态的（需要由进程调用一个函数获得限制值）。如文件名的最大字符数在不同的操作系统中，是属于动态/静态限制。因此提供了三种限制：<br>1、编译时限制（由头文件给定）<br>2、与文件或者目录无关的运行时限制（由 <code>sysconf</code>函数给定）<br>3、与文件或者目录相关的运行时限制（由 <code>pathconf</code>函数以及<code>fpathconf</code>函数给定）</p>
-</blockquote>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">sysconf</span><span class="params">(<span class="keyword">int</span> name)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">pathconf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*pathname,<span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">fpathconf</span><span class="params">(<span class="keyword">int</span> fd,<span class="keyword">int</span> name)</span></span>; <span class="comment">//fd 为文件描述符</span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/操作系统/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>操作系统</a>
-        
-          <a href="/tags/unix/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>unix</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -670,7 +385,8 @@
   
 
 
-	
+    
+  
 </div>
 <aside class="l_side">
   
@@ -930,14 +646,6 @@
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
       <script>setLoadingBarProgress(60);</script>
