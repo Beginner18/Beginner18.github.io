@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search">
+						<input type="text" class="input u-search-input" placeholder="搜尋">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -666,6 +666,23 @@
 </blockquote>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">sysconf</span><span class="params">(<span class="keyword">int</span> name)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">pathconf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*pathname,<span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">fpathconf</span><span class="params">(<span class="keyword">int</span> fd,<span class="keyword">int</span> name)</span></span>; <span class="comment">//fd 为文件描述符</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="2-I-O管理和磁盘调度"><a href="#2-I-O管理和磁盘调度" class="headerlink" title="2 I/O管理和磁盘调度"></a>2 I/O管理和磁盘调度</h2><h2 id="2-1-基本概述"><a href="#2-1-基本概述" class="headerlink" title="2.1 基本概述"></a>2.1 基本概述</h2><blockquote>
+<ul>
+<li>直接储存器访问DMA:<br><img src="../pic/os/%E5%8F%AF%E9%80%89%E6%8B%A9%E7%9A%84DMA%E9%85%8D%E7%BD%AE.jpeg" alt="可选择的DMA配置"></li>
+<li>磁盘性能远低于内存及cpu</li>
+<li>无I/O缓冲：磁盘通过操作系统读入用户进程空间，若用户进程空间内存正在进行I/O则相应内存不可换出（I/O时进程处于堵塞状态，内存不足时或者新进程调度时可能会换出内存）；若进程在相应内存锁定之前换出内存，则造成进程死锁（进程等待i/o执行激活状态，但相应内存已缓冲无法进行i/o操作)</li>
+<li>I/O缓冲：系统开辟空间作为缓冲区，磁盘读入缓冲区，用户进程从系统缓冲区读入，进程调度时不影响进程的换入换出<br><img src="../pic/os/io%E7%BC%93%E5%86%B2%E6%96%B9%E6%A1%88.jpeg" alt="I/O缓冲方案之双缓冲"></li>
+<li>磁盘性能：排队时间、等待I/O通道、寻道时间、旋转延迟、传送时间</li>
+<li>寻道时间：Ts平均小于10ms</li>
+<li>旋转延迟：1/2r</li>
+<li>传送时间: b/(rN)， b要传送字节数，N一个磁道中字节数，r转速</li>
+<li>总平均存取时间: Ts + 1/(2r) + b/(rN)</li>
+<li>顺序读取较随机读取快</li>
+<li>磁盘调度策略（尽可能顺序读取但又尽量公平）: FIFO SSTF(最短服务时间优先) SCAN(电梯算法：磁头臂仅沿一个方向移动并在途中满足所有未完成请求直到达到最后一个磁道或者没有请求；Look策略会接着反转扫描) C-SCAN（扫描策略仅在一个方向，扫描到末端后，磁头臂返回到末端反方向的末端，减少新请求的等待时间）</li>
+<li>RAID磁盘阵列+冗余</li>
+<li>磁盘高速缓存(单独内存区作缓存):页面置换策略 最不常用(LFU) 最近最少使用(LRU）基于频率置换（新区 老区 &amp;&amp; 新区 中间区 老区；只置换老区最少使用;新区时间过期换到中间区或者老区)</li>
+</ul>
+</blockquote>
 
       
     </div>
@@ -974,7 +991,7 @@
         <div class="readmore">
           <a href="/2019/06/29/tcp-ip-http/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
+            閱讀全文
           </a>
         </div>
       
@@ -1899,7 +1916,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1928,7 +1945,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -2017,19 +2034,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
     as theme
     
-      , 
+      ，
       total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
       times
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -2135,15 +2152,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "複製成功";
+  let COPY_FAILURE = "複製失敗";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
