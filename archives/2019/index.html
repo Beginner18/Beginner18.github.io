@@ -651,7 +651,7 @@
 <li>eg sbrk为进程分配空间，地址空间管理由进程处理，内核中系统调用分配一块空间给进程，库函数malloc在用户层次管理进程的内存空间;  </li>
 </ul>
 </blockquote>
-<p><img src="../pic/os/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%92%8C%E5%BA%93%E5%87%BD%E6%95%B0.jpeg" alt="系统调用和库函数"></p>
+<p><img src="../pic/os/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%92%8C%E5%BA%93%E5%87%BD%E6%95%B0.jpeg" alt="系统调用和库函数">  </p>
 <h2 id="1-11-标准"><a href="#1-11-标准" class="headerlink" title="1.11 标准"></a>1.11 <a href="https://www.jianshu.com/p/5841545715c8" target="_blank" rel="noopener">标准</a></h2><blockquote>
 <ul>
 <li>ISO C 规定了标准 C 的接口</li>
@@ -662,11 +662,12 @@
 </blockquote>
 <blockquote>
 <blockquote>
-<p>某些限制在一个给定的 UNIX 实现中可能是固定的（由头文件定义），在另一个 UNIX 实现中可能是动态的（需要由进程调用一个函数获得限制值）。如文件名的最大字符数在不同的操作系统中，是属于动态/静态限制。因此提供了三种限制：<br>1、编译时限制（由头文件给定）<br>2、与文件或者目录无关的运行时限制（由 <code>sysconf</code>函数给定）<br>3、与文件或者目录相关的运行时限制（由 <code>pathconf</code>函数以及<code>fpathconf</code>函数给定）</p>
+<p>某些限制在一个给定的 UNIX 实现中可能是固定的（由头文件定义），在另一个 UNIX 实现中可能是动态的（需要由进程调用一个函数获得限制值）。如文件名的最大字符数在不同的操作系统中，是属于动态/静态限制。因此提供了三种限制：<br>1、编译时限制（由头文件给定）<br>2、与文件或者目录无关的运行时限制（由 <code>sysconf</code>函数给定）:每个进程最大打开文件数，每个用户最大可用进程数，<br>3、与文件或者目录相关的运行时限制（由 <code>pathconf</code>函数以及<code>fpathconf</code>函数给定）  </p>
 </blockquote>
 </blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">sysconf</span><span class="params">(<span class="keyword">int</span> name)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">pathconf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*pathname,<span class="keyword">int</span> name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">fpathconf</span><span class="params">(<span class="keyword">int</span> fd,<span class="keyword">int</span> name)</span></span>; <span class="comment">//fd 为文件描述符</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">sysconf</span><span class="params">(<span class="keyword">int</span> name)</span></span>;    </span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">pathconf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*pathname,<span class="keyword">int</span> name)</span></span>;     </span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">fpathconf</span><span class="params">(<span class="keyword">int</span> fd,<span class="keyword">int</span> name)</span></span>; <span class="comment">//fd 为文件描述符</span></span><br></pre></td></tr></table></figure>
 
+<p>eg: linux系统通过ulimit -a命令查看相关限制<br>ulimit -a<br>core file size          (blocks, -c) unlimited<br>data seg size           (kbytes, -d) unlimited<br>scheduling priority             (-e) 0<br>file size               (blocks, -f) unlimited<br>pending signals                 (-i) 450642<br>max locked memory       (kbytes, -l) 64<br>max memory size         (kbytes, -m) unlimited<br>open files                      (-n) 1048576<br>pipe size            (512 bytes, -p) 8 //管道缓冲区大小<br>POSIX message queues     (bytes, -q) 819200<br>real-time priority              (-r) 0<br>stack size              (kbytes, -s) 8192  //线程栈大小<br>cpu time               (seconds, -t) unlimited<br>max user processes              (-u) 1048576<br>virtual memory          (kbytes, -v) unlimited<br>file locks                      (-x) unlimited<br><a href="https://blog.csdn.net/gatieme/article/details/51058797" target="_blank" rel="noopener"><strong><em>linux系统限制及设置</em></strong>：线程数 文件数</a></p>
 <h2 id="2-I-O管理和磁盘调度"><a href="#2-I-O管理和磁盘调度" class="headerlink" title="2 I/O管理和磁盘调度"></a>2 I/O管理和磁盘调度</h2><h2 id="2-1-基本概述"><a href="#2-1-基本概述" class="headerlink" title="2.1 基本概述"></a>2.1 基本概述</h2><blockquote>
 <ul>
 <li>直接储存器访问DMA:<br><img src="../pic/os/%E5%8F%AF%E9%80%89%E6%8B%A9%E7%9A%84DMA%E9%85%8D%E7%BD%AE.jpeg" alt="可选择的DMA配置"></li>
