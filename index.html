@@ -667,7 +667,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">sysconf</span><span class="params">(<span class="keyword">int</span> name)</span></span>;    </span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">pathconf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*pathname,<span class="keyword">int</span> name)</span></span>;     </span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">fpathconf</span><span class="params">(<span class="keyword">int</span> fd,<span class="keyword">int</span> name)</span></span>; <span class="comment">//fd 为文件描述符</span></span><br></pre></td></tr></table></figure>
 
 <p>eg: linux系统通过ulimit -a命令查看相关限制<br>ulimit -a<br>core file size          (blocks, -c) unlimited<br>data seg size           (kbytes, -d) unlimited<br>scheduling priority             (-e) 0<br>file size               (blocks, -f) unlimited<br>pending signals                 (-i) 450642<br>max locked memory       (kbytes, -l) 64<br>max memory size         (kbytes, -m) unlimited<br>open files                      (-n) 1048576<br>pipe size            (512 bytes, -p) 8 //管道缓冲区大小<br>POSIX message queues     (bytes, -q) 819200<br>real-time priority              (-r) 0<br>stack size              (kbytes, -s) 8192  //线程栈大小<br>cpu time               (seconds, -t) unlimited<br>max user processes              (-u) 1048576<br>virtual memory          (kbytes, -v) unlimited<br>file locks                      (-x) unlimited<br><a href="https://blog.csdn.net/gatieme/article/details/51058797" target="_blank" rel="noopener"><strong><em>linux系统限制及设置</em></strong>：线程数 文件数</a></p>
-<h2 id="2-I-O管理和磁盘调度"><a href="#2-I-O管理和磁盘调度" class="headerlink" title="2 I/O管理和磁盘调度"></a>2 I/O管理和磁盘调度</h2><h2 id="2-1-基本概述"><a href="#2-1-基本概述" class="headerlink" title="2.1 基本概述"></a>2.1 基本概述</h2><blockquote>
+<h2 id="2-I-O管理和磁盘调度"><a href="#2-I-O管理和磁盘调度" class="headerlink" title="2 I/O管理和磁盘调度"></a>2 I/O管理和磁盘调度</h2><h2 id="2-1-概述（不分系统）"><a href="#2-1-概述（不分系统）" class="headerlink" title="2.1 概述（不分系统）"></a>2.1 概述（不分系统）</h2><h2 id="2-1-1-基本概念"><a href="#2-1-1-基本概念" class="headerlink" title="2.1.1 基本概念"></a>2.1.1 基本概念</h2><blockquote>
 <ul>
 <li>直接储存器访问DMA:<br><img src="../pic/os/%E5%8F%AF%E9%80%89%E6%8B%A9%E7%9A%84DMA%E9%85%8D%E7%BD%AE.jpeg" alt="可选择的DMA配置"></li>
 <li>磁盘性能远低于内存及cpu</li>
@@ -688,10 +688,60 @@
 <li>顺序读取较随机读取快</li>
 <li>磁盘调度策略（尽可能顺序读取但又尽量公平）: FIFO SSTF(最短服务时间优先) SCAN(电梯算法：磁头臂仅沿一个方向移动并在途中满足所有未完成请求直到达到最后一个磁道或者没有请求；Look策略会接着反转扫描) C-SCAN（扫描策略仅在一个方向，扫描到末端后，磁头臂返回到末端反方向的末端，减少新请求的等待时间）</li>
 <li>RAID磁盘阵列+冗余</li>
-<li>磁盘高速缓存(单独内存区作缓存):页面置换策略 最不常用(LFU) 最近最少使用(LRU）基于频率置换（新区 老区 &amp;&amp; 新区 中间区 老区；只置换老区最少使用;新区时间过期换到中间区或者老区)</li>
+<li>磁盘高速缓存(单独内存区作缓存):页面置换策略 最不常用(LFU) 最近最少使用(LRU）基于频率置换（新区 老区 &amp;&amp; 新区 中间区 老区；只置换老区最少使用;新区时间过期换到中间区或者老区)  </li>
+</ul>
+<p><strong><em>待用参考：</em></strong><br><a href="https://blog.51cto.com/ccschan/2357207" target="_blank" rel="noopener">linux系统I/O分析</a><br><a href="https://xp-zhao.cn/2019/03/25/CPU-%E7%A1%AC%E7%9B%98-%E7%BD%91%E7%BB%9C%E9%80%9F%E5%BA%A6%E5%AF%B9%E6%AF%94/" target="_blank" rel="noopener">cpu、mem、网络I/O、磁盘I/O速度对比</a></p>
+</blockquote>
+<h2 id="2-1-2-文件系统"><a href="#2-1-2-文件系统" class="headerlink" title="2.1.2 文件系统"></a>2.1.2 文件系统</h2><blockquote>
+<ul>
+<li>域：域名 值 长度</li>
+<li>域组成记录，记录组成文件，文件组成数据库</li>
+<li><strong><em>文件系统软件架构</em></strong>缺图</li>
 </ul>
 </blockquote>
-<p><strong><em>待用参考：</em></strong><br><a href="https://blog.51cto.com/ccschan/2357207" target="_blank" rel="noopener">linux系统I/O分析</a></p>
+<blockquote>
+<blockquote>
+<p>a 设备驱动程序：直接与外围设备（或他们的控制器）通信<br>b 基本文件系统/物理I/O: 操作系统的一部分、外部环境的基本接口、关注块在二级存储和内存缓冲区的位置，不关注数据内容或文件结构<br>c 基本I/O管理程序:负责所有文件的I/O初始和终止、操作系统的一部分、维护设备输入输出、调度、文件状态，根据文件类型执行文件I/O设备，参与磁盘调度、I/O缓冲区的指定和辅存的分配<br>d 逻辑I/O：用户和应用程序能够访问到记录</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong><em>文件管理的要素：</em></strong> 用户-&gt;目录管理-&gt;文件结构-&gt;访问方法文件操作类型-&gt;记录-&gt;组/块-&gt;内存缓冲区物理块-&gt;辅存中的物理块；缺图</li>
+<li><strong><em>常用文件组织</em></strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>堆：最简单，数据按顺序到达，记录可以有不同的域，或域相似顺序不同，每个域自描述(域名:值)，域之间用划分符隐士指定或者包含在域中，或者为域类型默认长度；穷举查找，数据难以组织用堆文件；<br>顺序文件（类mysql表）：记录格式完全统一，每个域的域名和长度为文件结构的属性；记录按关键域顺序存储，文本关键域按字母顺序，数字关键域按数字顺序；记录的第一个域通常为关键域，顺序扫描；物理组织对应文件的组织；查找更新性能差，通常存在日志文件或者事务文件，新记录放在堆文件，周期执行成批更新将新纪录合并至主文件并按照正确关键字顺序产生新文件；<br>索引顺序文件：克服顺序文件缺点，保留顺序文件关键特征，快速接近目标，增加了文件索引及溢出文件，溢出文件类似日志堆文件；文件索引帮助快速定位记录：一级索引文件为顺序文件，存记录关键域及主文件中的位置；按索引查询定位到关键域等于或者小于需求关键域的最大值，之后顺序扫描主文件；多级索引加快文件查询速度；<br>索引文件：多索引结构，每种可能成为查询条件的域都有一个索引，无顺序性和关键字概念，只能通过索引访问记录；记录位置无限制，可用变长记录；主文件增加记录，索引全部更新；用于查询及时性高很少对所有数据进行处理的应用程序中：公司订票系统；<br>直接文件/散列文件：直接访问磁盘中任何一个地址已知块，每条记录存在关键域，无顺序排序，基于关键字散列，记录定长；类似散列表</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong><em>记录组块二级储存管理空闲空间管理</em></strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>块在扇区，块大小选择可能留下扇区空间，利用不足<br>块大小选择，块是否可变，块越大顺序读取局部性等好，但需要较大的内存缓冲区.<br>文件多条记录储存在物理磁盘块上，给定块大小存在三种组块方式：固定组块(固定长度记录，块末尾可能存在未用空间成为内部碎片);可变长度跨越式组块：可变长度记录，紧缩至块中，记录可以跨越组块；可变长度非跨越式组块：可变长度记录，记录不跨块，大多数块中存在未用空间；<br>文件的块分配，文件分配表：分区大小，可变大规模连续分区、按块分配<br>首次适配、最佳适配、最近适配（一个文件的不同块尽可能靠近）<br>分配方法：预分配、动态分配<br>连续分配（起始块 长度或块总数）、链接分配（起始块 长度，每个块都会链接下一个块）、索引分配（文件名-&gt;索引块，索引块中为文件对应块的列表）&amp;可变分区索引分配（列表为起始块&amp;&amp;块大小）.<br>空闲空间管理：需要磁盘分配表.<br>位表每个位代表相应块，0 1标识是否空间，空间占用小，可完全放入内存<br>链接空闲区、索引（空闲去当作文件)<br>空闲块列表：磁盘保留区为所有空闲块的顺序号，相比较位分配空间占用大，单可以作为栈结构部分导入内存，分配块从栈顶取，释放入栈，若栈空或者栈满则与磁盘交互；（栈可替换为fifo队列）<br>卷为磁盘扇区集合，扇区可不连续<br>文件：基本信息（名 类型 组织）；地址信息（卷 起始地址 使用大小 分配大小）；访问信息控制（所有者 访问信息 权限控制）；使用信息（数据创建 创建者身份 修改时间 当前使用等)</p>
+</blockquote>
+</blockquote>
+<h2 id="3-进程-amp-amp-线程-amp-amp-IPC"><a href="#3-进程-amp-amp-线程-amp-amp-IPC" class="headerlink" title="3 进程&amp;&amp;线程&amp;&amp;IPC"></a>3 进程&amp;&amp;线程&amp;&amp;IPC</h2><p>3.1 IPC&amp;&amp;跳转</p>
+<blockquote>
+<ul>
+<li><a href="https://blog.csdn.net/ljx0305/article/details/2904221" target="_blank" rel="noopener">sigsetjmp,siglongjmp的使用</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>sigsetjmp()会保存目前堆栈环境，然后将目前的地址作一个记号，而在程序其他地方调用siglongjmp()时便会直接跳到这个记号位置，然后还原堆栈，继续程序好执行。</li>
+<li>参数savesigs若为非0则代表搁置的信号集合也会一块保存</li>
+<li>当sigsetjmp()返回0时代表已经做好记号上，若返回非0则代表由siglongjmp（）跳转回来。 </li>
+<li>返回值：返回0代表局促存好目前的堆栈环境，随时可供siglongjmp()调用， 若返回非0值则代表由siglongjmp()返回 </li>
+<li>eg: alarm信号处理函数调用siglongjump,主程序中某个位置调用sigsetjump，若发生alarm信号则siglongjump自动跳回至sigsetjump函数处并恢复sigsetjump函数保存的堆栈信息，同时sigsetjump返回值非0，此时表明已经发生了超时信号则退出主程序</li>
+</ul>
+</blockquote>
+</blockquote>
 
       
     </div>
