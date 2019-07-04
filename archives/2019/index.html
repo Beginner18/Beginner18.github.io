@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜尋">
+						<input type="text" class="input u-search-input" placeholder="Search">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -671,8 +671,15 @@
 <ul>
 <li>直接储存器访问DMA:<br><img src="../pic/os/%E5%8F%AF%E9%80%89%E6%8B%A9%E7%9A%84DMA%E9%85%8D%E7%BD%AE.jpeg" alt="可选择的DMA配置"></li>
 <li>磁盘性能远低于内存及cpu</li>
-<li>无I/O缓冲：磁盘通过操作系统读入用户进程空间，若用户进程空间内存正在进行I/O则相应内存不可换出（I/O时进程处于堵塞状态，内存不足时或者新进程调度时可能会换出内存）；若进程在相应内存锁定之前换出内存，则造成进程死锁（进程等待i/o执行激活状态，但相应内存已缓冲无法进行i/o操作)</li>
-<li>I/O缓冲：系统开辟空间作为缓冲区，磁盘读入缓冲区，用户进程从系统缓冲区读入，进程调度时不影响进程的换入换出<br><img src="../pic/os/io%E7%BC%93%E5%86%B2%E6%96%B9%E6%A1%88.jpeg" alt="I/O缓冲方案之双缓冲"></li>
+<li>无I/O缓冲：磁盘通过操作系统读入用户进程空间，若用户进程空间内存正在进行I/O则相应内存不可换出（I/O时进程处于堵塞状态，内存不足时或者新进程调度时可能会换出内存）；若进程在相应内存锁定之前换出内存，则造成进程死锁（进程等待i/o执行激活状态，但相应内存已缓冲无法进行i/o操作)<fancybox>
+![I/O层次结构](../pic/os/IO架构体系.png)
+</fancybox></li>
+<li>I/O缓冲：系统开辟空间作为缓冲区，磁盘读入缓冲区，用户进程从系统缓冲区读入，进程调度时不影响进程的换入换出<br><img src="../pic/os/i:o%E7%BC%93%E5%86%B2.png" alt="I/O缓冲示意图">  </li>
+</ul>
+<p><strong>缓冲区在内核空间，不影响系统对用户进程执行换入换出，不会造成死锁</strong><br><img src="../pic/os/io%E7%BC%93%E5%86%B2%E6%96%B9%E6%A1%88.jpeg" alt="I/O缓冲方案之双缓冲"></p>
+</blockquote>
+<blockquote>
+<ul>
 <li>磁盘性能：排队时间、等待I/O通道、寻道时间、旋转延迟、传送时间</li>
 <li>寻道时间：Ts平均小于10ms</li>
 <li>旋转延迟：1/2r</li>
@@ -684,6 +691,7 @@
 <li>磁盘高速缓存(单独内存区作缓存):页面置换策略 最不常用(LFU) 最近最少使用(LRU）基于频率置换（新区 老区 &amp;&amp; 新区 中间区 老区；只置换老区最少使用;新区时间过期换到中间区或者老区)</li>
 </ul>
 </blockquote>
+<p><strong><em>待用参考：</em></strong><br><a href="https://blog.51cto.com/ccschan/2357207" target="_blank" rel="noopener">linux系统I/O分析</a></p>
 
       
     </div>
@@ -992,7 +1000,7 @@
         <div class="readmore">
           <a href="/2019/06/29/tcp-ip-http/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            閱讀全文
+            Read More
           </a>
         </div>
       
@@ -1918,7 +1926,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1947,7 +1955,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -2036,19 +2044,19 @@
     </div>
   
   <br>
-  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
   <div>
-    本站使用
+    Use
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
     as theme
     
-      ，
+      , 
       total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
       times
     
-    。
+    . 
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -2162,15 +2170,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "複製成功";
-  let COPY_FAILURE = "複製失敗";
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
