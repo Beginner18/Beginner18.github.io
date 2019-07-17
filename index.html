@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜索">
+						<input type="text" class="input u-search-input" placeholder="Search">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -274,9 +274,150 @@
         
           
         
+          
+        
       
     
     
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/07/18/http-go-gin/">
+      http-go-gin
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YY</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-07-17</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 <a href="https://github.com/gin-gonic/gin" target="_blank" rel="noopener">简介</a></h1><blockquote>
+<ul>
+<li>httpRoute架构非MVC(beego)</li>
+<li>handler为radix tree结构，GET POST…不同方法为不同数</li>
+<li>压缩字母树：自动分裂为新子树</li>
+<li>中间件处理：中间件为[]handler中的前几个handler最后一个handler为响应路径对应的处理方式，中间件函数内添加c.Next()执行下一个hadler函数；链式处理</li>
+<li>底层：listenAndServer等均为go底层net/http</li>
+</ul>
+</blockquote>
+<h1 id="2-源码分析"><a href="#2-源码分析" class="headerlink" title="2 源码分析"></a>2 源码分析</h1><p><strong><em>Engine</em></strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Engine is the framework's instance, it contains the muxer, middleware and configuration settings.</span></span><br><span class="line"><span class="comment">// Create an instance of Engine, by using New() or Default()</span></span><br><span class="line"><span class="keyword">type</span> Engine <span class="keyword">struct</span> &#123;</span><br><span class="line">	RouterGroup</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Enables automatic redirection if the current route can't be matched but a</span></span><br><span class="line">	<span class="comment">// handler for the path with (without) the trailing slash exists.</span></span><br><span class="line">	<span class="comment">// For example if /foo/ is requested but a route only exists for /foo, the</span></span><br><span class="line">	<span class="comment">// client is redirected to /foo with http status code 301 for GET requests</span></span><br><span class="line">	<span class="comment">// and 307 for all other request methods.</span></span><br><span class="line">	RedirectTrailingSlash <span class="keyword">bool</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// If enabled, the router tries to fix the current request path, if no</span></span><br><span class="line">	<span class="comment">// handle is registered for it.</span></span><br><span class="line">	<span class="comment">// First superfluous path elements like ../ or // are removed.</span></span><br><span class="line">	<span class="comment">// Afterwards the router does a case-insensitive lookup of the cleaned path.</span></span><br><span class="line">	<span class="comment">// If a handle can be found for this route, the router makes a redirection</span></span><br><span class="line">	<span class="comment">// to the corrected path with status code 301 for GET requests and 307 for</span></span><br><span class="line">	<span class="comment">// all other request methods.</span></span><br><span class="line">	<span class="comment">// For example /FOO and /..//Foo could be redirected to /foo.</span></span><br><span class="line">	<span class="comment">// RedirectTrailingSlash is independent of this option.</span></span><br><span class="line">	RedirectFixedPath <span class="keyword">bool</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// If enabled, the router checks if another method is allowed for the</span></span><br><span class="line">	<span class="comment">// current route, if the current request can not be routed.</span></span><br><span class="line">	<span class="comment">// If this is the case, the request is answered with 'Method Not Allowed'</span></span><br><span class="line">	<span class="comment">// and HTTP status code 405.</span></span><br><span class="line">	<span class="comment">// If no other Method is allowed, the request is delegated to the NotFound</span></span><br><span class="line">	<span class="comment">// handler.</span></span><br><span class="line">	HandleMethodNotAllowed <span class="keyword">bool</span></span><br><span class="line">	ForwardedByClientIP    <span class="keyword">bool</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// #726 #755 If enabled, it will thrust some headers starting with</span></span><br><span class="line">	<span class="comment">// 'X-AppEngine...' for better integration with that PaaS.</span></span><br><span class="line">	AppEngine <span class="keyword">bool</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// If enabled, the url.RawPath will be used to find parameters.</span></span><br><span class="line">	UseRawPath <span class="keyword">bool</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// If true, the path value will be unescaped.</span></span><br><span class="line">	<span class="comment">// If UseRawPath is false (by default), the UnescapePathValues effectively is true,</span></span><br><span class="line">	<span class="comment">// as url.Path gonna be used, which is already unescaped.</span></span><br><span class="line">	UnescapePathValues <span class="keyword">bool</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Value of 'maxMemory' param that is given to http.Request's ParseMultipartForm</span></span><br><span class="line">	<span class="comment">// method call.</span></span><br><span class="line">	MaxMultipartMemory <span class="keyword">int64</span></span><br><span class="line"></span><br><span class="line">	delims           render.Delims</span><br><span class="line">	secureJsonPrefix <span class="keyword">string</span></span><br><span class="line">	HTMLRender       render.HTMLRender</span><br><span class="line">	FuncMap          template.FuncMap</span><br><span class="line">	allNoRoute       HandlersChain</span><br><span class="line">	allNoMethod      HandlersChain</span><br><span class="line">	noRoute          HandlersChain</span><br><span class="line">	noMethod         HandlersChain</span><br><span class="line">	pool             sync.Pool</span><br><span class="line">	trees            methodTrees</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> methodTree <span class="keyword">struct</span> &#123;</span><br><span class="line">	method <span class="keyword">string</span></span><br><span class="line">	root   *node</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> methodTrees []methodTree</span><br><span class="line"><span class="keyword">type</span> node <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="comment">//path为绝对路径</span></span><br><span class="line">	path      <span class="keyword">string</span></span><br><span class="line">	indices   <span class="keyword">string</span></span><br><span class="line">	children  []*node</span><br><span class="line">	<span class="comment">// handlers为对应path的所有handlers</span></span><br><span class="line">	handlers  HandlersChain</span><br><span class="line">	priority  <span class="keyword">uint32</span></span><br><span class="line">	nType     nodeType</span><br><span class="line">	maxParams <span class="keyword">uint8</span></span><br><span class="line">	wildChild <span class="keyword">bool</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// New returns a new blank Engine instance without any middleware attached.</span></span><br><span class="line"><span class="comment">// By default the configuration is:</span></span><br><span class="line"><span class="comment">// - RedirectTrailingSlash:  true</span></span><br><span class="line"><span class="comment">// - RedirectFixedPath:      false</span></span><br><span class="line"><span class="comment">// - HandleMethodNotAllowed: false</span></span><br><span class="line"><span class="comment">// - ForwardedByClientIP:    true</span></span><br><span class="line"><span class="comment">// - UseRawPath:             false</span></span><br><span class="line"><span class="comment">// - UnescapePathValues:     true</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">New</span><span class="params">()</span> *<span class="title">Engine</span></span> &#123;</span><br><span class="line">	debugPrintWARNINGNew()</span><br><span class="line">	engine := &amp;Engine&#123;</span><br><span class="line">		RouterGroup: RouterGroup&#123;</span><br><span class="line">			Handlers: <span class="literal">nil</span>,</span><br><span class="line">			basePath: <span class="string">"/"</span>,</span><br><span class="line">			root:     <span class="literal">true</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">		FuncMap:                template.FuncMap&#123;&#125;,</span><br><span class="line">		RedirectTrailingSlash:  <span class="literal">true</span>,</span><br><span class="line">		RedirectFixedPath:      <span class="literal">false</span>,</span><br><span class="line">		HandleMethodNotAllowed: <span class="literal">false</span>,</span><br><span class="line">		ForwardedByClientIP:    <span class="literal">true</span>,</span><br><span class="line">		AppEngine:              defaultAppEngine,</span><br><span class="line">		UseRawPath:             <span class="literal">false</span>,</span><br><span class="line">		UnescapePathValues:     <span class="literal">true</span>,</span><br><span class="line">		MaxMultipartMemory:     defaultMultipartMemory,</span><br><span class="line">		trees:                  <span class="built_in">make</span>(methodTrees, <span class="number">0</span>, <span class="number">9</span>),</span><br><span class="line">		delims:                 render.Delims&#123;Left: <span class="string">"&#123;&#123;"</span>, Right: <span class="string">"&#125;&#125;"</span>&#125;,</span><br><span class="line">		secureJsonPrefix:       <span class="string">"while(1);"</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	engine.RouterGroup.engine = engine</span><br><span class="line">	engine.pool.New = <span class="function"><span class="keyword">func</span><span class="params">()</span> <span class="title">interface</span></span>&#123;&#125; &#123;</span><br><span class="line">		<span class="keyword">return</span> engine.allocateContext()</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> engine</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong><em>serverHTTP</em></strong>(net/http包handler的实现)</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ServeHTTP conforms to the http.Handler interface.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(engine *Engine)</span></span> <span class="type">ServeHTTP</span>(w http.<span class="type">ResponseWriter</span>, req *http.<span class="type">Request</span>) &#123;</span><br><span class="line">	<span class="built_in">c</span> := engine.pool.<span class="type">Get</span>().(*<span class="type">Context</span>)</span><br><span class="line">	<span class="built_in">c</span>.writermem.reset(w)</span><br><span class="line">	<span class="built_in">c</span>.<span class="type">Request</span> = req</span><br><span class="line">	<span class="built_in">c</span>.reset()</span><br><span class="line">	engine.handleHTTPRequest(<span class="built_in">c</span>)</span><br><span class="line">	engine.pool.<span class="type">Put</span>(<span class="built_in">c</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(engine *Engine)</span></span> handleHTTPRequest(<span class="built_in">c</span> *<span class="type">Context</span>) &#123;</span><br><span class="line">	httpMethod := <span class="built_in">c</span>.<span class="type">Request</span>.<span class="type">Method</span></span><br><span class="line">	path := <span class="built_in">c</span>.<span class="type">Request</span>.<span class="type">URL</span>.<span class="type">Path</span></span><br><span class="line">	unescape := <span class="literal">false</span></span><br><span class="line">	<span class="keyword">if</span> engine.<span class="type">UseRawPath</span> &amp;&amp; len(<span class="built_in">c</span>.<span class="type">Request</span>.<span class="type">URL</span>.<span class="type">RawPath</span>) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		path = <span class="built_in">c</span>.<span class="type">Request</span>.<span class="type">URL</span>.<span class="type">RawPath</span></span><br><span class="line">		unescape = engine.<span class="type">UnescapePathValues</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// Find root of the tree for the given HTTP method</span></span><br><span class="line">	t := engine.trees</span><br><span class="line">	<span class="keyword">for</span> i, tl := <span class="number">0</span>, len(t); i &lt; tl; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> t[i].method == httpMethod &#123;</span><br><span class="line">			root := t[i].root</span><br><span class="line">			<span class="comment">// Find route in tree</span></span><br><span class="line">			handlers, params, tsr := root.getValue(path, <span class="built_in">c</span>.<span class="type">Params</span>, unescape)</span><br><span class="line">			<span class="keyword">if</span> handlers != <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="built_in">c</span>.handlers = handlers</span><br><span class="line">				<span class="built_in">c</span>.<span class="type">Params</span> = params</span><br><span class="line">				<span class="built_in">c</span>.<span class="type">Next</span>()</span><br><span class="line">				<span class="built_in">c</span>.writermem.<span class="type">WriteHeaderNow</span>()</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> httpMethod != <span class="string">"CONNECT"</span> &amp;&amp; path != <span class="string">"/"</span> &#123;</span><br><span class="line">				<span class="keyword">if</span> tsr &amp;&amp; engine.<span class="type">RedirectTrailingSlash</span> &#123;</span><br><span class="line">					redirectTrailingSlash(<span class="built_in">c</span>)</span><br><span class="line">					<span class="keyword">return</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span> engine.<span class="type">RedirectFixedPath</span> &amp;&amp; redirectFixedPath(<span class="built_in">c</span>, root, engine.<span class="type">RedirectFixedPath</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> engine.<span class="type">HandleMethodNotAllowed</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> <span class="number">_</span>, tree := range engine.trees &#123;</span><br><span class="line">			<span class="keyword">if</span> tree.method != httpMethod &#123;</span><br><span class="line">				<span class="keyword">if</span> handlers, <span class="number">_</span>, <span class="number">_</span> := tree.root.getValue(path, <span class="literal">nil</span>, unescape); handlers != <span class="literal">nil</span> &#123;</span><br><span class="line">					<span class="built_in">c</span>.handlers = engine.allNoMethod</span><br><span class="line">					serveError(<span class="built_in">c</span>, <span class="number">405</span>, default405Body)</span><br><span class="line">					<span class="keyword">return</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">c</span>.handlers = engine.allNoRoute</span><br><span class="line">	serveError(<span class="built_in">c</span>, <span class="number">404</span>, default404Body)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+</blockquote>
+<p><strong><em>RouteGroup</em></strong>  </p>
+<blockquote>
+<ul>
+<li>gin可以设置路由组，所有路由组下路由绝对路径为RouteGroup.basePath+relativePath;</li>
+<li>中间件：路由组下所有路由的中间件为路由本身中间件+路由组中间件</li>
+<li>Handlers即为路由组相应中间件，最后一个可为具体请求处理</li>
+<li>新建routeGroup中的engine为原engine的地址一致</li>
+<li>engine中的trees为完整的路由树，routeGrouop方便按组添加中间件及某一路径下多子路径添加</li>
+</ul>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// RouterGroup is used internally to configure router, a RouterGroup is associated with a prefix</span></span><br><span class="line"><span class="comment">// and an array of handlers (middleware).</span></span><br><span class="line"><span class="keyword">type</span> RouterGroup <span class="keyword">struct</span> &#123;</span><br><span class="line">	Handlers HandlersChain</span><br><span class="line">	basePath <span class="keyword">string</span></span><br><span class="line">	engine   *Engine</span><br><span class="line">	root     <span class="keyword">bool</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// handlerFun定义</span></span><br><span class="line"><span class="keyword">type</span> HandlerFunc <span class="function"><span class="keyword">func</span><span class="params">(*Context)</span></span></span><br><span class="line"><span class="function">// 组下添加<span class="title">handler</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(group *RouterGroup)</span> <span class="title">handle</span><span class="params">(httpMethod, relativePath <span class="keyword">string</span>, handlers HandlersChain)</span> <span class="title">IRoutes</span></span> &#123;</span><br><span class="line">	absolutePath := group.calculateAbsolutePath(relativePath)</span><br><span class="line">	handlers = group.combineHandlers(handlers)</span><br><span class="line">	group.engine.addRoute(httpMethod, absolutePath, handlers)</span><br><span class="line">	<span class="keyword">return</span> group.returnObj()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Use adds middleware to the group, see example code in github.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(group *RouterGroup)</span> <span class="title">Use</span><span class="params">(middleware ...HandlerFunc)</span> <span class="title">IRoutes</span></span> &#123;</span><br><span class="line">	group.Handlers = <span class="built_in">append</span>(group.Handlers, middleware...)</span><br><span class="line">	<span class="keyword">return</span> group.returnObj()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>每个路径还可以单独添加自己独有的中间件,通过(RouteGroup.Handle):  </li>
+</ul>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(group *RouterGroup)</span> <span class="title">Handle</span><span class="params">(httpMethod, relativePath <span class="keyword">string</span>, handlers ...HandlerFunc)</span> <span class="title">IRoutes</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> matches, err := regexp.MatchString(<span class="string">"^[A-Z]+$"</span>, httpMethod); !matches || err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(<span class="string">"http method "</span> + httpMethod + <span class="string">" is not valid"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> group.handle(httpMethod, relativePath, handlers)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>创建新的routeGroup:</li>
+</ul>
+</blockquote>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Group creates a new router group. You should add all the routes that have common middlwares or the same path prefix.</span></span><br><span class="line"><span class="comment">// For example, all the routes that use a common middlware for authorization could be grouped.</span></span><br><span class="line">func (<span class="keyword">group</span> *RouterGroup) <span class="keyword">Group</span>(relativePath <span class="built_in">string</span>, handlers <span class="params">...</span>HandlerFunc) *RouterGroup &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;RouterGroup&#123;</span><br><span class="line">		Handlers: <span class="keyword">group</span>.combineHandlers(handlers),</span><br><span class="line">		basePath: <span class="keyword">group</span>.calculateAbsolutePath(relativePath),</span><br><span class="line">		engine:   <span class="keyword">group</span>.engine,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>GIN Context</em></strong></p>
+<blockquote>
+<ul>
+<li>listen建立accept后，针对每个请求执行handler时新建gin.Context</li>
+<li>httpReq项</li>
+<li>ResponseWriter</li>
+<li>context存放httpReq获取的请求参数及responseWrite将返回结果返回请求方</li>
+</ul>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Context is the most important part of gin. It allows us to pass variables between middleware,</span></span><br><span class="line"><span class="comment">// manage the flow, validate the JSON of a request and render a JSON response for example.</span></span><br><span class="line"><span class="keyword">type</span> Context <span class="keyword">struct</span> &#123;</span><br><span class="line">	writermem responseWriter</span><br><span class="line">	Request   *http.Request</span><br><span class="line">	Writer    ResponseWriter</span><br><span class="line">	Params   Params</span><br><span class="line">	handlers HandlersChain</span><br><span class="line">	index    <span class="keyword">int8</span></span><br><span class="line">	engine *Engine</span><br><span class="line">	<span class="comment">// Keys is a key/value pair exclusively for the context of each request.</span></span><br><span class="line">	Keys <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">	<span class="comment">// Errors is a list of errors attached to all the handlers/middlewares who used this context.</span></span><br><span class="line">	Errors errorMsgs</span><br><span class="line">	<span class="comment">// Accepted defines a list of manually accepted formats for content negotiation.</span></span><br><span class="line">	Accepted []<span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class="post-wrapper">
@@ -1884,98 +2025,27 @@
           </div>
         
       
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/06/12/java-异常/">
-      java异常处理
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YY</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-06-11</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h2 id="1-自定义异常"><a href="#1-自定义异常" class="headerlink" title="1 自定义异常"></a>1 <a href="https://www.runoob.com/java/java-exceptions.html" target="_blank" rel="noopener">自定义异常</a></h2>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/java-异常/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>java, 异常</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
+    
+      <br>
+      <div class="prev-next">
+        <div class="prev-next">
+          
+          <p class="current">
+            1 / 2
+          </p>
+          
+            <a class="next" rel="next" href="/page/2/">
+              <section class="post next">
+                &nbsp;Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+              </section>
+            </a>
+          
+        </div>
+      </div>
+
     
     <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
     
@@ -2109,7 +2179,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -2138,7 +2208,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -2227,19 +2297,19 @@
     </div>
   
   <br>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
   <div>
-    本站使用
+    Use
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    作为主题
+    as theme
     
-      ，
-      总访问量为
+      , 
+      total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
+      times
     
-    。
+    . 
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -2345,15 +2415,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "复制成功";
-  let COPY_FAILURE = "复制失败";
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

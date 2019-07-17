@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: 自动代理 | Private Zone</title>
+  <title>Archives: 2019 | Private Zone</title>
   
   <meta name="keywords" content="web">
   
@@ -248,18 +248,10 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      
-<div class="l_main">
-  
-    
-      
+      <div class="l_main">
+	
+		
   <section class="post-list">
-    
-      
-        
-          
-        
-      
     
     
       
@@ -276,8 +268,8 @@
       
         
   <h2 class="title">
-    <a href="/2019/07/04/代理服务注册服务发现/">
-      代理服务注册服务发现
+    <a href="/2019/06/12/java-异常/">
+      java异常处理
     </a>
   </h2>
 
@@ -305,7 +297,7 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-07-03</p>
+    <p>2019-06-11</p>
   </a>
 </div>
 
@@ -336,36 +328,13 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h2 id="1-服务注册"><a href="#1-服务注册" class="headerlink" title="1 服务注册"></a>1 服务注册</h2><blockquote>
-<ul>
-<li>服务自动将自己的ip地址及其他信息(rpc:serviceName/methodName)等注册到对应的注册中心(etcd zookeeper)</li>
-<li>注册中心(zookeeper)可以发送健康检查检查服务的运行状态，进行相应的处理</li>
-</ul>
-</blockquote>
-<h2 id="2-服务发现"><a href="#2-服务发现" class="headerlink" title="2 服务发现"></a>2 服务发现</h2><blockquote>
-<ul>
-<li>cli端(dubbo的consumer)或者proxy代理通过注册中心(etcd zookeeper)等，查询对应的请求对应的ip地址，返回ip地址给cli端</li>
-</ul>
-</blockquote>
-<h2 id="3-代理-amp-amp-网关"><a href="#3-代理-amp-amp-网关" class="headerlink" title="3 代理&amp;&amp;网关"></a>3 代理&amp;&amp;网关</h2><blockquote>
-<ul>
-<li>代理根据相应的url命名，解析url转发至相应的服务</li>
-<li>eg http请求grpc服务: http请求代理地址，代理服务器到注册中心查询相应serviceName的ip地址，代理服务器做负载均衡，代理服务器将解析的http请求封装成grpc请求，直接请求grpc服务</li>
-<li>网关类似代理，所有请求按相应的规则打到网关服务器，网关根据规则将请求转发到对应的服务器或者代理，再做其他处理</li>
-</ul>
-</blockquote>
-<p><a href="https://www.jianshu.com/p/a68e45bcadb6" target="_blank" rel="noopener">kong</a></p>
-
+      <h2 id="1-自定义异常"><a href="#1-自定义异常" class="headerlink" title="1 自定义异常"></a>1 <a href="https://www.runoob.com/java/java-exceptions.html" target="_blank" rel="noopener">自定义异常</a></h2>
       
     </div>
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/服务注册/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>服务注册</a>
-        
-          <a href="/tags/服务发现/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>服务发现</a>
-        
-          <a href="/tags/自动代理/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>自动代理</a>
+          <a href="/tags/java-异常/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>java, 异常</a>
         
       </div>
     
@@ -379,6 +348,24 @@
   </section>
   
     
+      <br>
+      <div class="prev-next">
+        <div class="prev-next">
+          
+            <a class="prev" rel="prev" href="/archives/2019/">
+              <section class="post prev">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
+              </section>
+            </a>
+          
+          <p class="current">
+            2 / 2
+          </p>
+          
+        </div>
+      </div>
+
+    
     <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
     
     
@@ -386,8 +373,7 @@
   
 
 
-    
-  
+	
 </div>
 <aside class="l_side">
   
@@ -647,6 +633,14 @@
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
+
+
+
+
+	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+	
+
+	
 
 
       <script>setLoadingBarProgress(60);</script>
