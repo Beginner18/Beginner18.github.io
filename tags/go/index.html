@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search">
+						<input type="text" class="input u-search-input" placeholder="搜索">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -476,6 +476,11 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> testInterface <span class="keyword">interface</span>&#123;</span><br><span class="line">set(a <span class="keyword">string</span>)</span><br><span class="line">show()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> testHello <span class="keyword">struct</span>&#123;</span><br><span class="line">info <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a *testHello)</span> <span class="title">set</span><span class="params">(b <span class="keyword">string</span>)</span></span>&#123;</span><br><span class="line">a.info=b</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a *testHello)</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">fmt.Println(<span class="string">"here is: "</span>, a.info)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> hello testHello	</span><br><span class="line">	hello.info=<span class="string">"123"</span></span><br><span class="line">	<span class="keyword">var</span> testType testInterface = &amp;hello	<span class="comment">//接口类型为testInterface,接口值为动态变量的类型及值，接口的值分为type&amp;&amp;value</span></span><br><span class="line">						<span class="comment">//接口值： 1 type=*testHello 2 value=&amp;hello；接口值中type必须实现接口定义的方法</span></span><br><span class="line">						<span class="comment">// testInterface=hello错误</span></span><br><span class="line">					   	<span class="comment">//cannot use hello (type testHello) as type testInterface in assignment:</span></span><br><span class="line">					  	<span class="comment">//testHello does not implement testInterface (set method has pointer receiver)</span></span><br><span class="line">	testType.set(<span class="string">"hello world"</span>)</span><br><span class="line">	testType.show()</span><br><span class="line">	fmt.Printf(<span class="string">"%T"</span>,hello)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> testInterface <span class="keyword">interface</span>&#123;</span><br><span class="line">show()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> testHello <span class="keyword">struct</span>&#123;</span><br><span class="line">info <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a testHello)</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">fmt.Println(<span class="string">"here is: "</span>, a.info)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> hello testHello	</span><br><span class="line">	hello.info=<span class="string">"123"</span></span><br><span class="line">	<span class="keyword">var</span> testType testInterface = &amp;hello	<span class="comment">//接收类型为非指针类型，interface值的type可以为指针也可以为非指针</span></span><br><span class="line">	testType.show()</span><br><span class="line">	fmt.Printf(<span class="string">"%T"</span>,hello)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-1-反射"><a href="#2-1-反射" class="headerlink" title="2.1 反射"></a>2.1 反射</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// resRaw为json byte,&#123;"code": , "data": , "message": &#125;</span></span><br><span class="line"><span class="comment">// 将[]byte解析为type res struct&#123;Code int, Message string, Data interface&#123;&#125;&#125;, json tag分别为code message data</span></span><br><span class="line"><span class="comment">// 兼容data为空及存在值时返回类型不同，data单独解析，首先判空</span></span><br><span class="line"><span class="comment">// resType struct&#123;Code int, Message string, Data []byte&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(resRaw []<span class="keyword">byte</span>, res <span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> resRaw == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> errors.New(<span class="string">"empty raw byte"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> resOri resType</span><br><span class="line">	<span class="keyword">if</span> err := json.Unmarshal(resRaw, &amp;resOri); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 获取res的类型及值，解析通常传指针 map []slice</span></span><br><span class="line">	t := reflect.TypeOf(res)</span><br><span class="line">	v := reflect.ValueOf(res)</span><br><span class="line">	<span class="comment">// 指针处理 获取实际类型的type及值</span></span><br><span class="line">	<span class="keyword">if</span> t.Kind() == reflect.Ptr &#123;</span><br><span class="line">		t = t.Elem()</span><br><span class="line">		v = v.Elem()</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 结构体</span></span><br><span class="line">	<span class="keyword">if</span> t.Kind() != reflect.Struct &#123;</span><br><span class="line">		log.Println(<span class="string">"Check type error not Struct"</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	members := t.NumField()</span><br><span class="line">	<span class="comment">// 处理方式1 fieldByName</span></span><br><span class="line">	<span class="comment">//v.FieldByName("Code").Set(reflect.ValueOf(resOri.Code))</span></span><br><span class="line">	<span class="comment">//v.FieldByName("Message").Set(reflect.ValueOf(resOri.Message))</span></span><br><span class="line">	<span class="comment">// 按照json Tag解析字串</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; members; i++ &#123;</span><br><span class="line">	<span class="comment">// 获取field tag json tag</span></span><br><span class="line">		<span class="keyword">switch</span> t.Field(i).Tag.Get(<span class="string">"json"</span>) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"data"</span>:</span><br><span class="line">			<span class="keyword">if</span> err := parseBody(resOri.Data, v.Field(i).Interface()); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> err</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"code"</span>:</span><br><span class="line">			v.Field(i).Set(reflect.ValueOf(resOri.Code))</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"message"</span>:</span><br><span class="line">			v.Field(i).Set(reflect.ValueOf(resOri.Message))</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> err</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-Go工具"><a href="#3-Go工具" class="headerlink" title="3 Go工具"></a>3 Go工具</h1><h2 id="3-1-go-test"><a href="#3-1-go-test" class="headerlink" title="3.1 go test"></a>3.1 go test</h2><h2 id="3-2-go-mock-单测数据模拟"><a href="#3-2-go-mock-单测数据模拟" class="headerlink" title="3.2 go mock (单测数据模拟)"></a>3.2 go mock (单测数据模拟)</h2><p><strong><em>Links</em></strong><br><a href="https://www.jianshu.com/p/598a11bbdafb" target="_blank" rel="noopener">ref-1</a><br><a href="https://github.com/golang/mock" target="_blank" rel="noopener">github gomock</a></p>
+
       
     </div>
     
@@ -629,7 +634,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -658,7 +663,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -747,19 +752,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -865,15 +870,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

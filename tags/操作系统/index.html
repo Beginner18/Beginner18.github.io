@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search">
+						<input type="text" class="input u-search-input" placeholder="搜索">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -495,6 +495,23 @@
 <p>块在扇区，块大小选择可能留下扇区空间，利用不足<br>块大小选择，块是否可变，块越大顺序读取局部性等好，但需要较大的内存缓冲区.<br>文件多条记录储存在物理磁盘块上，给定块大小存在三种组块方式：固定组块(固定长度记录，块末尾可能存在未用空间成为内部碎片);可变长度跨越式组块：可变长度记录，紧缩至块中，记录可以跨越组块；可变长度非跨越式组块：可变长度记录，记录不跨块，大多数块中存在未用空间；<br>文件的块分配，文件分配表：分区大小，可变大规模连续分区、按块分配<br>首次适配、最佳适配、最近适配（一个文件的不同块尽可能靠近）<br>分配方法：预分配、动态分配<br>连续分配（起始块 长度或块总数）、链接分配（起始块 长度，每个块都会链接下一个块）、索引分配（文件名-&gt;索引块，索引块中为文件对应块的列表）&amp;可变分区索引分配（列表为起始块&amp;&amp;块大小）.<br>空闲空间管理：需要磁盘分配表.<br>位表每个位代表相应块，0 1标识是否空间，空间占用小，可完全放入内存<br>链接空闲区、索引（空闲去当作文件)<br>空闲块列表：磁盘保留区为所有空闲块的顺序号，相比较位分配空间占用大，单可以作为栈结构部分导入内存，分配块从栈顶取，释放入栈，若栈空或者栈满则与磁盘交互；（栈可替换为fifo队列）<br>卷为磁盘扇区集合，扇区可不连续<br>文件：基本信息（名 类型 组织）；地址信息（卷 起始地址 使用大小 分配大小）；访问信息控制（所有者 访问信息 权限控制）；使用信息（数据创建 创建者身份 修改时间 当前使用等)</p>
 </blockquote>
 </blockquote>
+<h2 id="2-2-select-amp-poll-amp-epoll"><a href="#2-2-select-amp-poll-amp-epoll" class="headerlink" title="2.2 select&amp;poll&amp;epoll"></a>2.2 select&amp;poll&amp;epoll</h2><blockquote>
+<ul>
+<li>select与poll返回可用的数目，及fd_set bit或者结构体，用户遍历获取可用的fd进行相关处理</li>
+<li>select与poll若总链接数百万级以上但活跃数几百，用户需要每次遍历返回结果确定可用的fd浪费cpu</li>
+<li>select用32个整数的32位，即32*32= 1024来标识，fd值为1-1024，select存在最大数量限制</li>
+<li>poll用数组标识无最大fd限制</li>
+<li>select用bit标识，返回值会覆盖需要观测的fd位，每次select时均需要初始化</li>
+<li>poll与select不同，通过一个pollfd数组向内核传递需要关注的事件，故没有描述符个数的限制，pollfd中的events字段和revents分别用于标示关注的事件和发生的事件，故pollfd数组只需要被初始化一次。</li>
+<li>epoll还是poll的一种优化，返回后不需要对所有的fd进行遍历，在内核中维持了fd的列表。select和poll是将这个内核列表维持在用户态，然后传递到内核中。与poll/select不同，epoll不再是一个单独的系统调用，而是由epoll_create/epoll_ctl/epoll_wait三个系统调用组成，后面将会看到这样做的好处。epoll在2.6以后的内核才支持</li>
+<li>select与poll每次调用均需要将fd_set从用户空间copy到内核空间</li>
+<li>epoll：用户通过epoll_ctl注册fd_set及监听类型；epoll_wait堵塞直到超时、信号或者可用fd返回，；无最大数量限制</li>
+<li>epoll仅返回可用的fd，对返回的fd进行遍历不会浪费cpu</li>
+<li>select 和 poll 都是主動輪詢機制，需要拜訪每一個 FD；</li>
+<li>epoll是被动触发方式，给fd注册了相应事件的时候，我们为每一个fd指定了一个回调函数，当数据准备好之后，就会把就绪的fd加入一个就绪的队列中，epoll_wait的工作方式实际上就是在这个就绪队列中查看有没有就绪的fd，如果有，就唤醒就绪队列上的等待者，然后调用回调函数。</li>
+</ul>
+</blockquote>
+<p><a href="https://www.jianshu.com/p/1b4b3c738d8c" target="_blank" rel="noopener">参考</a><br><a href="http://man7.org/linux/man-pages/man2/epoll_ctl.2.html" target="_blank" rel="noopener">epoll函数</a><br><a href="https://linux.die.net/man/4/epoll" target="_blank" rel="noopener">linux</a><br><a href="https://blog.csdn.net/yusiguyuan/article/details/15027821" target="_blank" rel="noopener">epoll函数解析</a><br><a href="https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/#.XSvqwJMzbI4" target="_blank" rel="noopener">epoll用法</a><br><a href="https://blog.csdn.net/wangpeihuixyz/article/details/41732127" target="_blank" rel="noopener">epoll内核实现</a></p>
 <h2 id="3-进程-amp-amp-线程-amp-amp-IPC"><a href="#3-进程-amp-amp-线程-amp-amp-IPC" class="headerlink" title="3 进程&amp;&amp;线程&amp;&amp;IPC"></a>3 进程&amp;&amp;线程&amp;&amp;IPC</h2><p>3.1 IPC&amp;&amp;跳转</p>
 <blockquote>
 <ul>
@@ -668,7 +685,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -697,7 +714,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -786,19 +803,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -904,15 +921,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
