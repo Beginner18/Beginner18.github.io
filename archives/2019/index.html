@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search">
+						<input type="text" class="input u-search-input" placeholder="搜索">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -1369,9 +1369,10 @@
 </blockquote>
 <blockquote>
 <blockquote>
+</blockquote>
+</blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">"id="</span>+result.data[<span class="string">'id'</span>]+<span class="string">"; path=/"</span>;</span><br><span class="line"><span class="built_in">document</span>.cookie = <span class="string">"name="</span>+result.data[<span class="string">'name'</span>]+<span class="string">"; path=/"</span>;</span><br><span class="line"><span class="built_in">document</span>.cookie = <span class="string">"avatar="</span>+result.data[<span class="string">'avatar'</span>]+<span class="string">"; path=/"</span>;</span><br><span class="line">使用到cookie时做如下解析：</span><br><span class="line"><span class="keyword">var</span> cookie = <span class="built_in">document</span>.cookie;<span class="keyword">var</span> cookieArr = cookie.split(<span class="string">";"</span>);<span class="keyword">var</span> user_info = &#123;&#125;;<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cookieArr.length; i++) &#123;</span><br><span class="line">    user_info[cookieArr[i].split(<span class="string">"="</span>)[<span class="number">0</span>]] = cookieArr[i].split(<span class="string">"="</span>)[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">'#user_name'</span>).text(user_info[<span class="string">' name'</span>]);</span><br><span class="line">$(<span class="string">'#user_avatar'</span>).attr(<span class="string">"src"</span>, user_info[<span class="string">' avatar'</span>]);</span><br><span class="line">$(<span class="string">'#user_id'</span>).val(user_info[<span class="string">' id'</span>]);</span><br><span class="line"><span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&gt;</span></span><br><span class="line"><span class="string">&gt;- ***session为会话管理，cli与服务端交互服务端用session保存用户的信息，用户离开即销毁：***</span></span><br><span class="line"><span class="string">当用户打开某个web应用时，便与web服务器产生一次session。服务器使用session把用户的信息临时保存在了服务器上，用户离开网站后session会被销毁。这种用户信息存储方式相对cookie来说更安全，可是session有一个缺陷：如果web服务器做了负载均衡，那么下一个操作请求到了另一台服务器的时候session会丢失。</span></span><br><span class="line"><span class="string">&gt;&gt;</span></span><br><span class="line"><span class="string">&gt;&gt;若server可以产生sessionID(关联用户数据)，cli请求时带sessionID即可;  </span></span><br><span class="line"><span class="string">可以对session加过期时间（安全起见）;  </span></span><br><span class="line"><span class="string">session用户离开页面过期(一段时间无请求则过期)，用户离开session销毁;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&gt;-  ***cookie 和session的区别, cookie可以只保存sessionID***</span></span><br><span class="line"><span class="string">&gt;&gt;</span></span><br><span class="line"><span class="string">&gt;&gt;session无法跨机器问题：session外部保存，eg redis缓存  </span></span><br><span class="line"><span class="string">1、cookie数据存放在客户的浏览器上，session数据放在服务器上。  </span></span><br><span class="line"><span class="string">2、cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗</span></span><br><span class="line"><span class="string">   考虑到安全应当使用session。  </span></span><br><span class="line"><span class="string">3、session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能</span></span><br><span class="line"><span class="string">   考虑到减轻服务器性能方面，应当使用COOKIE。  </span></span><br><span class="line"><span class="string">4、单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。  </span></span><br><span class="line"><span class="string">5、所以个人建议：将登陆信息等重要信息存放为SESSION、其他信息如果需要保留，可以放在COOKIE中  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&gt;- token:  token的意思是“令牌”，是用户身份的验证方式，最简单的token组成:uid(用户唯一的身份标识)、time(当前时间的时间戳)、sign(签名，由token的前几位+盐以哈希算法压缩成一定长的十六进制字符串，可以防止恶意第三方拼接token请求服务器)。还可以把不变的参数也放进token，避免多次查库</span></span><br><span class="line"><span class="string">&gt;- ***JWT标准Token:***</span></span><br><span class="line"><span class="string">&gt;&gt;</span></span><br><span class="line"><span class="string">&gt;&gt;实施 Token 验证的方法挺多的，还有一些标准方法，比如 JWT，读作：jot ，表示：JSON Web Tokens 。JWT 标准的 Token 有三个部分：  </span></span><br><span class="line"><span class="string">***header（头部）***:加密算法，加密设置alg为对应算法，否则alg为none</span></span><br><span class="line"><span class="string">&gt;&gt;</span></span><br><span class="line"><span class="string">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-</blockquote>
+
 <p>{
   “alg”: “HS256”<br>}
 意思是这个 JWT 用的算法是 HS256。上面的内容得用 base64url 的形式编码一下，所以就变成这样：<br>eyJhbGciOiJIUzI1NiJ9</p>
@@ -2135,7 +2136,7 @@
           
             <a class="next" rel="next" href="/archives/2019/page/2/">
               <section class="post next">
-                &nbsp;Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+                &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
               </section>
             </a>
           
@@ -2276,7 +2277,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -2307,7 +2308,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -2396,19 +2397,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -2522,15 +2523,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
