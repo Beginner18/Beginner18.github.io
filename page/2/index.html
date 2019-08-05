@@ -110,7 +110,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜尋">
+						<input type="text" class="input u-search-input" placeholder="Search">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -212,6 +212,132 @@
       
         
   <h2 class="title">
+    <a href="/2019/06/14/go_mem/">
+      go 内存
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YY</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-06-13</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h1 id="go内存模型"><a href="#go内存模型" class="headerlink" title="go内存模型"></a>go内存模型</h1><ol>
+<li><strong>内存模型剖析</strong></li>
+</ol>
+<hr>
+<blockquote>
+<ul>
+<li>待补充</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li><a href="https://www.jianshu.com/p/72e1a2571f01" target="_blank" rel="noopener"><strong>逃逸分析</strong></a></li>
+</ol>
+<hr>
+<blockquote>
+<ul>
+<li>编译参数加入 -gcflags ‘-m -l’</li>
+<li>go消除堆栈区别  </li>
+<li>逃逸分析确定变量的储存区域为堆/栈，减少gc压力，栈可以直接回收，栈分配空间及回收空间较快</li>
+<li>代码段</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>main</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import (</span><br><span class="line">	&quot;time&quot;</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line">func main()&#123;</span><br><span class="line">	//go_parser.TestParser(&quot;a==1 &amp;&amp; b!=2&quot;)</span><br><span class="line">	res := make(map[string]int)</span><br><span class="line">	fmt.Println(res[&quot;res&quot;])</span><br><span class="line">	fmt.Println(int(time.Now().Weekday()))</span><br><span class="line">	// test grpc dispatch get scenes</span><br><span class="line">	//grpc.GetScene(20351, imkfdispatch.Scene_BuyCarConsult)</span><br><span class="line">	res1 := taoyi()</span><br><span class="line">	fmt.Println(&quot;2st addr of i: &quot;, res1)</span><br><span class="line">	i := *res1</span><br><span class="line">	fmt.Println(&quot;the res is: %d&quot;, i)</span><br><span class="line">	fmt.Println(&quot;3st addr of i: &quot;, &amp;i)</span><br><span class="line">&#125;</span><br><span class="line">func taoyi()(*int)&#123;</span><br><span class="line">	var i int = 1</span><br><span class="line">	fmt.Println(&quot;1st addr of i: &quot;, &amp;i)</span><br><span class="line">	return &amp;i</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<ul>
+<li>输出内容：</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>./main.go:25:14: “1st addr of i: “ escapes to heap<br>./main.go:25:33: &amp;i escapes to heap<br>./main.go:25:33: &amp;i escapes to heap<br>./main.go:24:6: moved to heap: i<br>./main.go:26:9: &amp;i escapes to heap<br>./main.go:25:13: taoyi … argument does not escape<br>./main.go:11:17: res[“res”] escapes to heap<br>./main.go:13:17: int(time.Now().Weekday()) escapes to heap<br>./main.go:17:14: “2st addr of i: “ escapes to heap<br>./main.go:17:14: res1 escapes to heap<br>./main.go:19:14: “the res is: %d” escapes to heap<br>./main.go:19:14: i escapes to heap<br>./main.go:20:14: “3st addr of i: “ escapes to heap<br>./main.go:20:33: &amp;i escapes to heap<br>./main.go:20:33: &amp;i escapes to heap<br>./main.go:18:2: moved to heap: i<br>./main.go:10:13: main make(map[string]int) does not escape<br>./main.go:11:13: main … argument does not escape<br>./main.go:13:13: main … argument does not escape<br>./main.go:17:13: main … argument does not escape<br>./main.go:19:13: main … argument does not escape<br>./main.go:20:13: main … argument does not escape</p>
+</blockquote>
+</blockquote>
+<p><a href="https://studygolang.com/articles/10026" target="_blank" rel="noopener">参考1</a></p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/go-内存/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>go,内存</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/2019/06/12/java-异常/">
       java异常处理
     </a>
@@ -298,7 +424,7 @@
           
             <a class="prev" rel="prev" href="/">
               <section class="post prev">
-                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一頁&nbsp;
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
               </section>
             </a>
           
@@ -442,7 +568,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -473,7 +599,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -562,19 +688,19 @@
     </div>
   
   <br>
-  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
   <div>
-    本站使用
+    Use
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    作为主题
+    as theme
     
-      ，
-      总访问量为
+      , 
+      total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
+      times
     
-    。
+    . 
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -680,15 +806,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "複製成功";
-  let COPY_FAILURE = "複製失敗";
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
