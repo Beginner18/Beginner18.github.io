@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search">
+						<input type="text" class="input u-search-input" placeholder="搜尋">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -257,9 +257,105 @@
         
           
         
+          
+        
       
     
     
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/08/06/grpc/">
+      grpc
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YY</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-08-05</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h1 id="1-grpc-gateway："><a href="#1-grpc-gateway：" class="headerlink" title="1 grpc-gateway： "></a>1 grpc-gateway： </h1><p>It reads protobuf service definitions and generates a reverse-proxy server which translates a RESTful HTTP API into gRPC. </p>
+<blockquote>
+<ul>
+<li>实现server端http请求</li>
+<li>.proto文件中options中给出method, path等</li>
+<li>实现方式：建立与grpc conn的连接，gateway server建立自己的restful server,存在自己的路由函数，根据cli请求，找到对应路由函数，进而通过与grpc conn的连接调用grpc server对应的方法，实现http请求</li>
+</ul>
+</blockquote>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">定义grpc server proto文件</span><br><span class="line">your_service.proto:</span><br><span class="line">syntax = <span class="string">"proto3"</span>;</span><br><span class="line"><span class="keyword">package</span> example;</span><br><span class="line"><span class="class"><span class="keyword">message</span> <span class="title">StringMessage</span> </span>&#123;</span><br><span class="line">  <span class="built_in">string</span> value = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">service</span> <span class="title">YourService</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">rpc</span> Echo(StringMessage) <span class="keyword">returns</span> (StringMessage) &#123;&#125;</span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function">添加google.api.http 注解到 .proto file</span></span><br><span class="line"><span class="function">your_service.proto:</span></span><br><span class="line"><span class="function"> syntax = "proto3"</span>;</span><br><span class="line"> <span class="keyword">package</span> example;</span><br><span class="line">+</span><br><span class="line">+<span class="keyword">import</span> <span class="string">"google/api/annotations.proto"</span>;</span><br><span class="line">+</span><br><span class="line"> <span class="class"><span class="keyword">message</span> <span class="title">StringMessage</span> </span>&#123;</span><br><span class="line">   <span class="built_in">string</span> value = <span class="number">1</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="class"><span class="keyword">service</span> <span class="title">YourService</span> </span>&#123;</span><br><span class="line">-  <span class="function"><span class="keyword">rpc</span> Echo(StringMessage) <span class="keyword">returns</span> (StringMessage) &#123;&#125;</span></span><br><span class="line"><span class="function">+  <span class="keyword">rpc</span> Echo(StringMessage) <span class="keyword">returns</span> (StringMessage) &#123;</span></span><br><span class="line"><span class="function">+    option (google.api.http) = &#123;</span></span><br><span class="line"><span class="function">+      post: "/v1/example/echo" // method path</span></span><br><span class="line"><span class="function">+      body: "*"</span></span><br><span class="line"><span class="function">+    &#125;</span>;</span><br><span class="line">+  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/grpc-ecosystem/grpc-gateway" target="_blank" rel="noopener">参考github</a></p>
+
+      
+    </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class="post-wrapper">
@@ -482,7 +578,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -513,7 +609,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -602,19 +698,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -728,15 +824,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "複製成功";
+  let COPY_FAILURE = "複製失敗";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

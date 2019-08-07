@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[grpc]]></title>
+    <url>%2F2019%2F08%2F06%2Fgrpc%2F</url>
+    <content type="text"><![CDATA[1 grpc-gateway： It reads protobuf service definitions and generates a reverse-proxy server which translates a RESTful HTTP API into gRPC. 实现server端http请求 .proto文件中options中给出method, path等 实现方式：建立与grpc conn的连接，gateway server建立自己的restful server,存在自己的路由函数，根据cli请求，找到对应路由函数，进而通过与grpc conn的连接调用grpc server对应的方法，实现http请求 1234567891011121314151617181920212223242526272829定义grpc server proto文件your_service.proto:syntax = "proto3";package example;message StringMessage &#123; string value = 1;&#125;service YourService &#123; rpc Echo(StringMessage) returns (StringMessage) &#123;&#125;&#125;添加google.api.http 注解到 .proto fileyour_service.proto: syntax = "proto3"; package example;++import "google/api/annotations.proto";+ message StringMessage &#123; string value = 1; &#125; service YourService &#123;- rpc Echo(StringMessage) returns (StringMessage) &#123;&#125;+ rpc Echo(StringMessage) returns (StringMessage) &#123;+ option (google.api.http) = &#123;+ post: "/v1/example/echo" // method path+ body: "*"+ &#125;;+ &#125; &#125; 参考github]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[tools]]></title>
     <url>%2F2019%2F08%2F02%2Ftools%2F</url>
     <content type="text"><![CDATA[1 日志系统kibana展示es集群计算logbash收集并http发送至集群]]></content>
