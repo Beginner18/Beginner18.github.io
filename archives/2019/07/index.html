@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜尋">
+						<input type="text" class="input u-search-input" placeholder="搜索">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -1033,7 +1033,8 @@
 </ul>
 </blockquote>
 </blockquote>
-<h2 id="3-2-信号-异步处理"><a href="#3-2-信号-异步处理" class="headerlink" title="3.2 信号:异步处理"></a>3.2 信号:异步处理</h2><blockquote>
+<h2 id="3-2-信号-异步处理"><a href="#3-2-信号-异步处理" class="headerlink" title="3.2 信号:异步处理"></a>3.2 信号:异步处理</h2><p>信号可以在任何时候中断程序，信号处理中若对共享数据进行相关操作需要注意数据竞争，信号处理程序中可以使用自旋锁，不可使用休眠类锁，中断处理尽量快，不应该休眠</p>
+<blockquote>
 <ul>
 <li>信号处理方式：信号出现时告知内核处理方式；捕获(handler处理)、默认处理方式、忽略</li>
 <li>SIGKILL(杀死进程) &amp; SIGSTOP(作业控制)不可捕获或者忽略</li>
@@ -1105,6 +1106,7 @@
 </ul>
 <blockquote>
 <ul>
+<li>不用创建临时文件，系统内核map共享内存区域并创建文件表项，应用程序通过文件描述符对相关内存区域进行读写操作仅可一端写一端读，达到进程间通信；利用虚拟文件系统</li>
 <li>半双工</li>
 <li>具有公共祖先的进程间使用</li>
 <li>read写端关闭管道，所有数据读取后，read返回0，写端还有进程则不会产生文件结束</li>
@@ -1126,7 +1128,7 @@
 <ul>
 <li>不相关进程可以交换数据</li>
 <li>是一种文件类型</li>
-<li>创建FIFO类似创建文件，FIFO路径存在文件系统中</li>
+<li>创建FIFO类似创建文件，FIFO路径存在文件系统中，但不存在磁盘快中，利用虚拟文件系统，在内核内存区域</li>
 <li>int mkfifo(const char *path, mode_t mode);类似于新建文件，创建后可以open(char *path,…)</li>
 <li>可用open(O_NONBLOCK) read write close操作</li>
 <li>可被原子写入的最大数据量为PIPE_BUF</li>
@@ -1141,7 +1143,7 @@
 
 <blockquote>
 <ul>
-<li>XSI IPC</li>
+<li>XSI IPC： 内核相关内存中</li>
 </ul>
 </blockquote>
 <blockquote>
@@ -1571,7 +1573,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1602,7 +1604,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1691,7 +1693,7 @@
     </div>
   
   <br>
-  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
     本站使用
@@ -1817,15 +1819,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "複製成功";
-  let COPY_FAILURE = "複製失敗";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
