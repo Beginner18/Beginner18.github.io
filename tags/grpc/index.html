@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Tag: grpc | Private Zone</title>
+  
+  <meta name="keywords" content="web">
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/css/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class="cover  half">
+      
+        
+  <h1 class="title">Private Zone</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder>
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class="menu navgation">
+  <ul class="h-list">
+    
+      
+        <li>
+          <a class="nav home" href="/" id="home">
+            <i class="fas fa-rss fa-fw"></i>&nbsp;博文
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/projects/" id="projects">
+            <i class="fas fa-code-branch fa-fw"></i>&nbsp;项目
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/friends/" rel="nofollow" id="friends">
+            <i class="fas fa-link fa-fw"></i>&nbsp;友链
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/" rel="nofollow" id="archives">
+            <i class="fas fa-archive fa-fw"></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/" rel="nofollow" id="about">
+            <i class="fas fa-info-circle fa-fw"></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          Private Zone
+        
+      </a>
+			<div class="menu navgation">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/" id="home">
+									<i class="fas fa-grin fa-fw"></i>&nbsp;示例
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/" rel="nofollow" id="categories">
+									<i class="fas fa-folder-open fa-fw"></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/" rel="nofollow" id="tags">
+									<i class="fas fa-hashtag fa-fw"></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/dev/cocoa/" id="categoriesdevcocoa">
+									<i class="fab fa-apple fa-fw"></i>&nbsp;Cocoa Dev
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/dev/" id="categoriesdev">
+									<i class="fas fa-laptop-code fa-fw"></i>&nbsp;Dev
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/life/" rel="nofollow" id="categorieslife">
+									<i class="fas fa-coffee fa-fw"></i>&nbsp;Life
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search">
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+        
+          <li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/friends/" rel="nofollow" id="friends">
+								<i class="fas fa-link fa-fw"></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="https://xaoxuu.com/wiki/material-x/" rel="nofollow" id="https:xaoxuu.comwikimaterial-x">
+								<i class="fas fa-book fa-fw"></i>&nbsp;主题文档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/" rel="nofollow" id="about">
+								<i class="fas fa-info-circle fa-fw"></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class="fas fa-clock fa-fw"></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/" rel="nofollow" id="archives">
+								<i class="fas fa-archive fa-fw"></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/projects/" id="projects">
+								<i class="fas fa-code-branch fa-fw"></i>&nbsp;开源项目
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/music/" rel="nofollow" id="music">
+								<i class="fas fa-compact-disc fa-fw"></i>&nbsp;歌单分享
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      
+<div class="l_main">
+  
+    
+      
+  <section class="post-list">
+    
+      
+        
+          
+        
+      
+    
+    
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/08/06/grpc/">
+      grpc
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    <a href="http://yoursite.com" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>YY</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-08-05</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h1 id="1-grpc"><a href="#1-grpc" class="headerlink" title="1 grpc"></a>1 grpc</h1><h2 id="特色"><a href="#特色" class="headerlink" title="特色:"></a><strong><em>特色</em></strong>:</h2><blockquote>
+<ul>
+<li>解决语言及环境通信的复杂性：protobuf</li>
+<li>跨语言、多语言：插件根据protobuf生成对应语言代码</li>
+<li>各种环境：云服务器/平板电脑</li>
+<li>高效的序列号：名称用序列代替</li>
+<li>简单的 IDL: interface defined language</li>
+<li>容易进行接口更新</li>
+<li>基于http/2</li>
+<li>自动根据proto文件生成对应语言的api，client&amp;server端</li>
+</ul>
+</blockquote>
+<h2 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a><strong><em>缺点</em></strong>：</h2><blockquote>
+<ol>
+<li>GRPC尚未提供连接池，需要自行实现 </li>
+<li>尚未提供“服务发现”、“负载均衡”机制 </li>
+<li>因为基于HTTP2，绝大部多数HTTP Server、Nginx都尚不支持，即Nginx不能将GRPC请求作为HTTP请求来负载均衡，而是作为普通的TCP请求。 （nginx1.9版本已支持） </li>
+<li>Protobuf二进制可读性差（貌似提供了Text_Fromat功能）<br>默认不具备动态特性（可以通过动态定义生成消息类型或者动态编译支持）</li>
+</ol>
+</blockquote>
+<h2 id="GRPC使用流程"><a href="#GRPC使用流程" class="headerlink" title="GRPC使用流程"></a><strong><em>GRPC使用流程</em></strong></h2><blockquote>
+<ol>
+<li>写.proto文件</li>
+<li>生成对应语言接口 pb.go; proto-gen-go插件中插件grpc</li>
+<li>实现客户端及服务端(可用不同语言)</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//////服务端  </span></span><br><span class="line">实现pb.<span class="keyword">go</span>中相关方法</span><br><span class="line">生成grpc服务端server grpc.NewServer()并开始监听lis, err := net.Listen(“tcp”, port)</span><br><span class="line">newServer建立server结构体，其中包含server的相关配置：最大读/写缓冲区大小，是否安全认证</span><br><span class="line">利用pb.<span class="keyword">go</span>中方法，注册grpc方法函数需要用到server及实现<span class="number">3.1</span><span class="number">.1</span>中方法的结构体&amp;<span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">packagePbGo.NewExportXXServer(server, &amp;<span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line">注册server：reflection.Register(server)</span><br><span class="line">server.Serve(lis)</span><br><span class="line"><span class="comment">///////客户端</span></span><br><span class="line"><span class="comment">// 基于http2服务，需要先建立连接，设置options, 客户端将req编码为对应的编码格式，然后通过连接发送至server端</span></span><br><span class="line">发起链接：conn := grpc.Dial(address, grpc.WithInSecure()) <span class="comment">//非https 无tls ttl</span></span><br><span class="line"><span class="keyword">defer</span> conn.Close</span><br><span class="line">建立客户端：c := packagePbGo.NewExportXXClient(conn)</span><br><span class="line">方法调用: &amp;res, err := c.MethodName(contex.Background(), &amp;req)</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">***GRPC 中间件***</span></span><br><span class="line"><span class="string">---</span></span><br><span class="line"><span class="string">&gt;- 创建cliConn或者server的时候通过options设置中间件</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>// 只能添加一个中间件;多个中间件通过grpc middlerware组合成一个中间件<br>// WithUnaryInterceptor returns a DialOption that specifies the interceptor for<br>// unary RPCs.<br>func WithUnaryInterceptor(f UnaryClientInterceptor) DialOption {<br>    return newFuncDialOption(func(o *dialOptions) {<br>        o.unaryInt = f<br>    })<br>}</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">- grpc-middlerWare将grpc中间件函数组合成chain，链式中间件</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
+
+<p>// ChainUnaryClient creates a single interceptor out of a chain of many interceptors.<br>//<br>// Execution is done in left-to-right order, including passing of context.<br>// For example ChainUnaryClient(one, two, three) will execute one before two before three.<br>func ChainUnaryClient(interceptors …grpc.UnaryClientInterceptor) grpc.UnaryClientInterceptor {<br>    switch len(interceptors) {<br>    case 0:<br>        // do not want to return nil interceptor since this function was never defined to do so/for backwards compatibility<br>        return func(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts …grpc.CallOption) error {<br>            return invoker(ctx, method, req, reply, cc, opts…)<br>        }<br>    case 1:<br>        return interceptors[0]<br>    default:<br>        return func(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts …grpc.CallOption) error {<br>            buildChain := func(current grpc.UnaryClientInterceptor, next grpc.UnaryInvoker) grpc.UnaryInvoker {<br>                return func(currentCtx context.Context, currentMethod string, currentReq, currentRepl interface{}, currentConn *grpc.ClientConn, currentOpts …grpc.CallOption) error {<br>                    return current(currentCtx, currentMethod, currentReq, currentRepl, currentConn, next, currentOpts…)<br>                }<br>            }<br>            chain := invoker<br>            for i := len(interceptors) - 1; i &gt;= 0; i– {<br>                chain = buildChain(interceptors[i], chain)<br>            }<br>            return chain(ctx, method, req, reply, cc, opts…)<br>        }<br>    }<br>}</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 语法糖</span></span><br></pre></td></tr></table></figure>
+
+<p>// Chain creates a single interceptor out of a chain of many interceptors.<br>//<br>// WithUnaryServerChain is a grpc.Server config option that accepts multiple unary interceptors.<br>// Basically syntactic sugar.<br>func WithUnaryServerChain(interceptors …grpc.UnaryServerInterceptor) grpc.ServerOption {<br>    return grpc.UnaryInterceptor(ChainUnaryServer(interceptors…))<br>}</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">grpc实用工具github</span>](<span class="link">https://github.com/grpc-ecosystem/awesome-grpc</span>)</span><br><span class="line">[<span class="string">go-grpc-metrics中间件</span>](<span class="link">https://github.com/grpc-ecosystem/go-grpc-prometheus</span>)</span><br><span class="line">[<span class="string">grpc中间件</span>](<span class="link">https://github.com/grpc-ecosystem/go-grpc-middleware</span>)</span><br><span class="line">1.1 grpc内部实现</span><br><span class="line">---</span><br><span class="line">server端：</span><br><span class="line">&gt;- grpc关键组件处理</span><br><span class="line">&gt;- 安全认证：TLS等</span><br><span class="line">&gt;- http/2</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<p>// Server is a gRPC server to serve RPC requests.<br>type Server struct {<br>    opts options<br>    mu     sync.Mutex // guards following<br>    lis    map[net.Listener]bool<br>    conns  map[io.Closer]bool<br>    serve  bool<br>    drain  bool<br>    cv     <em>sync.Cond          // signaled when connections close for GracefulStop<br>    m      map[string]</em>service // service name -&gt; service info,注册的service放置在该map中<br>    events trace.EventLog<br>    quit               chan struct{}<br>    done               chan struct{}<br>    quitOnce           sync.Once<br>    doneOnce           sync.Once<br>    channelzRemoveOnce sync.Once<br>    serveWG            sync.WaitGroup // counts active Serve goroutines for GracefulStop<br>    channelzID int64 // channelz unique identification number<br>    czData     <em>channelzData<br>}
+// RegisterService registers a service and its implementation to the gRPC<br>// server. It is called from the IDL generated code. This must be called before<br>// invoking Serve.<br>func (s *Server) RegisterService(sd *ServiceDesc, ss interface{}) {<br>    ht := reflect.TypeOf(sd.HandlerType).Elem()<br>    st := reflect.TypeOf(ss)<br>    if !st.Implements(ht) {<br>        grpclog.Fatalf(“grpc: Server.RegisterService found the handler of type %v that does not satisfy %v”, st, ht)<br>    }<br>    s.register(sd, ss)<br>}
+func (s *Server) register(sd *ServiceDesc, ss interface{}) {<br>    s.mu.Lock()<br>    defer s.mu.Unlock()<br>    s.printf(“RegisterService(%q)”, sd.ServiceName)<br>    if s.serve {<br>        grpclog.Fatalf(“grpc: Server.RegisterService after Server.Serve for %q”, sd.ServiceName)<br>    }<br>    if _, ok := s.m[sd.ServiceName]; ok {<br>        grpclog.Fatalf(“grpc: Server.RegisterService found duplicate service registration for %q”, sd.ServiceName)<br>    }<br>    srv := &amp;service{<br>        server: ss,<br>        md:     make(map[string]</em>MethodDesc),<br>        sd:     make(map[string]*StreamDesc),<br>        mdata:  sd.Metadata,<br>    }<br>    for i := range sd.Methods {<br>        d := &amp;sd.Methods[i]<br>        srv.md[d.MethodName] = d<br>    }<br>    for i := range sd.Streams {<br>        d := &amp;sd.Streams[i]<br>        srv.sd[d.StreamName] = d<br>    }<br>    s.m[sd.ServiceName] = srv<br>}</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2 grpc-gateway： </span><br><span class="line">===</span><br><span class="line">It reads protobuf<span class="built_in"> service </span>definitions <span class="keyword">and</span> generates a reverse-proxy<span class="built_in"> server </span>which translates a RESTful HTTP API into gRPC. </span><br><span class="line">&gt;- 实现server端http请求</span><br><span class="line">&gt;- .proto文件中options中给出method, path等</span><br><span class="line">&gt;- 实现方式：建立与grpc conn的连接，gateway server建立自己的restful server,存在自己的路由函数，根据cli请求，找到对应路由函数，进而通过与grpc conn的连接调用grpc server对应的方法，实现http请求</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<p>定义grpc server proto文件<br>your_service.proto:<br>syntax = “proto3”;<br>package example;<br>message StringMessage {<br>  string value = 1;<br>}
+service YourService {<br>  rpc Echo(StringMessage) returns (StringMessage) {}<br>}
+添加google.api.http 注解到 .proto file<br>your_service.proto:<br> syntax = “proto3”;<br> package example;<br>+
++import “google/api/annotations.proto”;<br>+
+ message StringMessage {<br>   string value = 1;<br> }<br> service YourService {</p>
+<ul>
+<li>rpc Echo(StringMessage) returns (StringMessage) {}</li>
+</ul>
+<ul>
+<li>rpc Echo(StringMessage) returns (StringMessage) {</li>
+<li>option (google.api.http) = {</li>
+<li>post: “/v1/example/echo” // method path</li>
+<li>body: “*”</li>
+<li>};</li>
+<li>}
+}<br>```
+<a href="https://github.com/grpc-ecosystem/grpc-gateway" target="_blank" rel="noopener">参考github</a></li>
+</ul>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/grpc/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>grpc</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+    
+  </section>
+  
+    
+    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+    
+    
+
+  
+
+
+    
+  
+</div>
+<aside class="l_side">
+  
+    
+    
+      
+        
+          
+          
+            <section class="widget author">
+  <div class="content pure">
+    
+      <div class="avatar">
+        <img class="avatar" src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/avatar/avatar.png">
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:1204321942@qq.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/Beginner18" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=63035382" class="social fas fa-headphones-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+
+          
+        
+      
+        
+          
+          
+            <section class="widget grid">
+  
+<header class="pure">
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class="content pure">
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/" id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/" rel="nofollow" id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/projects/" href="/projects/" id="projects">
+          
+            <i class="fas fa-code-branch fa-fw" aria-hidden="true"></i>
+          
+          开源项目
+        </a></li>
+      
+        <li><a class="flat-box" title="/friends/" href="/friends/" rel="nofollow" id="friends">
+          
+            <i class="fas fa-link fa-fw" aria-hidden="true"></i>
+          
+          我的友链
+        </a></li>
+      
+        <li><a class="flat-box" title="/" href="/" rel="nofollow" id="home">
+          
+            <i class="fas fa-book fa-fw" aria-hidden="true"></i>
+          
+          主题文档
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/" rel="nofollow" id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于小站
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget category">
+    
+<header class="pure">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/java/" href="/categories/java/"><div class="name">java</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/网络/" href="/categories/网络/"><div class="name">网络</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/网络框架/" href="/categories/网络框架/"><div class="name">网络框架</div><div class="badge">(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class="widget tagcloud">
+    
+<header class="pure">
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/go/" style="font-size: 24px; color: #555">go</a> <a href="/tags/go-内存/" style="font-size: 14px; color: #999">go,内存</a> <a href="/tags/grpc/" style="font-size: 14px; color: #999">grpc</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/http1-0-2/" style="font-size: 14px; color: #999">http1.0-2</a> <a href="/tags/java/" style="font-size: 14px; color: #999">java</a> <a href="/tags/java-spring-boot/" style="font-size: 14px; color: #999">java, spring boot</a> <a href="/tags/java-异常/" style="font-size: 14px; color: #999">java, 异常</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/unix/" style="font-size: 14px; color: #999">unix</a> <a href="/tags/webSocket/" style="font-size: 14px; color: #999">webSocket</a> <a href="/tags/依赖管理/" style="font-size: 14px; color: #999">依赖管理</a> <a href="/tags/操作系统/" style="font-size: 14px; color: #999">操作系统</a> <a href="/tags/服务发现/" style="font-size: 14px; color: #999">服务发现</a> <a href="/tags/服务注册/" style="font-size: 14px; color: #999">服务注册</a> <a href="/tags/自动代理/" style="font-size: 14px; color: #999">自动代理</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+
+          
+        
+      
+        
+          
+          
+            
+
+
+  <section class="widget music">
+    
+<header class="pure">
+  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
+  
+    <a class="rightBtn" rel="external nofollow noopener noreferrer" target="_blank" href="https://music.163.com/#/user/home?id=63035382" title="https://music.163.com/#/user/home?id=63035382">
+    <i class="far fa-heart fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer" data-theme="#1BCDFC" data-mode="circulation" data-server="netease" data-type="playlist" data-id="2615636388" data-volume="0.7">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="mailto:1204321942@qq.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/Beginner18" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://music.163.com/#/user/home?id=63035382" class="social fas fa-headphones-alt flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+  <div>
+    Use
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
+    as theme
+    
+      , 
+      total visits
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      times
+    
+    . 
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
