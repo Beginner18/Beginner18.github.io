@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search">
+						<input type="text" class="input u-search-input" placeholder="搜索">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -393,7 +393,8 @@
 <p>广播：不能跨路由器，所有机器都接收解析到ip+port层；不感兴趣的主机也必须接受<br>组播：感兴趣的主机订阅组播IP（可以限制源ip即发送组播消息的ip地址范围），路由器支持，组播消息只发送给感兴趣的主机；</p>
 <h2 id="2-7-其他"><a href="#2-7-其他" class="headerlink" title="2.7 其他"></a>2.7 其他</h2><p>DHCP自动配置：以广播的形式请求ip地址discovery，获得路由器应答offer，绑定ip地址获取应答request获取ack；<br>NAT地址转换：内网ip+port转换为公网ip+new port（一般一个公网ip可以利用NAT连接很多内网机器，ip跟端口组成映射，跨多层传输协议）<br>DNS：域名解析</p>
 <p><a href="https://juejin.im/post/5a069b6d51882509e5432656" target="_blank" rel="noopener">tcp/ip协议详解</a><br><a href="https://juejin.im/post/5a069b6d51882509e5432656" target="_blank" rel="noopener">一篇文章带你熟悉 TCP/IP 协议</a><br><a href="https://www.jianshu.com/p/6e9e4156ece3" target="_blank" rel="noopener">一篇文章带你熟悉http协议</a><br><a href="https://blog.csdn.net/wsclinux/article/details/55049708" target="_blank" rel="noopener">网络接口</a><br><a href="https://blog.csdn.net/sinat_36629696/article/details/80740678" target="_blank" rel="noopener">tcp协议详解</a><br><a href="https://blog.csdn.net/itermeng/article/details/77973279" target="_blank" rel="noopener">深入浅出tcp</a><br><a href="https://blog.csdn.net/min996358312/article/details/68969519" target="_blank" rel="noopener">tcp http与socket连接的区别</a><br><a href="https://blog.csdn.net/rosetta/article/details/7712606" target="_blank" rel="noopener">数字签名与验签</a><br><a href="https://www.cnblogs.com/fuqiang88/p/5956363.html" target="_blank" rel="noopener">websocket</a></p>
-<h2 id="3-udp"><a href="#3-udp" class="headerlink" title="3 udp"></a>3 udp</h2><h2 id="4-http协议-http1-0-http1-1-http2-0"><a href="#4-http协议-http1-0-http1-1-http2-0" class="headerlink" title="4 http协议 http1.0 http1.1 http2.0"></a>4 http协议 http1.0 http1.1 http2.0</h2><blockquote>
+<h2 id="3-udp"><a href="#3-udp" class="headerlink" title="3 udp"></a>3 udp</h2><h2 id="4-http协议-http1-0-http1-1-http2-0"><a href="#4-http协议-http1-0-http1-1-http2-0" class="headerlink" title="4 http协议 http1.0 http1.1 http2.0"></a>4 http协议 http1.0 http1.1 http2.0</h2><p><a href="https://blog.csdn.net/qq_21993785/article/details/81188253" target="_blank" rel="noopener">浏览器输入地址到获取资源</a><br><a href="https://blog.csdn.net/guizaijianchic/article/details/78024982" target="_blank" rel="noopener">从浏览器输入地址到收到资源展示全流程</a></p>
+<blockquote>
 <ul>
 <li>http1 建立连接 客户端请求  服务端发送响应并关闭连接 获取响应</li>
 <li>http1.1 复用连接,建立连接: 请求1-&gt;响应1, 请求2-&gt;响应2, 其他顺序请求获取响应后才可再次发送请求； 由于复用连接，客户端需要区分每个响应：context-length或者分块传输(Chunked)<br>服务端需提供context-length标明响应body的长度，客户端做区分(服务端必须处理完所有数据才可以发送响应)；<br>http1.1 规定可以不使用Content-Length字段，而使用”分块传输编码”（Chunked Transfer Encoding）。只要请求或响应的头信息有Transfer-Encoding: chunked字段，就表明body将可能由数量未定的多个数据块组成。每个数据块之前会有一行包含一个16进制数值，表示这个块的长度；最后一个大小为0的块，就表示本次响应的数据发送完了。</li>
@@ -879,7 +880,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -910,7 +911,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -999,19 +1000,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -1117,15 +1118,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

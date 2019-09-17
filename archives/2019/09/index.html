@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search">
+						<input type="text" class="input u-search-input" placeholder="搜索">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -259,8 +259,6 @@
         
           
         
-          
-        
       
     
     
@@ -338,7 +336,8 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      
+      <h2 id="1-docker原理篇"><a href="#1-docker原理篇" class="headerlink" title="1 docker原理篇"></a>1 docker原理篇</h2><p><a href="https://www.jianshu.com/p/7a58ad7fade4" target="_blank" rel="noopener">docker原理简书</a><br><a href="http://dockone.io/article/783" target="_blank" rel="noopener">docker命令图解</a></p>
+
       
     </div>
     
@@ -455,132 +454,6 @@
 </blockquote>
 </blockquote>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">net/trace包：</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="comment">// 注册default serverMux：handler已经存在重复注册panic</span></span><br><span class="line">	http.HandleFunc(<span class="string">"/debug/requests"</span>, <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, req *http.Request)</span></span> &#123;</span><br><span class="line">		any, sensitive := AuthRequest(req)</span><br><span class="line">		<span class="keyword">if</span> !any &#123;</span><br><span class="line">			http.Error(w, <span class="string">"not allowed"</span>, http.StatusUnauthorized)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"text/html; charset=utf-8"</span>)</span><br><span class="line">		Render(w, req, sensitive)</span><br><span class="line">	&#125;)</span><br><span class="line">	http.HandleFunc(<span class="string">"/debug/events"</span>, <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, req *http.Request)</span></span> &#123;</span><br><span class="line">		any, sensitive := AuthRequest(req)</span><br><span class="line">		<span class="keyword">if</span> !any &#123;</span><br><span class="line">			http.Error(w, <span class="string">"not allowed"</span>, http.StatusUnauthorized)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"text/html; charset=utf-8"</span>)</span><br><span class="line">		RenderEvents(w, req, sensitive)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/09/06/mysql-eg/">
-      mysql_eg
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YY</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-05</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <ol>
-<li>常用命令</li>
-</ol>
-<hr>
-<p>show create table 表名：显示创建表命令<br>show index from 表名： 显示索引<br>explain sql语句：解析sql执行过程（随表统计信息改变）</p>
-<ol start="2">
-<li>三表连查inner join</li>
-</ol>
-<hr>
-<p>join语句需要有驱动表即第一个表，若该表用上索引则用索引（区分度高），否则全表扫描</p>
-<p>im_customer表信息：总表大小约317W<br><img src="../pic/mysql/im_customer.png" alt="im_customer索引信息"><br>customer表信息：总表大小约317W<br><img src="../pic/mysql/customer.png" alt="customer索引信息"><br>conversation表信息：总表大小约463W<br><img src="../pic/mysql/conversation.png" alt="conversation索引信息"></p>
-<p><strong><em>关联语句1</em></strong>：全部用到索引，执行一个月查询需要2.921s左右</p>
-<blockquote>
-<ul>
-<li>customer&amp;conversation为驱动表</li>
-</ul>
-</blockquote>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">explain</span><br><span class="line">select im<span class="selector-class">.uid</span>, im<span class="selector-class">.business_line</span>, customer<span class="selector-class">.nickname</span>, customer<span class="selector-class">.customer_name</span>, </span><br><span class="line">customer<span class="selector-class">.phone_encrypt</span>, customer<span class="selector-class">.city_id</span>, customer<span class="selector-class">.created_at</span>, customer<span class="selector-class">.updated_at</span> from</span><br><span class="line">`guazi_call`.`im_customer` as im</span><br><span class="line">inner join `guazi_call`.`customer` as customer</span><br><span class="line">on customer<span class="selector-class">.uid</span> = im.uid</span><br><span class="line">inner join `guazi_call`.`im_conversation`  as conversation </span><br><span class="line">on conversation<span class="selector-class">.uid</span> = customer.uid</span><br><span class="line">where im<span class="selector-class">.app_type</span> = <span class="number">0</span></span><br><span class="line">and customer<span class="selector-class">.created_at</span> between <span class="string">'2019-08-02 00:00'</span> and <span class="string">'2019-09-02 00:00'</span> and customer<span class="selector-class">.city_id</span> = <span class="number">192</span></span><br><span class="line">and conversation<span class="selector-class">.agent_id</span> = <span class="number">380522</span> and conversation<span class="selector-class">.created_at</span> between <span class="string">'2019-08-02 00:00'</span> and <span class="string">'2019-09-02 00:00'</span></span><br><span class="line">ORDER BY customer<span class="selector-class">.id</span> DESC</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<blockquote>
-<ul>
-<li>变更：若去掉where cityID则im表为customer表驱动但没有相关索引customer全表扫描；<br>分析结果：<br><img src="../pic/mysql/%E6%9F%A5%E8%AF%A2%E5%88%86%E6%9E%901.png" alt="conversation索引信息"></li>
-</ul>
-</blockquote>
-</blockquote>
-<p><strong><em>关联语句2</em></strong>: im未用到索引执行嵌套循环，执行时间136.369</p>
-<blockquote>
-</blockquote>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">explain</span><br><span class="line">select im<span class="selector-class">.uid</span>, im<span class="selector-class">.business_line</span>, customer<span class="selector-class">.nickname</span>, customer<span class="selector-class">.customer_name</span>, </span><br><span class="line">customer<span class="selector-class">.phone_encrypt</span>, customer<span class="selector-class">.city_id</span>, customer<span class="selector-class">.created_at</span>, customer<span class="selector-class">.updated_at</span> from</span><br><span class="line">`guazi_call`.`im_conversation`  as conversation </span><br><span class="line">inner join `guazi_call`.`im_customer` as im</span><br><span class="line">on im<span class="selector-class">.uid</span> = conversation.uid</span><br><span class="line">inner join `guazi_call`.`customer` as customer</span><br><span class="line">on customer<span class="selector-class">.uid</span> = conversation.uid</span><br><span class="line">where im<span class="selector-class">.app_type</span> = <span class="number">0</span></span><br><span class="line">and customer<span class="selector-class">.created_at</span> between <span class="string">'2019-08-02 00:00'</span> and <span class="string">'2019-09-02 00:00'</span> and customer<span class="selector-class">.city_id</span> = <span class="number">192</span></span><br><span class="line">and conversation<span class="selector-class">.agent_id</span> = <span class="number">342580</span> and conversation<span class="selector-class">.created_at</span> between <span class="string">'2019-08-02 00:00'</span> and <span class="string">'2019-09-02 00:00'</span></span><br><span class="line">ORDER BY customer<span class="selector-class">.id</span> DESC</span><br></pre></td></tr></table></figure>
-
-<p>分析结果：将第二个join中的customer.uid=conversation.uid改为customer.uid=im.uid可以用到索引查询<br><img src="../pic/mysql/%E6%9F%A5%E8%AF%A2%E5%88%86%E6%9E%902.png" alt="conversation索引信息"></p>
-<p><strong><em>变更</em></strong>: im表增加appType&amp;created_at联合索引，若联合索引区分度高则用索引（全表只保留最近一个月数据，时间区间小于一个月可以用上索引），否则全表扫描：</p>
-<blockquote>
-</blockquote>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">全表扫描：</span><br><span class="line">explain</span><br><span class="line">select im<span class="selector-class">.uid</span>, im<span class="selector-class">.business_line</span>, customer<span class="selector-class">.nickname</span>, customer<span class="selector-class">.customer_name</span>, </span><br><span class="line">customer<span class="selector-class">.phone_encrypt</span>, customer<span class="selector-class">.city_id</span>, customer<span class="selector-class">.created_at</span>, customer<span class="selector-class">.updated_at</span> from</span><br><span class="line">`guazi_call`.`customer` as customer </span><br><span class="line">inner join `guazi_call`.`im_customer` as im</span><br><span class="line">on customer<span class="selector-class">.uid</span> =im<span class="selector-class">.uid</span> </span><br><span class="line">inner join `guazi_call`.`im_conversation`  as conversation </span><br><span class="line">on im.uid=conversation<span class="selector-class">.uid</span> </span><br><span class="line">where im<span class="selector-class">.app_type</span> = <span class="number">0</span></span><br><span class="line">and im<span class="selector-class">.created_at</span> between <span class="string">'2019-08-05 00:00'</span> and <span class="string">'2019-09-02 00:00'</span></span><br><span class="line">and customer<span class="selector-class">.created_at</span> between <span class="string">'2019-09-01 00:00'</span> and <span class="string">'2019-09-02 00:00'</span></span><br><span class="line">and conversation<span class="selector-class">.agent_id</span> = <span class="number">380522</span> and conversation<span class="selector-class">.created_at</span> between <span class="string">'2019-09-01 00:00'</span> and <span class="string">'2019-09-02 00:00'</span></span><br><span class="line">ORDER BY customer<span class="selector-class">.id</span> DESC</span><br></pre></td></tr></table></figure>
-
-<fancybox>
-![三表join增加索引解决全表扫](../pic/mysql/三表join复合索引.jpg)
-</fancybox>
-
-<p>参考链接：<br><a href="https://blog.csdn.net/UFO___/article/details/81279227" target="_blank" rel="noopener">join的表驱动</a><br><a href="https://blog.csdn.net/q3838418/article/details/78877678" target="_blank" rel="noopener">多表join</a><br><a href="http://blog.itpub.net/22664653/viewspace-1692317/" target="_blank" rel="noopener">mysql join优化</a></p>
-<p><strong><em>注意join的表选择，驱动表选择，选择小表驱动</em></strong></p>
-
       
     </div>
     
@@ -727,7 +600,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -758,7 +631,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -847,19 +720,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -973,15 +846,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

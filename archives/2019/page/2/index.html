@@ -164,7 +164,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search">
+						<input type="text" class="input u-search-input" placeholder="搜索">
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -254,483 +254,6 @@
   <section class="post-list">
     
     
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/06/29/tcp-ip-http/">
-      tcp-ip-http
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    <a href="http://yoursite.com" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>YY</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-06-28</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/网络/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>网络</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h2 id="1-socket"><a href="#1-socket" class="headerlink" title="1 socket"></a>1 socket</h2><h2 id="2-tcp-ip"><a href="#2-tcp-ip" class="headerlink" title="2 tcp/ip "></a>2 tcp/ip </h2><p>数据链路层是解决同一网络内节点之间的通信，而网络层主要解决不同子网间的通信。例如在广域网之间通信时，必然会遇到路由（即两节点间可能有多条路径）选择问题<br>一般五层模型</p>
-<blockquote>
-</blockquote>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">OSI</span>只是一个理论上的参考模型，也就是说实际应用中作为参考的。现行的tcp/<span class="built_in">ip</span>协议族选用了<span class="number">5</span>层架构，把 </span><br><span class="line">会话层和表示层的功能整合在了应用层，这样有助于给开发者更多的选择。层次太多增加协议的复杂性也造成</span><br><span class="line">效率的折损。在osi参考模型中，会话层的功能是会话控制和同步，表示层是解决两个系统间交换信息的语法</span><br><span class="line">与语义问题，还有数据表示转化(转为主机无关编码)，加解密和压缩与解压缩功能。很明显这两层在实际应用</span><br><span class="line">中很难保持统一性，应用通常会选择不同的加解密方式，不同的语义和时序，谈不上复用的东西作为协议的一</span><br><span class="line">部分自然是没有意义的，所以这两层的功能交给应用开发者作为应用层的一部分功能开发是比较合适的。</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://blog.csdn.net/Kaiwii/article/details/8224261" target="_blank" rel="noopener">OSI上三层模型</a><br><a href="https://blog.csdn.net/yaopeng_2005/article/details/7064869" target="_blank" rel="noopener">OSI七层模型</a><br><a href="https://www.jianshu.com/p/801e650850b7" target="_blank" rel="noopener">会话层表示层应用层</a></p>
-<h2 id="2-1-链路层"><a href="#2-1-链路层" class="headerlink" title="2.1 链路层"></a>2.1 链路层</h2><p>DST:目的地mac地址<br>SRC:发送方mac地址<br>标示上层协议<br>校验合</p>
-<p><img src="../pic/tcp-ip/IEEE%E5%88%86%E7%BB%84%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%B8%A7.jpeg" alt="以太网帧"><br><a href="https://www.cnblogs.com/fadewalk/p/10539628.html" target="_blank" rel="noopener">以太网帧，链路层</a></p>
-<h2 id="2-2-IP协议"><a href="#2-2-IP协议" class="headerlink" title="2.2 IP协议"></a>2.2 IP协议</h2><p><img src="../pic/tcp-ip/IPv4%E5%8D%8F%E8%AE%AE.jpeg" alt="IPv4协议"><br>version: ip协议版本<br>header lenght:ipv4头部中32位字的数量<br>type of service:8bit, 前三位为优先级，D T R位+两位保留位；D T R全部置位1表示低延迟 高吞吐 高可靠性；eg: 111 0 1 1 00；最高优先级，高吞吐 高可靠；保留位可用于拥塞标志，路由器转发分组时有能力可以设置，有些协议发现拥塞标志会通知发送方；发送方降低发送速率缓解拥塞；<br>identification:分片标识，每发送一个ip数据片计数+1<br>flag: 标识是否为原始数据报的最后一个分组<br>fragment Offset: 分片的起始字节在原始数据报中的偏移值/位置<br>TTL：经过的路由器上线<br>protocol：上层协议<br>header checksum:首部校验和(ipv6无)<br><img src="../pic/tcp-ip/IP%E8%BD%AC%E5%8F%91.jpg" alt="IP转发"><br>路由选择（ip转发）：从路由表中选择与目的地ip最匹配的下一跳ip，获取到mac地址，更改dst的mac地址，实现路由选择；ip地址的DST SRC均不变； P145页</p>
-<blockquote>
-</blockquote>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">源和目的<span class="keyword">mac</span>地址产生变化</span><br><span class="line">源和目的ip地址不变</span><br><span class="line">转发的过程：</span><br><span class="line">1、主机A查看查看自己的ARP表。如果主机A第一次给主机B发送数据包，那将无法从ARP映射表中找到对应的<span class="keyword">mac</span>地址。</span><br><span class="line">所以主机A将以FF:FF:FF:FF:FF:FF为目的<span class="keyword">mac</span>地址，发送一个广播包。</span><br><span class="line">2、这个时候，如果主机B在本网段内。则主机B会向主机A发送一个应答包。让主机A得到主机B的<span class="keyword">mac</span>地址。这样主机A</span><br><span class="line">将分别以自己和主机B的<span class="keyword">mac</span>地址作为源和目的地址，以自己和主机B的ip地址作为源和目的地址发送数据包。交换机将通</span><br><span class="line">过自身的<span class="keyword">mac</span>地址表找到主机B对应的端口，并发送给主机B。</span><br><span class="line">3、但是一般情况并非是这样，如果主机B不在本网段内。路由器的端口将通过把自己的<span class="keyword">mac</span>地址发送给主机A，这个时候</span><br><span class="line">主机A的操作和2基本相同。将目的<span class="keyword">mac</span>地址替换为路由器端口的<span class="keyword">mac</span>地址。并且发送出去，并且通过同样的道理发送到路</span><br><span class="line">由器的端口。（注：如果是直连，则不需经过交换机直接发送）</span><br><span class="line">4、路由器从端口中接收数据包之后，进行数据链路层帧头的拆包。并从网络层的ip数据报头中获取目的ip地址，根据路由</span><br><span class="line">表进行转发。获得下一跳的ip地址后，如果路由器中没有下一跳的<span class="keyword">mac</span>地址，则进行<span class="keyword">mac</span>广播这里跟1中是相同的。但是区</span><br><span class="line">别在于，这里就算知道了下一跳的ip地址，但是保留原ip报文中的ip信息。不进行替换。</span><br><span class="line">5、路由器将源<span class="keyword">mac</span>地址替换为转发出的端口<span class="keyword">mac</span>地址，目的<span class="keyword">mac</span>地址转换为下一跳<span class="keyword">mac</span>地址。进行转发。</span><br><span class="line">6、当下一跳收到数据包后，重复3、4、5的步骤。直到主机B收到对应的数据包</span><br></pre></td></tr></table></figure>
-
-<p><img src="../pic/tcp-ip/IPv6%E5%8D%8F%E8%AE%AE.gif" alt="IPv6协议"></p>
-<h1 id="flow-label-ipv6流标识-作用是啥？"><a href="#flow-label-ipv6流标识-作用是啥？" class="headerlink" title="flow label: ipv6流标识???作用是啥？"></a><strong><em>flow label</em></strong>: ipv6流标识???作用是啥？</h1><p>下一头部：标识下一头部的协议，扩展类型，下一头部可以为ip分片 tcp。。。<br><img src="../pic/tcp-ip/ipv6%E5%88%86%E7%89%87.jpg" alt="IPV6分片"><br>ipv6分片头部包括：下一个头部、保留位、分片偏移、M 1为包含更多分片 0表示为原始分片的最后一个分片、标识符</p>
-<h2 id="2-3-ARP协议地址解析协议"><a href="#2-3-ARP协议地址解析协议" class="headerlink" title="2.3 ARP协议地址解析协议"></a>2.3 ARP协议地址解析协议</h2><p>IP地址获取硬件地址：确定帧目的地接口<br>网络硬件：主地址由设备制造商定义，并储存在设备的永久性内存中<br>网络层地址到硬件层地址的动态映射<br>arp消息中的目的地以太网地址可不填写<br>广播的形式发送：DST为ff:ff:ff:ff广播地址；<br>基于链路层<br>OP： 1为arp请求、2为arp应答、3为RARP请求、4为RARP应答<br><img src="../pic/tcp-ip/arp%E5%B8%A7%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F.jpeg" alt="ARP协议"></p>
-<h2 id="2-4-ICMP协议（IP层一部分）"><a href="#2-4-ICMP协议（IP层一部分）" class="headerlink" title="2.4 ICMP协议（IP层一部分）"></a>2.4 ICMP协议（IP层一部分）</h2><p>负责传递需要注意的差错报文和控制报文<br>通常由IP层本身、上层的传输协议甚至某种情况下用户触发执行<br>不为IP网络提供可靠性<br>标明故障和配置信息<br>丢包（路由器缓冲区溢出）不会触发ICMP消息<br>可用于邻居发现、配置主机管理组播地址<br>ICMP报文在IP数据报内被封装传输<br>信息类请求操作系统自动处理</p>
-<blockquote>
-<ul>
-<li>请求/回显 ping</li>
-<li>路由发现</li>
-<li>邻居发现</li>
-<li>组播侦听</li>
-<li>。。。<br>差错报文传递给用户进程或者传输层协议：差错报文包括违规数据报</li>
-<li>重定向</li>
-<li>目的不可达</li>
-<li>端口不可达</li>
-</ul>
-</blockquote>
-<p><img src="../pic/tcp-ip/ICMP%E5%8D%8F%E8%AE%AE.jpg" alt="ICMP协议"></p>
-<h2 id="2-5-TCP协议"><a href="#2-5-TCP协议" class="headerlink" title="2.5 TCP协议"></a>2.5 TCP协议</h2><p><img src="../pic/tcp-ip/tcp%E5%8D%8F%E8%AE%AE.jpeg" alt="TCP协议"><br>四元标识：两方IP+端口<br>三次握手<br><img src="../pic/tcp-ip/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.jpeg" alt="三次握手"></p>
-<blockquote>
-<ul>
-<li>交换数据：窗口大小 seq等</li>
-<li>ack确认<br>四次挥手<br><img src="../pic/tcp-ip/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.jpeg" alt="四次挥手"></li>
-<li>timeWait:最后一个ack确保收到，未收到会重发；2个ttl老数据消散</li>
-<li>一方关闭，另一方先确认ack，仍可继续发送数据，待发送完数据再发送fin<br>窗口大小：两方交换窗口大小<br>seq：双方交换初始化的seq值<br>滑动窗口：</li>
-<li>发送方收到ack后将窗口值滑动至ack序列号位置；</li>
-<li>接收方根据应用程序处理接收数据速度+缓存大小更新窗口</li>
-<li>发送方收到窗口更新大小变成窗口大小<br>慢启动<br>拥塞控制：拥塞窗口减半，接收2个ack可发送一个数据包，降低发送速率<br>拥塞避免：以较小增量发送数据<br>快速重传：多次收到重复ack则重新发送数据<br>超时重传：超过ttl仍未收到ack重传<br>延时确认：返回ack时，等一定时间有数据或者多个ack时只发送一个最新ack<br>Nagle算法：小数据包时，收到ack确认才可发送下一个小数据包；可以禁用<br>Nagle+延时确认会造成短时死锁<br>SACK: 接受到的多个ack范围区间，发送方接到sack可以判定丢包或者乱序数据，重发<br>保活机制：不影响数据流的情况下探测对方；非正常关机：直接断网</li>
-<li>一定时间内无数据传输，则可发起保活探测；保活时间</li>
-<li>没有收到ack，间隔一定时间持续发送；保活时间间隔</li>
-<li>若干次没有收到，认为主机不可达，中断连接；保活探测数</li>
-</ul>
-</blockquote>
-<h2 id="2-6-UDP协议"><a href="#2-6-UDP协议" class="headerlink" title="2.6 UDP协议"></a>2.6 UDP协议</h2><p><img src="../pic/tcp-ip/UPD%E5%8D%8F%E8%AE%AE.jpeg" alt="UDP协议"></p>
-<p>广播：不能跨路由器，所有机器都接收解析到ip+port层；不感兴趣的主机也必须接受<br>组播：感兴趣的主机订阅组播IP（可以限制源ip即发送组播消息的ip地址范围），路由器支持，组播消息只发送给感兴趣的主机；</p>
-<h2 id="2-7-其他"><a href="#2-7-其他" class="headerlink" title="2.7 其他"></a>2.7 其他</h2><p>DHCP自动配置：以广播的形式请求ip地址discovery，获得路由器应答offer，绑定ip地址获取应答request获取ack；<br>NAT地址转换：内网ip+port转换为公网ip+new port（一般一个公网ip可以利用NAT连接很多内网机器，ip跟端口组成映射，跨多层传输协议）<br>DNS：域名解析</p>
-<p><a href="https://juejin.im/post/5a069b6d51882509e5432656" target="_blank" rel="noopener">tcp/ip协议详解</a><br><a href="https://juejin.im/post/5a069b6d51882509e5432656" target="_blank" rel="noopener">一篇文章带你熟悉 TCP/IP 协议</a><br><a href="https://www.jianshu.com/p/6e9e4156ece3" target="_blank" rel="noopener">一篇文章带你熟悉http协议</a><br><a href="https://blog.csdn.net/wsclinux/article/details/55049708" target="_blank" rel="noopener">网络接口</a><br><a href="https://blog.csdn.net/sinat_36629696/article/details/80740678" target="_blank" rel="noopener">tcp协议详解</a><br><a href="https://blog.csdn.net/itermeng/article/details/77973279" target="_blank" rel="noopener">深入浅出tcp</a><br><a href="https://blog.csdn.net/min996358312/article/details/68969519" target="_blank" rel="noopener">tcp http与socket连接的区别</a><br><a href="https://blog.csdn.net/rosetta/article/details/7712606" target="_blank" rel="noopener">数字签名与验签</a><br><a href="https://www.cnblogs.com/fuqiang88/p/5956363.html" target="_blank" rel="noopener">websocket</a></p>
-<h2 id="3-udp"><a href="#3-udp" class="headerlink" title="3 udp"></a>3 udp</h2><h2 id="4-http协议-http1-0-http1-1-http2-0"><a href="#4-http协议-http1-0-http1-1-http2-0" class="headerlink" title="4 http协议 http1.0 http1.1 http2.0"></a>4 http协议 http1.0 http1.1 http2.0</h2><blockquote>
-<ul>
-<li>http1 建立连接 客户端请求  服务端发送响应并关闭连接 获取响应</li>
-<li>http1.1 复用连接,建立连接: 请求1-&gt;响应1, 请求2-&gt;响应2, 其他顺序请求获取响应后才可再次发送请求； 由于复用连接，客户端需要区分每个响应：context-length或者分块传输(Chunked)<br>服务端需提供context-length标明响应body的长度，客户端做区分(服务端必须处理完所有数据才可以发送响应)；<br>http1.1 规定可以不使用Content-Length字段，而使用”分块传输编码”（Chunked Transfer Encoding）。只要请求或响应的头信息有Transfer-Encoding: chunked字段，就表明body将可能由数量未定的多个数据块组成。每个数据块之前会有一行包含一个16进制数值，表示这个块的长度；最后一个大小为0的块，就表示本次响应的数据发送完了。</li>
-<li>http2 数据压缩 头跟数据分成不同帧 建立连接 发送请求1 2 3 4 获取请求2 3 1 4 请求返回可以无序</li>
-<li>http头堵塞问题：服务端顺序处理请求，若某一请求处理时间较久，其后所有请求排队堵塞</li>
-<li>http基于tcp传输层协议，存在tcp头堵塞问题，Tcp全双工 发送不堵塞接收 </li>
-<li>http2.0采用二进制数据分帧更好的利用底层tcp，解决1.1的队首问题；</li>
-<li>http2.0利用分帧机制，不再依赖多个TCP连接去实现多流并行了</li>
-<li>http2.0客户端发起的流标识为奇数，服务端发起的流标识为偶数</li>
-<li>http2.0可以支持优先级，首部压缩减少传输数量量，客户端服务端均可以乱序发送数据，之后通过流标识及帧进行数据重组；http2.0服务端支持数据推送</li>
-</ul>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>http2多路复用<br>Tcp全双工：<br>发送数据流头堵塞 按序到达<br>发送堵塞不影响接收<br>http:<br>请求<br>1 请求以数据帧形式发送<br>2 并发发送<br>3 若发送的数据帧出现tcp头堵塞则堵塞<br>返回<br>无需按接收到的请求顺序返回结果<br>完成的结果，按tcp协议写入到socket<br>发送头堵塞不影响接收端接收数据<br>server端处理请求方式：<br>单进程单线程 排队 对头堵塞<br>单进程多线程<br>多进程单线程<br>多进程多线程</p>
-</blockquote>
-</blockquote>
-<p>消息：</p>
-<ul>
-<li>流：流是连接中的一个虚拟信道，可以承载双向的消息；每个流都有一个唯一的整数标识符（1、2…N）；</li>
-<li>消息：是指逻辑上的 HTTP 消息，比如请求、响应等，由一或多个帧组成。</li>
-<li>帧：HTTP 2.0 通信的最小单位，每个帧包含帧首部，至少也会标识出当前帧所属的流，承载着特定类型的数据，如 HTTP 首部、负荷，等等<br>每帧由消息流号标识</li>
-</ul>
-<blockquote>
-<ul>
-<li><strong><em>http响应四种模型:</em></strong></li>
-</ul>
-</blockquote>
-<blockquote>
-<blockquote>
-<ul>
-<li>单进程I/O模型:<br>服务端开启一个进程，一个进程仅能处理一个请求，并且对请求顺序处理；</li>
-<li>多进程I/O模型: 服务端并行开启多个进程，同样的一个进程只能处理一个请求，这样服务端就可以同时处理多个请求；</li>
-<li>复用I/O模型: 服务端开启一个进程，但是呢，同时开启多个线程，一个线程响应一个请求，同样可以达到同时处理多个请求，线程间并发执行；</li>
-<li>复用多线程I/O模型: 服务端并行开启多个进程，同时每个进程开启多个线程，这样服务端可以同时处理进程数M*每个进程的线程数N个请求。<br><a href="https://blog.51cto.com/13570193/2108347" target="_blank" rel="noopener">http协议</a><br><a href="https://blog.51cto.com/biketiger/1716962" target="_blank" rel="noopener">http断开连接</a><br><a href="https://blog.csdn.net/zqjflash/article/details/50179235" target="_blank" rel="noopener">http2详解</a><br><a href="https://www.cnblogs.com/XiongMaoMengNan/p/8425724.html" target="_blank" rel="noopener">http1.1 vs http2.0</a><br><a href="http://www.blogjava.net/yongboy/archive/2015/03/20/423655.html" target="_blank" rel="noopener">http2.0定义的帧</a><br><a href="https://www.jianshu.com/p/6e9e4156ece3" target="_blank" rel="noopener">http协议详解</a>  </li>
-</ul>
-</blockquote>
-</blockquote>
-<blockquote>
-<ul>
-<li><strong><em>TLS(transport layer security) SSL(socket security layer)</em></strong></li>
-<li>http明文传输不安全</li>
-<li>TSL/SSL介于应用层http及传输层tcp之间的安全层，提供传输数据加密</li>
-</ul>
-</blockquote>
-<p><img src="../pic/tcp-ip/https%E5%8D%8F%E8%AE%AE.jpeg" alt="https协议"></p>
-<blockquote>
-<ul>
-<li>TSL/SSL客户端与服务端的传输消息为对称加密，对称加密的加密密钥为非对称加密</li>
-<li>版本1: server存在公钥&amp;私钥，cli端建立连接后https请求获取公钥，cli端产生随机密码通过公钥对随机密码加密并传输至server端，server通私钥解密获取密码；cli-server对传输消息通过密码加密处理传输</li>
-<li>版本1存在问题：窃听者截取cli获取公钥信息将窃听者自己的公钥发送给cli，cli通过窃听者公钥加密后密码传输，窃听者获取密码后，并将密码通过server公钥加密给server；</li>
-</ul>
-</blockquote>
-<p><img src="../pic/tcp-ip/https%E4%BF%A1%E6%81%AF%E5%8A%AB%E6%8C%81%E6%94%BB%E5%87%BB.jpeg" alt="https劫持"></p>
-<blockquote>
-<ul>
-<li>版本2:CA证书，CA 是 PKI 系统中通信双方信任的实体，被称为可信第三方（Trusted Third Party，简称TTP），CA 证书，就是 CA 颁发的证书</li>
-</ul>
-<p><img src="../pic/tcp-ip/CA%E8%AF%81%E4%B9%A6https.jpeg" alt="CA证书"></p>
-</blockquote>
-<blockquote>
-<blockquote>
-<ul>
-<li>Agree on the version of the protocol to use.</li>
-<li>Select cryptographic algorithms.</li>
-<li>Authenticate each other by exchanging and validating digital certificates.</li>
-<li>Use asymmetric encryption techniques to generate a shared secret key, which avoids the key distribution problem. SSL or TLS then uses the shared key for the symmetric encryption of messages, which is faster than asymmetric encryption.<br>![SSL handshake](../pic/tcp-ip/SSL handshake.gif)</li>
-<li>step1: client发送”client hello” 消息为加密信息（SSL/TSL版本、客户端带优先级支持的加密套件、随机byte string)列表</li>
-<li>step2: server发送”server hello”消息包括密码套件（从cli发送的密码套件组选择的、sessionID、新的随机byte string、数字证书），server端可以请求客户端数字证书</li>
-<li>step3: cli认证数字证书</li>
-<li>step4: cli发送随机byte string（被证书中公钥加密）至server，用于后续计算出传输消息所用的密码</li>
-<li>step5: 若server要求客户端的数字证书，cli将随机数及cli的数字证书（若没有则”no digital certificate alert“代替）公钥加密后发送给server</li>
-<li>step6: server认证cli数字证书</li>
-<li>step7: cli发送”finished”消息，密钥加密</li>
-<li>step8: server发送”finished”消息，密钥加密</li>
-<li>step9: session内cli和server通过密码进行对称加密消息传输</li>
-</ul>
-</blockquote>
-</blockquote>
-<p><a href="https://blog.csdn.net/freekiteyu/article/details/76423436" target="_blank" rel="noopener">https TSL/SSL 协议</a><br><a href="https://juejin.im/post/5a030e326fb9a0450a66c8ea" target="_blank" rel="noopener">https协议</a><br><a href="https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_7.1.0/com.ibm.mq.doc/sy10660_.htm" target="_blank" rel="noopener">ssl/tsl handshake</a></p>
-<h2 id="4-1-session-amp-amp-cookie-amp-amp-token"><a href="#4-1-session-amp-amp-cookie-amp-amp-token" class="headerlink" title="4.1 session&amp;&amp;cookie&amp;&amp;token"></a>4.1 session&amp;&amp;cookie&amp;&amp;token</h2><p>http协议为无状态协议，如果需要关联不同的http request需要在请求中存储用户数据，可以通过session cookie URL参数</p>
-<blockquote>
-<ul>
-<li>URL参数不安全通过URL地址即可知悉参数；用户信息放置在URL parameter不安全</li>
-<li>cookie&amp;URL参数存储在cli端</li>
-<li><strong><em>cookie: 保存在本地终端的数据，服务器产生</em></strong><br>cookie的组成有：名称(key)、值(value)、有效域(domain)、路径(域的路径，一般设置为全局:”&quot;)、失效时间、安全标志(指定后，cookie只有在使用SSL连接时才发送到服务器(https))。下面是一个简单的js使用cookie的例子:<br>用户登录时产生cookie:   </li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">"id="</span>+result.data[<span class="string">'id'</span>]+<span class="string">"; path=/"</span>;</span><br><span class="line"><span class="built_in">document</span>.cookie = <span class="string">"name="</span>+result.data[<span class="string">'name'</span>]+<span class="string">"; path=/"</span>;</span><br><span class="line"><span class="built_in">document</span>.cookie = <span class="string">"avatar="</span>+result.data[<span class="string">'avatar'</span>]+<span class="string">"; path=/"</span>;</span><br><span class="line">使用到cookie时做如下解析：</span><br><span class="line"><span class="keyword">var</span> cookie = <span class="built_in">document</span>.cookie;<span class="keyword">var</span> cookieArr = cookie.split(<span class="string">";"</span>);<span class="keyword">var</span> user_info = &#123;&#125;;<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cookieArr.length; i++) &#123;</span><br><span class="line">    user_info[cookieArr[i].split(<span class="string">"="</span>)[<span class="number">0</span>]] = cookieArr[i].split(<span class="string">"="</span>)[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">'#user_name'</span>).text(user_info[<span class="string">' name'</span>]);</span><br><span class="line">$(<span class="string">'#user_avatar'</span>).attr(<span class="string">"src"</span>, user_info[<span class="string">' avatar'</span>]);</span><br><span class="line">$(<span class="string">'#user_id'</span>).val(user_info[<span class="string">' id'</span>]);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ul>
-<li><strong><em>session为会话管理，cli与服务端交互服务端用session保存用户的信息，用户离开即销毁：</em></strong><br>当用户打开某个web应用时，便与web服务器产生一次session。服务器使用session把用户的信息临时保存在了服务器上，用户离开网站后session会被销毁。这种用户信息存储方式相对cookie来说更安全，可是session有一个缺陷：如果web服务器做了负载均衡，那么下一个操作请求到了另一台服务器的时候session会丢失。<blockquote>
-<p>若server可以产生sessionID(关联用户数据)，cli请求时带sessionID即可;<br>可以对session加过期时间（安全起见）;<br>session用户离开页面过期(一段时间无请求则过期)，用户离开session销毁;</p>
-</blockquote>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li><strong><em>cookie 和session的区别, cookie可以只保存sessionID</em></strong><blockquote>
-<p>session无法跨机器问题：session外部保存，eg redis缓存<br>1、cookie数据存放在客户的浏览器上，session数据放在服务器上。<br>2、cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗<br>考虑到安全应当使用session。<br>3、session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能<br>考虑到减轻服务器性能方面，应当使用COOKIE。<br>4、单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。<br>5、所以个人建议：将登陆信息等重要信息存放为SESSION、其他信息如果需要保留，可以放在COOKIE中  </p>
-</blockquote>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>token:  token的意思是“令牌”，是用户身份的验证方式，最简单的token组成:uid(用户唯一的身份标识)、time(当前时间的时间戳)、sign(签名，由token的前几位+盐以哈希算法压缩成一定长的十六进制字符串，可以防止恶意第三方拼接token请求服务器)。还可以把不变的参数也放进token，避免多次查库</li>
-<li><strong><em>JWT标准Token:</em></strong><blockquote>
-<p>实施 Token 验证的方法挺多的，还有一些标准方法，比如 JWT，读作：jot ，表示：JSON Web Tokens 。JWT 标准的 Token 有三个部分：  </p>
-</blockquote>
-</li>
-</ul>
-<p><strong><em>header（头部）</em></strong>:加密算法，加密设置alg为对应算法，否则alg为none</p>
-</blockquote>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"alg"</span>: <span class="string">"HS256"</span></span><br><span class="line">&#125;</span><br><span class="line">意思是这个 <span class="keyword">JWT </span>用的算法是 HS256。上面的内容得用 <span class="keyword">base64url </span>的形式编码一下，所以就变成这样：</span><br><span class="line">eyJhbGciOiJIUzI1NiJ9</span><br></pre></td></tr></table></figure>
-
-
-<blockquote>
-<blockquote>
-</blockquote>
-<p>payload（数据）：具体内容为标准字段</p>
-<blockquote>
-</blockquote>
-</blockquote>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">iss：Issuer，发行者</span><br><span class="line"><span class="function"><span class="keyword">sub</span>：<span class="title">Subject</span>，主题</span></span><br><span class="line"><span class="function"><span class="title">aud</span>：<span class="title">Audience</span>，观众</span></span><br><span class="line"><span class="function"><span class="title">exp</span>：<span class="title">Expiration</span> <span class="title">time</span>，过期时间</span></span><br><span class="line"><span class="function"><span class="title">nbf</span>：<span class="title">Not</span> <span class="title">before</span></span></span><br><span class="line"><span class="function"><span class="title">iat</span>：<span class="title">Issued</span> <span class="title">at</span>，发行时间</span></span><br><span class="line"><span class="function"><span class="title">jti</span>：<span class="title">JWT</span> <span class="title">ID</span></span></span><br><span class="line"><span class="function"><span class="title">eg</span>:</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="string">"iss"</span>: <span class="string">"ninghao.net"</span>,</span><br><span class="line"> <span class="string">"exp"</span>: <span class="string">"1438955445"</span>,</span><br><span class="line"> <span class="string">"name"</span>: <span class="string">"wanghao"</span>,</span><br><span class="line"> <span class="string">"admin"</span>: true</span><br><span class="line">&#125;</span><br><span class="line">使用 base64url 编码：</span><br><span class="line">eyJpc3MiOiJuaW5naGFvLm5ldCIsImV4cCI6IjE0Mzg5NTU0NDUiLCJuYW1lIjoid2FuZ2hhbyIsImFkbWluIjp0cnVlfQ</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<blockquote>
-</blockquote>
-<p><strong><em>signature（签名）</em></strong>: JWT 的最后一部分，这部分内容有三个部分，先是用 Base64 编码的 header.payload ，再用加密算法加密一下，加密的时候要放进去一个 Secret ，这个相当于是一个密码，这个密码秘密地存储在服务端。  </p>
-<blockquote>
-</blockquote>
-</blockquote>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const encodedString = <span class="keyword">base64UrlEncode(header) </span>+ <span class="string">"."</span> + <span class="keyword">base64UrlEncode(payload); </span></span><br><span class="line">HMACSHA256(encodedString, <span class="string">'secret'</span>)<span class="comment">;</span></span><br><span class="line">处理后的签名：</span><br><span class="line"><span class="keyword">SwyHTEx_RQppr97g4J5lKXtabJecpejuef8AqKYMAJc</span></span><br><span class="line"><span class="keyword">最终token为：</span></span><br><span class="line"><span class="keyword">eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJuaW5naGFvLm5ldCIsImV4cCI6IjE0Mzg5NTU0NDUiLCJuYW1lIjoid2FuZ2hhbyIsImFkbWluIjp0cnVlfQ.SwyHTEx_RQppr97g4J5lKXtabJecpejuef8AqKYMAJc</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<blockquote>
-</blockquote>
-<p><strong><em>Token的签发</em></strong>：密钥 加密算法 payload 生成签名，组成token   base64URL(head).base64URL(payload).signature;加密算法可选非对称加密  </p>
-<blockquote>
-</blockquote>
-<p><strong><em>Token的验证</em></strong>：cli cookie传递的token，根据head payload 加密算法 解密密码 验证签名  </p>
-<blockquote>
-</blockquote>
-<p><strong><em>详细参考</em></strong>: <a href="https://ninghao.net/blog/2834" target="_blank" rel="noopener">JWT详解</a></p>
-</blockquote>
-<blockquote>
-<ul>
-<li>Token ，如果指的是OAuth Token 或类似的机制的话，提供的是认证和授权，认证是针对用户，授权是针对App;其目的是让 某App有权利访问某用户的信息。这里的 Token是唯一的。不可以转移到其它 App上，也不可以转到其它 用户上</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>token就是令牌，比如你授权（登录）一个程序时，他就是个依据，判断你是否已经授权该软件；cookie就是写在客户端的一个txt文件，里面包括你登录信息之类的，这样你下次在登录某个网站，就会自动调用cookie自动登录用户名；session和cookie差不多，只是session是写在服务器端的文件，也需要在客户端写入cookie文件，但是文件里是你的浏览器编号.Session的状态是存储在服务器端，客户端只有session id；而Token的状态是存储在客户端。 </li>
-<li>cookie kv形式储存在cli端，可以存储sessionID token等</li>
-<li>session服务端生成服务端存储用户相关信息，根据cli传递的session进行信息验证</li>
-<li>token由header payload signature组成，表示加密算法 具体信息 签名，服务端保存签名用密码，根据算法 密码对signature进行验证，header payload不可篡改，否则signature验证无法通过； </li>
-</ul>
-<p><strong><em>auth2.0认证</em></strong><a href="https://www.jianshu.com/p/243b85771be2" target="_blank" rel="noopener">auth2.0认证</a></p>
-</blockquote>
-<p><a href="https://blog.csdn.net/jikeehuang/article/details/51488020" target="_blank" rel="noopener">session cookie token</a><br><a href="https://www.jianshu.com/p/af8360b83a9f" target="_blank" rel="noopener">JWT Json WEB token</a><br><a href="https://blog.csdn.net/qq_32784541/article/details/79655146" target="_blank" rel="noopener">token原理及应用</a><br><a href="https://blog.csdn.net/xiaofei0859/article/details/50819954" target="_blank" rel="noopener">appKey secret vs token</a><br><a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" target="_blank" rel="noopener">auth2.0详解</a></p>
-<h2 id="4-2-跨域请求-CORS"><a href="#4-2-跨域请求-CORS" class="headerlink" title="4.2 跨域请求(CORS)"></a>4.2 跨域请求(CORS)</h2><p>定义：当前发起请求的域与该请求指向的资源所在的域不一样。域指：协议 + 域名 + 端口号；  ​   eg：域名为aaa.cn的网站，它发起一个资源路径为aaa.cn/books/getBookInfo的 Ajax 请求，那么这个请求是同域的，因为资源路径的协议、域名以及端口号与当前域一致（例子中协议名默认为http，端口号默认为80）。但是，如果发起一个资源路径为bbb.com/pay/purchase的 Ajax 请求，那么这个请求就是跨域请求，因为域不一致，与此同时由于安全问题，这种请求会受到同源策略限制。</p>
-<blockquote>
-<ul>
-<li>服务端设置跨域请求相关设置：go-gin可以参考<a href="https://github.com/gin-contrib/cors" target="_blank" rel="noopener">https://github.com/gin-contrib/cors</a><br><a href="https://www.jianshu.com/p/f880878c1398" target="_blank" rel="noopener">跨域资源请求详解参考网站</a></li>
-</ul>
-</blockquote>
-<h2 id="4-3-CSRF攻击"><a href="#4-3-CSRF攻击" class="headerlink" title="4.3 CSRF攻击"></a>4.3 CSRF攻击</h2><blockquote>
-<ul>
-<li>浏览器缓存用户登陆过的所有cookie session信息</li>
-<li>服务端无法判定是否为用户浏览器发送的请求还是用户发起的请求</li>
-</ul>
-</blockquote>
-<p><img src="../pic/tcp-ip/CSRF%E6%94%BB%E5%87%BB.jpg" alt="跨域资源攻击"></p>
-<blockquote>
-<ul>
-<li>攻击者利用用户缓存在浏览器的相关验证信息伪冒用户身份访问相关网站，篡改相关信息</li>
-<li><strong><em>防御方法：</em></strong></li>
-</ul>
-</blockquote>
-<blockquote>
-<blockquote>
-<ul>
-<li>(1).Cookie Hashing(所有表单都包含同一个伪随机值)：攻击者无法获取cookie则提交表单时无法包含此伪随机数；服务端进行hash随机数验证，验证通过做相应操作</li>
-<li>(2).验证码：用户提交需要填写随机字串</li>
-<li>(3).One-Time Tokens(不同的表单包含一个不同的伪随机值)</li>
-</ul>
-</blockquote>
-</blockquote>
-<p><a href="https://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html" target="_blank" rel="noopener">CSRF攻击参考网站</a></p>
-<h2 id="4-4-验签"><a href="#4-4-验签" class="headerlink" title="4.4 验签"></a>4.4 验签</h2><blockquote>
-<ul>
-<li>服务端之间传递参数需要信息验证：给出不同域名对应的ID&amp;seceret</li>
-<li>cli端请求server：请求参数中添加ID、随机序列、过期时间三项；参数按照字母升序排序组成para1=value&amp;para2=value2；对组合字符串加密-&gt;encode base64 -&gt; hash取[n:m]-&gt;作为参数signature=XX组合成请求参数之一；</li>
-<li>server端根据请求参数中除signature外的其他参数按照相应规则进行处理获取signature值若与请求参数中signature不一致则验签失败</li>
-<li>拒绝未授权请求&amp;冒充请求（除非appKey Secret 加密方法全部泄漏）</li>
-</ul>
-</blockquote>
-<h2 id="5-webSocket协议"><a href="#5-webSocket协议" class="headerlink" title="5 webSocket协议"></a>5 webSocket协议</h2><h2 id="5-1-简介"><a href="#5-1-简介" class="headerlink" title="5.1 简介"></a>5.1 简介</h2><p>WebSocket是一种协议，与HTTP协议一样位于应用层，都是TCP/IP协议的子集。HTTP协议是单向通信协议，只有客户端发起HTTP请求，服务端才会返回数据。而WebSocket协议是双向通信协议，在建立连接之后，客户端和服务器都可以主动向对方发送或接受数据。WebSocket协议建立的前提需要借助HTTP协议，建立连接之后，持久连接的双向通信就与HTTP协议无关了。</p>
-<p>WebSocket是应用层协议，是TCP/IP协议的子集，通过HTTP/1.1协议的101状态码进行握手。也就是说，WebSocket协议的建立需要先借助HTTP协议，在服务器返回101状态码之后，就可以进行websocket全双工双向通信了，就没有HTTP协议什么事情了。</p>
-<p>WebSocket协议的目标是在一个独立的持久连接上提供全双工双向通信。客户端和服务器可以向对方主动发送和接受数据。在JS中创建WebSocket后，会有一个HTTP请求发向浏览器以发起请求。在取得服务器响应后，建立的连接会使用HTTP升级将HTTP协议转换为WebSocket协议。也就是说，使用标准的HTTP协议无法实现WebSocket，只有支持那些协议的专门浏览器才能正常工作。  </p>
-<p>由于WebScoket使用了自定义协议，所以URL与HTTP协议略有不同。未加密的连接为ws://，而不是http://。加密的连接为wss://，而不是https://。</p>
-<h2 id="5-2-对比http"><a href="#5-2-对比http" class="headerlink" title="5.2 对比http"></a>5.2 对比http</h2><blockquote>
-<ul>
-<li>前端通过浏览器与服务端建立tcp长连接，全双工通信</li>
-<li>通过http get建立连接 之后升级协议为webSocket</li>
-<li>http协议请求型，惰性，客服端发起请求，服务端才回复请求</li>
-</ul>
-</blockquote>
-<blockquote>
-<blockquote>
-<ul>
-<li>ajax可以通过轮询实现后端推送消息给前端：一定时间后发起http请求，并得到response(不论是否有新的数据),导致后端服务器过忙，很多无用请求;<strong><em>1个request对应一个response,轮询发起http请求</em></strong></li>
-<li>前端通过long poll实现服务端推送消息至前端：前端发起请求，服务端无数据时不发送response直到有新的数据发起response;<strong><em>1个request对应一个response，阻塞在服务端response</em></strong></li>
-<li>http流实现后端推送消息至前端：前端发起请求，服务端可以推送多次response;<strong><em>一个request对应多个response</em></strong></li>
-<li>ajax轮询 需要服务器有很快的处理速度和资源。（速度）</li>
-<li>long poll 需要有很高的并发，也就是说同时接待客户的能力。（场地大小）</li>
-<li>传统轮询技术(Ajax短轮询)是客户端向服务器发起HTTP请求，无论数据是否更新，服务器都会传输数据。一个request对应一个response。<br>服务器推送技术(Ajax长轮询)是短轮询的变种，是客户端向服务器发起HTTP请求，只有等待数据更新后才会传输数据，否则服务器保持连接状态。接着发起下一次HTTP请求，一个request对应一个response。<br>服务器推送技术(HTTP流)，在客户端只发起一次HTTP请求，服务器保持连接状态，在数据更新之后，服务器会传输数据，否则保持连接状态。此时一个requset对应多个response。<br>无论是短轮询、长轮询，还是HTTP流，相同点在于都需要客户端先发起HTTP请求。</li>
-</ul>
-</blockquote>
-</blockquote>
-<h2 id="5-3-示例"><a href="#5-3-示例" class="headerlink" title="5.3 示例"></a>5.3 示例</h2><p><strong><em>Js webSocketAPI</em></strong></p>
-<figure class="highlight plain"><figcaption><span>打开WebSocket, 传递的参数url没有同源策略的限制。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">let websocket = new WebSocket(url)</span><br><span class="line"></span><br><span class="line">// 监听open事件，在成功建立websocket时向url发送纯文本字符串数据(如果是对象则必须序列化处理)。</span><br><span class="line">websocket.onopen = () =&gt; &#123;</span><br><span class="line">  if (websocket.readyState === WebSocket.OPEN) &#123;</span><br><span class="line">    websocket.send(&apos;hello world&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 监听message事件，在服务器响应时接受数据。返回的数据存储在事件对象中。</span><br><span class="line">websocket.onmessage = e =&gt; &#123;</span><br><span class="line">  let data = e.data</span><br><span class="line">  console.log(data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 监听error事件，在发生错误时触发，连接不能持续。</span><br><span class="line">websocket.onerror = () =&gt; &#123;</span><br><span class="line">  console.log(&apos;websocket connecting error!!&apos;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 监听close事件，在连接关闭时触发。只有close事件的事件对象拥有额外的信息。可以通过这些信息来查看关闭状态</span><br><span class="line">websocket.onclose = e =&gt; &#123;</span><br><span class="line">  let clean = e.wasClean // 是否已经关闭</span><br><span class="line">  let code = e.code // 服务器返回的数值状态码。</span><br><span class="line">  let reason = e.reason //服务器返回的消息。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="../pic/webSocket%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%B7%E6%B1%82.png" alt="webSocekt请求"><br><a href="https://www.cnblogs.com/fuqiang88/p/5956363.html" target="_blank" rel="noopener">看完让你彻底搞懂Websocket原理</a><br><a href="https://blog.csdn.net/qq_34803821/article/details/84657721" target="_blank" rel="noopener">webSocket协议</a><br><a href="https://www.cnblogs.com/unclekeith/p/8087182.html" target="_blank" rel="noopener">webSocket协议解析</a><br><a href="https://blog.csdn.net/xuduorui/article/details/76464576" target="_blank" rel="noopener">golang中的webSocket实现</a><br><a href="https://godoc.org/golang.org/x/net/websocket#Codec" target="_blank" rel="noopener">golang官方webSocket实现</a><br>// 基于转为hijack（cli端负责关闭conn）的conn新建webSocket conn<br><a href="https://github.com/gorilla/websocket" target="_blank" rel="noopener">golang webSocket github</a></p>
-<h1 id="6-GRPC"><a href="#6-GRPC" class="headerlink" title="6 GRPC"></a>6 GRPC</h1><h2 id="6-1-RPC"><a href="#6-1-RPC" class="headerlink" title="6.1 RPC"></a>6.1 RPC</h2><p>RPC 的主要功能目标是让构建分布式计算（应用）更容易，在提供强大的远程调用能力时不损失本地调用的语义简洁性。跨应用层&amp;传输层；编解码、网络传输、同步||异步</p>
-<blockquote>
-<ul>
-<li>GRPC基于http/2.0</li>
-<li>server：实现相应的方法，并注册（default mutex生成handler），listen，accept</li>
-<li>client: dial或者建立connect调用server的grpc方法<br>同步&amp;&amp;异步（是否需要返回值）</li>
-<li>cli&amp;server单个连接(tcp conn)VS多个连接，单个连接单个缓冲区若数据量足够多缓冲区不够用，不能充分发挥网络优势；基于http/2的grpc单个连接对req请求的处理为并发处理，多个连接并无特殊优势；  </li>
-<li>message queue为异步调用，sender向queue节点发送消息，consumer从queue节点获取消息并处理，不适合应用于需要返回值的同步请求中；消息暂存压力在queue节点</li>
-</ul>
-<p><strong>参考：</strong><br><a href="https://blog.csdn.net/kingcat666/article/details/78577079" target="_blank" rel="noopener"><strong><em>RPC入门总结（一）RPC定义和原理</em></strong></a><br><a href="https://blog.csdn.net/mindfloating/article/details/39473807" target="_blank" rel="noopener"><strong><em>深入浅出RPC-浅出篇</em></strong></a><br><a href="https://blog.csdn.net/mindfloating/article/details/39474123" target="_blank" rel="noopener"><strong><em>深入浅出RPC-深入篇</em></strong></a><br><a href="https://blog.csdn.net/b1303110335/article/details/79557292" target="_blank" rel="noopener">什么是RPC框架</a><br><a href="https://blog.csdn.net/dongnaosenlu/article/details/76998419" target="_blank" rel="noopener">分布式结构核心RPC原理</a><br><a href="https://blog.csdn.net/kingcat666/article/details/78577079" target="_blank" rel="noopener">RPC入门总结（一）RPC定义和原理</a><br><a href="https://pingcap.com/blog-cn/grpc/" target="_blank" rel="noopener">简介http1.0-grpc</a>  </p>
-</blockquote>
-<h2 id="6-2-net-rpc"><a href="#6-2-net-rpc" class="headerlink" title="6.2 net/rpc"></a>6.2 net/rpc</h2><p>golang远程rpc包</p>
-<blockquote>
-<ul>
-<li>可以基于tcp, udp或者http协议</li>
-<li>需要注册: </li>
-</ul>
-</blockquote>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Server represents an RPC Server.</span></span><br><span class="line">type Server struct &#123;</span><br><span class="line">	serviceMap sync<span class="selector-class">.Map</span>   <span class="comment">// map[string]*service 存放注册的service</span></span><br><span class="line">	reqLock    sync<span class="selector-class">.Mutex</span> <span class="comment">// protects freeReq</span></span><br><span class="line">	freeReq    *Request</span><br><span class="line">	respLock   sync<span class="selector-class">.Mutex</span> <span class="comment">// protects freeResp</span></span><br><span class="line">	freeResp   *Response</span><br><span class="line">&#125;</span><br><span class="line">type service struct &#123;</span><br><span class="line">	name   string                 <span class="comment">// name of service</span></span><br><span class="line">	rcvr   reflect<span class="selector-class">.Value</span>          <span class="comment">// receiver of methods for the service</span></span><br><span class="line">	typ    reflect<span class="selector-class">.Type</span>           <span class="comment">// type of the receiver</span></span><br><span class="line">	method map[string]*methodType <span class="comment">// registered methods</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ul>
-<li>serverConn: 可用于tcp</li>
-</ul>
-</blockquote>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(server *Server)</span> <span class="title">ServeConn</span><span class="params">(conn io.ReadWriteCloser)</span></span> &#123;</span><br><span class="line">	buf := bufio.NewWriter(conn)</span><br><span class="line">	srv := &amp;gobServerCodec&#123;</span><br><span class="line">		rwc:    conn,</span><br><span class="line">		dec:    gob.NewDecoder(conn),</span><br><span class="line">		enc:    gob.NewEncoder(buf),</span><br><span class="line">		encBuf: buf,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 从连接conn中读取req对应的service.method arg res等，根据service.method从注册map中取对应的函数，执行函数调用</span></span><br><span class="line">	server.ServeCodec(srv)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(server *Server)</span> <span class="title">Accept</span><span class="params">(lis net.Listener)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		conn, err := lis.Accept()</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Print(<span class="string">"rpc.Serve: accept:"</span>, err.Error())</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">go</span> server.ServeConn(conn)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ServeHTTP implements an http.Handler that answers RPC requests.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(server *Server)</span> <span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, req *http.Request)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> req.Method != <span class="string">"CONNECT"</span> &#123;</span><br><span class="line">		w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"text/plain; charset=utf-8"</span>)</span><br><span class="line">		w.WriteHeader(http.StatusMethodNotAllowed)</span><br><span class="line">		io.WriteString(w, <span class="string">"405 must CONNECT\n"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	conn, _, err := w.(http.Hijacker).Hijack()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Print(<span class="string">"rpc hijacking "</span>, req.RemoteAddr, <span class="string">": "</span>, err.Error())</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	io.WriteString(conn, <span class="string">"HTTP/1.0 "</span>+connected+<span class="string">"\n\n"</span>)</span><br><span class="line">	server.ServeConn(conn)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 注册http handler</span></span><br><span class="line"><span class="comment">// HandleHTTP registers an HTTP handler for RPC messages on rpcPath,</span></span><br><span class="line"><span class="comment">// and a debugging handler on debugPath.</span></span><br><span class="line"><span class="comment">// It is still necessary to invoke http.Serve(), typically in a go statement.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(server *Server)</span> <span class="title">HandleHTTP</span><span class="params">(rpcPath, debugPath <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	http.Handle(rpcPath, server)</span><br><span class="line">	http.Handle(debugPath, debugHTTP&#123;server&#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// HandleHTTP registers an HTTP handler for RPC messages to DefaultServer</span></span><br><span class="line"><span class="comment">// on DefaultRPCPath and a debugging handler on DefaultDebugPath.</span></span><br><span class="line"><span class="comment">// It is still necessary to invoke http.Serve(), typically in a go statement.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">HandleHTTP</span><span class="params">()</span></span> &#123;</span><br><span class="line">	DefaultServer.HandleHTTP(DefaultRPCPath, DefaultDebugPath)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-3-GRPC"><a href="#6-3-GRPC" class="headerlink" title="6.3 GRPC"></a>6.3 GRPC</h2><p>适用于分布式系统、前后端、手机应用；基于http2.0的传输的双向流和完全集成的可插拔身份验证;</p>
-<blockquote>
-<ul>
-<li>server: 类似net/rpc</li>
-</ul>
-</blockquote>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Server is a gRPC server to serve RPC requests.</span></span><br><span class="line"><span class="keyword">type</span> Server <span class="keyword">struct</span> &#123;</span><br><span class="line">	opts options</span><br><span class="line">	mu     sync.Mutex <span class="comment">// guards following</span></span><br><span class="line">	lis    <span class="keyword">map</span>[net.Listener]<span class="keyword">bool</span></span><br><span class="line">	conns  <span class="keyword">map</span>[io.Closer]<span class="keyword">bool</span></span><br><span class="line">	serve  <span class="keyword">bool</span></span><br><span class="line">	drain  <span class="keyword">bool</span></span><br><span class="line">	cv     *sync.Cond          <span class="comment">// signaled when connections close for GracefulStop</span></span><br><span class="line">	m      <span class="keyword">map</span>[<span class="keyword">string</span>]*service <span class="comment">// service name -&gt; service info</span></span><br><span class="line">	events trace.EventLog</span><br><span class="line">	quit               <span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">	done               <span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">	quitOnce           sync.Once</span><br><span class="line">	doneOnce           sync.Once</span><br><span class="line">	channelzRemoveOnce sync.Once</span><br><span class="line">	serveWG            sync.WaitGroup <span class="comment">// counts active Serve goroutines for GracefulStop</span></span><br><span class="line">	channelzID <span class="keyword">int64</span> <span class="comment">// channelz unique identification number</span></span><br><span class="line">	czData     *channelzData</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ul>
-<li>protocol buffer协议</li>
-<li>负载均衡</li>
-<li>超时处理</li>
-<li>流量控制</li>
-<li>tracing</li>
-<li>健康检查</li>
-<li>认证</li>
-</ul>
-<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// proto文件</span></span><br><span class="line">syntax = <span class="string">"proto3"</span>;</span><br><span class="line"><span class="keyword">package</span> bistream;</span><br><span class="line"><span class="class"><span class="keyword">service</span> <span class="title">MapStream</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">rpc</span> GetMap(stream ReqMap)<span class="keyword">returns</span>(stream ResMap)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">message</span> <span class="title">ReqMap</span> </span>&#123;</span><br><span class="line">    <span class="built_in">int32</span> seqNum = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">message</span> <span class="title">ResMap</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> resMessage = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<ul>
-<li>protoc -I packageOfProto/ xx/xx.proto –go_out=plugins=grpc:packageName</li>
-<li>client端实现</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// client</span></span><br><span class="line"><span class="keyword">package</span> client</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"google.golang.org/grpc"</span></span><br><span class="line">	<span class="string">"context"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">	<span class="string">"work/grpc-eg/bistream"</span></span><br><span class="line">	<span class="string">"github.com/prometheus/common/log"</span></span><br><span class="line">	<span class="string">"io"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">var</span> streamConn *grpc.ClientConn</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ctx := context.Background()</span><br><span class="line">	newCtx, _ := context.WithTimeout(ctx, <span class="number">1</span>*time.Second)</span><br><span class="line">	conn, err := grpc.DialContext(newCtx, <span class="string">"localhost:8080"</span>, grpc.WithInsecure())</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Errorf(<span class="string">"cli err is: %+v"</span>, err)</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	streamConn = conn</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetStream</span><span class="params">(ctx context.Context)</span></span>&#123;</span><br><span class="line">	cliConn := streamConn</span><br><span class="line">	cli := bistream.NewMapStreamClient(cliConn)</span><br><span class="line">	cliStream, err := cli.GetMap(ctx)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Errorf(<span class="string">"failed to get map: %+v"</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">len</span> := <span class="number">10</span></span><br><span class="line">	notify := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line">	<span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;<span class="built_in">len</span>;i++&#123;</span><br><span class="line">		<span class="keyword">if</span> err := cliStream.Send(&amp;bistream.ReqMap&#123;</span><br><span class="line">			SeqNum:<span class="keyword">int32</span>(i+<span class="number">1</span>),</span><br><span class="line">		&#125;); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Errorf(<span class="string">"failed to send seqNum: %+v"</span>, i+<span class="number">1</span>)</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			log.Infof(<span class="string">"sent seqNum: %+v"</span>, i+<span class="number">1</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// cli关闭发送端</span></span><br><span class="line">	cliStream.CloseSend()</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span> &#123;</span><br><span class="line">			res, err := cliStream.Recv()</span><br><span class="line">			<span class="keyword">if</span> err == io.EOF &#123;</span><br><span class="line">				log.Infof(<span class="string">"end cli from res"</span>)</span><br><span class="line">				<span class="built_in">close</span>(notify)</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Errorf(<span class="string">"failed to receive res"</span>)</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> res == <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Infof(<span class="string">"res is nil"</span>)</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			log.Infof(<span class="string">"res is: %+v"</span>, res.ResMessage)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line">	&lt;-notify</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<ul>
-<li>server端实现</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> streameg</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"work/grpc-eg/bistream"</span></span><br><span class="line">	<span class="string">"io"</span></span><br><span class="line">	<span class="string">"github.com/prometheus/common/log"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> StreamEg <span class="keyword">struct</span> &#123;</span><br><span class="line">	Description <span class="keyword">map</span>[<span class="keyword">int32</span>]<span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetStreamEg</span><span class="params">()</span>*<span class="title">StreamEg</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;StreamEg&#123;</span><br><span class="line">		Description:<span class="keyword">map</span>[<span class="keyword">int32</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">			<span class="number">1</span>:<span class="string">"num1"</span>,</span><br><span class="line">			<span class="number">2</span>:<span class="string">"num2"</span>,</span><br><span class="line">			<span class="number">3</span>:<span class="string">"num3"</span>,</span><br><span class="line">			<span class="number">4</span>:<span class="string">"num4"</span>,</span><br><span class="line">			<span class="number">5</span>:<span class="string">"num5"</span>,</span><br><span class="line">			<span class="number">6</span>:<span class="string">"num6"</span>,</span><br><span class="line">			<span class="number">7</span>:<span class="string">"num7"</span>,</span><br><span class="line">			<span class="number">8</span>:<span class="string">"num8"</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// GetMap grpc流</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *StreamEg)</span><span class="title">GetMap</span><span class="params">(reqStream bistream.MapStream_GetMapServer)</span> <span class="title">error</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="comment">// 必须并行处理 防止cli发送完req关闭conn，但server端未来得及发送res</span></span><br><span class="line">		req, err := reqStream.Recv()</span><br><span class="line">		<span class="keyword">if</span> err == io.EOF &#123;</span><br><span class="line">			log.Infof(<span class="string">"end of res from cli"</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			log.Errorf(<span class="string">"server err is: %+v"</span>, err)</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line">		time.Sleep(<span class="number">200</span>*time.Millisecond)</span><br><span class="line">		<span class="keyword">if</span> req == <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> err := reqStream.Send(<span class="literal">nil</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> err</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span> err := reqStream.Send(&amp;bistream.ResMap&#123;</span><br><span class="line">				ResMessage:s.Description[req.SeqNum],</span><br><span class="line">			&#125;); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> err</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<ul>
-<li>main函数</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"work/grpc-eg/server"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">	<span class="string">"os/signal"</span></span><br><span class="line">	<span class="string">"syscall"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	sigChan := <span class="built_in">make</span>(<span class="keyword">chan</span> os.Signal, <span class="number">1</span>)</span><br><span class="line">	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		server.RegistryStreamEg()</span><br><span class="line">	&#125;()</span><br><span class="line">&lt;-sigChan</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p><a href="http://cwiki.guazi.com/pages/viewpage.action?pageId=67820086" target="_blank" rel="noopener">grpc proxy&amp;bridge</a><br><a href="https://segmentfault.com/a/1190000016503114" target="_blank" rel="noopener">grpc stream介绍</a><br><a href="https://colobu.com/2017/04/06/dive-into-gRPC-streaming/" target="_blank" rel="noopener">grpc stream实例</a><br><a href="https://www.grpc.io/docs/tutorials/" target="_blank" rel="noopener">grpc 官方案例</a></p>
-<h1 id="7-并发编程-select-I-O复用"><a href="#7-并发编程-select-I-O复用" class="headerlink" title="7 并发编程 select I/O复用"></a>7 并发编程 select I/O复用</h1><h1 id="8-前后端通信"><a href="#8-前后端通信" class="headerlink" title="8 前后端通信"></a>8 前后端通信</h1><blockquote>
-<ul>
-<li>前端作为通信的cli端，若http协议只能通过请求获取response</li>
-<li>服务端之间通信: 服务端均可作为通信的server端存在</li>
-</ul>
-<blockquote>
-<ul>
-<li>服务端A B</li>
-<li>B推送消息给A，A作为server端，B作为cli端调用接口(http rpc)发送消息给A； B主动发起请求，获取response</li>
-<li>A需要从B获取消息: B作为server端提供响应接口，A作为cli端调用B(http rpc)； A主动发起请求获取response</li>
-</ul>
-</blockquote>
-</blockquote>
-<h1 id="9-其他"><a href="#9-其他" class="headerlink" title="9 其他"></a>9 其他</h1><blockquote>
-<ul>
-<li>IP地址是逻辑地址用来标识网络中的一个主机，ip地址唯一，计算机间通信通过ip</li>
-<li>IP分公有ip及私有ip，公有ip全球可以访问，私有地址(以192.168.开头)不能直接在internet网络中应用</li>
-<li>IP地址=网络地址+主机地址</li>
-<li>网络地址就是判断网络中的计算机在不在同一网络,在就能通,不在就不能通</li>
-<li>网络地址: IP地址&amp;子网掩码，二进制计算获取网络地址</li>
-<li>域名internet中计算机或者计算机组的名称,域名便于人类记忆</li>
-<li>DNS(Domain name server): 域名服务器，存有域名跟ip的对应表，可以将域名解析为ip；</li>
-<li>chrom浏览器输入google.com：1 请求dns服务器解析google.com获取ip地址 2 与该ip建立连接</li>
-<li>用网线直接连接的计算机或是通过HUB（集线器）或普通交换机间接的计算机之间要能够相互通,计算机必须要在同一网络；即网络地址必须相同</li>
-<li>网络A的IP地址范围为“192.168.1.1<del>192. 168.1.254”，网络B的IP地址范围为“192.168.2.1</del>192.168.2.254”，两者的子网掩码为255.255.255.0</li>
-<li>网络A与B在不同的网络中不能直接通信，两者必须通过网关通信：如果网络A中的主机发现数据包的目的主机不在本地网络中，就把数据包转发给它自己的网关，再由网关转发给网络B的网关，网络B的网关再转发给网络B的某个主机</li>
-<li>网关的IP地址是具有路由功能的设备的IP地址： 路由器、启用了路由协议的服务器（实质上相当于一台路由器）、代理服务器（也相当于一台路由器）。</li>
-<li>一台主机可以有多个网关,主机找不到可用网关则使用默认网关</li>
-<li>自动设置就是利用DHCP（Dynamic Host Configuration Protocol, 动态主机配置协议）服务器来自动给网络中的电脑分配IP地址、子网掩码和默认网关 。这样做的好处是一旦网络的默认网关发生了变化时，只要更改了DHCP服务器中默认网关的设置，那么网络中所有的电脑均获得了新的默认网关的IP地址。这种方法适用于网络规模较大、TCP/IP参数有可能变动的网络。另外一种自动获得网关的办法是通过安装代理服务器软件（如MS Proxy）的客户端程序来自动获得，其原理和方法和DHCP有相似之处。  </li>
-</ul>
-</blockquote>
-<p><a href="https://www.cnblogs.com/JuneWang/p/3917697.html" target="_blank" rel="noopener">IP地址，子网掩码，默认网关，DNS服务器详解</a></p>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/tcp-ip/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>tcp/ip</a>
-        
-          <a href="/tags/http1-0-2/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>http1.0-2</a>
-        
-          <a href="/tags/webSocket/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>webSocket</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
       
         
           <div class="post-wrapper">
@@ -1577,7 +1100,7 @@
           
             <a class="prev" rel="prev" href="/archives/2019/">
               <section class="post prev">
-                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
               </section>
             </a>
           
@@ -1722,7 +1245,7 @@
   <section class="widget category">
     
 <header class="pure">
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn" rel="nofollow" href="/categories/" title="categories/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1753,7 +1276,7 @@
   <section class="widget tagcloud">
     
 <header class="pure">
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn" rel="nofollow" href="/tags/" title="tags/">
     <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
@@ -1842,19 +1365,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Private Zone</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -1968,15 +1491,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
